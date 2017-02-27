@@ -11,72 +11,178 @@ using UnityEngine.UI;
 public class PauserScript : MonoBehaviour {
  
     private static ModalOption modalOption = new ModalOption();
-	// Use this for initialization
-	void Start () {
+
+    private GameObject RootObject;
+
+    //for Option
+    private GameObject BackgroundObject;
+
+    //MainとかのUI中心以外の画面に使うときはGameObjectのModalOptionをScene内にコピーする必要あり
+    //for Main
+    private GameObject Player;
+    private GameObject Enemy;
+    private GameObject EventSystemObject;
+
+    //for select
+    private GameObject PlayerSelectControllerObject;
+    private GameObject CameraObject;
+
+    public bool isModalOption;
+    private bool isPause;
+
+    // Use this for initialization
+    void Start () {
+
     }
 	
 	// Update is called once per frame
 	void Update () {
         
-        Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-        SelectObjectDependOnSceneName(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "is Active");
 
-        Debug.Log(!ModalOption.isModalSetActive);
+        if (isModalOption)
+        {
+            SelectObjectDependOnSceneName(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, ModalOption.isModalSetActive);
+        }else
+        {
+            // カットイン実装用
+            // isPauseを外部スクリプトからコントロール, ポーズの呼び出し
+            SelectObjectDependOnSceneName(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, isPause);
+        }
+        //Debug.Log(!ModalOption.isModalSetActive);
 
     }
 
 
     //TODO: 例外処理
-    private void SelectObjectDependOnSceneName(string SceneName)
+    public void SelectObjectDependOnSceneName(string SceneName, bool ModalFlag)
     {
-        GameObject RootObject;
         switch (SceneName) {
             case "Title":
                 RootObject = GameObject.Find("TitleCanvas");
 
-                GetComponentInParentAndChildren<FadeScript>(RootObject).enabled = !ModalOption.isModalSetActive;
-                GetComponentInParentAndChildren<TitleScene>(RootObject).enabled = !ModalOption.isModalSetActive;
-
+                GetComponentInParentAndChildren<FadeScript>(RootObject).enabled = !ModalFlag;
+                GetComponentInParentAndChildren<TitleScene>(RootObject).enabled = !ModalFlag;
                 break;
             case "SelectMenu":
                 RootObject = GameObject.Find("SelectCanvas");
 
-                GetComponentInParentAndChildren<CanvasRotate>(RootObject).enabled = !ModalOption.isModalSetActive;
-                GetComponentInParentAndChildren<CircularUI>(RootObject).enabled = !ModalOption.isModalSetActive;
+                GetComponentInParentAndChildren<CanvasRotate>(RootObject).enabled = !ModalFlag;
+                GetComponentInParentAndChildren<CircularUI>(RootObject).enabled = !ModalFlag;
 
                 break;
             case "Gallery":
                 RootObject = GameObject.Find("GalleryCanvas");
 
                 //どのUIgroupをSetActiveにするかを保存する
-                GetComponentInParentAndChildren<ChangeCameraOnGallery>(RootObject).enabled = !ModalOption.isModalSetActive;
-                GetComponentInParentAndChildren<GalleryCanvas>(RootObject).enabled = !ModalOption.isModalSetActive;
-                //GetComponentInParentAndChildren<GalleryCoverFlow>(RootObject).enabled = !ModalOption.isModalSetActive;
+                GetComponentInParentAndChildren<ChangeCameraOnGallery>(RootObject).enabled = !ModalFlag;
+                GetComponentInParentAndChildren<GalleryCanvas>(RootObject).enabled = !ModalFlag;
+                //GetComponentInParentAndChildren<GalleryCoverFlow>(RootObject).enabled = !ModalFlag;
 
                 break;
             case "Option":
+
+                BackgroundObject = GameObject.Find("BackgroundCamera");
+                GetComponentInParentAndChildren<MoveStage>(BackgroundObject).enabled = !ModalFlag;
+
                 RootObject = GameObject.Find("OptionCanvas");
                 //GetComponent<OptionRotate>().enabled = !ModalOption.isPause;
 
-                GetComponentInParentAndChildren<OptionRotate>(RootObject).enabled = !ModalOption.isModalSetActive;
-                GetComponentInParentAndChildren<CircularOption>(RootObject).enabled = !ModalOption.isModalSetActive;
+                GetComponentInParentAndChildren<OptionRotate>(RootObject).enabled = !ModalFlag;
+                GetComponentInParentAndChildren<CircularOption>(RootObject).enabled = !ModalFlag;
 
                 if (GetComponentInParentAndChildren<keyConfigCoverFlow>(RootObject) != null)
-                    GetComponentInParentAndChildren<keyConfigCoverFlow>(RootObject).enabled = !ModalOption.isModalSetActive;
+                    GetComponentInParentAndChildren<keyConfigCoverFlow>(RootObject).enabled = !ModalFlag;
                 if (GetComponentInParentAndChildren<KeyConfigBehaviour>(RootObject) != null)
-                    GetComponentInParentAndChildren<KeyConfigBehaviour>(RootObject).enabled = !ModalOption.isModalSetActive;
+                    GetComponentInParentAndChildren<KeyConfigBehaviour>(RootObject).enabled = !ModalFlag;
 
                 if (GetComponentInParentAndChildren<ChangeBGMVal>(RootObject) != null)
-                    GetComponentInParentAndChildren<ChangeBGMVal>(RootObject).enabled = !ModalOption.isModalSetActive;
+                    GetComponentInParentAndChildren<ChangeBGMVal>(RootObject).enabled = !ModalFlag;
                 if (GetComponentInParentAndChildren<ChangeDifficulty>(RootObject) != null)
-                    GetComponentInParentAndChildren<ChangeDifficulty>(RootObject).enabled = !ModalOption.isModalSetActive;
+                    GetComponentInParentAndChildren<ChangeDifficulty>(RootObject).enabled = !ModalFlag;
                 if (GetComponentInParentAndChildren<ChangeDIM>(RootObject) != null)
-                    GetComponentInParentAndChildren<ChangeDIM>(RootObject).enabled = !ModalOption.isModalSetActive;
+                    GetComponentInParentAndChildren<ChangeDIM>(RootObject).enabled = !ModalFlag;
                 if (GetComponentInParentAndChildren<ChangeVoiceVolume>(RootObject) != null)
-                    GetComponentInParentAndChildren<ChangeVoiceVolume>(RootObject).enabled = !ModalOption.isModalSetActive;
+                    GetComponentInParentAndChildren<ChangeVoiceVolume>(RootObject).enabled = !ModalFlag;
                 if (GetComponentInParentAndChildren<ChangeSEVolume>(RootObject) != null)
-                    GetComponentInParentAndChildren<ChangeSEVolume>(RootObject).enabled = !ModalOption.isModalSetActive;
+                    GetComponentInParentAndChildren<ChangeSEVolume>(RootObject).enabled = !ModalFlag;
                     break;
+            case "Main":
+
+                //validate Null Exception
+                Player = GameObject.Find("UNICORN1playMode");
+
+                RootObject = GameObject.Find("Canvas");
+
+                GetComponentInParentAndChildren<LockOnChangeTest>(RootObject).enabled = !ModalFlag;
+
+                EventSystemObject = GameObject.Find("EventSystem");
+
+                if (GetComponentInParentAndChildren<Time_ScoreScript>(EventSystemObject) != null)
+                    GetComponentInParentAndChildren<Time_ScoreScript>(EventSystemObject).enabled = !ModalFlag;
+
+                if (GetComponentInParentAndChildren<EnemyInstantiate>(EventSystemObject) != null)
+                    GetComponentInParentAndChildren<EnemyInstantiate>(EventSystemObject).enabled = !ModalFlag;
+
+                int SelectNumber = PlayerSelectController.Selectnumber();
+
+                switch (SelectNumber) {
+                    case 1:
+                        //BANSHEE
+                        Player = GameObject.Find("BANSHEE1playMode");
+                        break;
+                    case 2:
+                        //UNICORN
+                        Player = GameObject.Find("UNICORN1playMode");
+                        break;
+                    case 3:
+                        //PHOENIX
+                        Player = GameObject.Find("PHENEX1playMode");
+                        break;
+                    default: break;
+
+                }
+                
+                if(Player != null)
+                {
+                    GetComponentInParentAndChildren<PlayerAp>(Player).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<PlayerMove>(Player).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<PlayerRotate>(Player).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<PlayerMotion>(Player).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<PlayerShoot>(Player).enabled = !ModalFlag;
+
+                    GetComponentInParentAndChildren<LockOn>(Player).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<Compass>(Player).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<BoostEffect>(Player).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<BattleManager>(Player).enabled = !ModalFlag;
+
+                    GetComponentInParentAndChildren<ScreenOverlayManager>(Player).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<CamVibrationManager>(Player).enabled = !ModalFlag;
+                }
+
+                Enemy = GameObject.Find("Enemy");
+
+                GetComponentInParentAndChildren<Enemy>(Enemy).enabled = !ModalFlag;
+                GetComponentInParentAndChildren<Marker>(Enemy).enabled = !ModalFlag;
+
+                break;
+            case "2PlayerMode":
+                break;
+            case "stageselect":
+                break;
+            case "select":
+                CameraObject = GameObject.Find("Camera");
+                GetComponentInParentAndChildren<CameraController>(CameraObject).enabled = !ModalFlag;
+
+                PlayerSelectControllerObject = GameObject.Find("PlayerSelectController");
+                GetComponentInParentAndChildren<PlayerSelectController>(PlayerSelectControllerObject).enabled = !ModalFlag;
+
+                break;
+            case "selectsceneDouble":
+                break;
+            case "Result": 
+                break;
+
             default: break;
                  
         }

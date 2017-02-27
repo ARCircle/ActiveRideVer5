@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class ModalOption : MonoBehaviour {
     public GameObject ModalCanvas;
 	public List<Button> ModalOptionButtons = new List<Button>();
-	public List<GameObject> ModalOptionDescRiptions = new List<GameObject>();
+	public List<GameObject> ModalOptionDescriptions = new List<GameObject>();
 
 	public static bool isModalSetActive;
     public static bool isPause;
@@ -29,10 +29,10 @@ public class ModalOption : MonoBehaviour {
 	}
 
 	private void SetActiveDescriptions(int index){
-		foreach (GameObject d in ModalOptionDescRiptions) {
+		foreach (GameObject d in ModalOptionDescriptions) {
 			d.SetActive (false);
 		}
-		ModalOptionDescRiptions [index].SetActive (true);
+		ModalOptionDescriptions [index].SetActive (true);
 	}
 
     private void QuitGame()

@@ -199,10 +199,22 @@ public class GalleryCoverFlow : MonoBehaviour {
                 Debug.Log("test" + PhotosinGallery[nLoop].GetComponent<UIMaskTransparent>().UI_mask_mat);
                 PhotosinGallery[nLoop].GetComponent<UIMaskTransparent>().enabled = false;
             }
-        }
 
-        centerPhoto.GetComponent<UIMaskTransparent>().enabled = true;
-        
+            if (PhotosinGallery[nLoop] != centerPhoto)
+            {
+                PhotosinGallery[nLoop].GetComponentInChildren<UnityEngine.UI.Image>().material = null;
+
+                UnityEngine.Object target = PhotosinGallery[nLoop].GetComponent<UIMaskTransparent>();
+                UnityEngine.Object.Destroy(target);
+            }else
+            {
+
+                PhotosinGallery[nLoop].GetComponent<UIMaskTransparent>().enabled = true;
+                PhotosinGallery[nLoop].GetComponentInChildren<UnityEngine.UI.Image>().material = UI_mat;
+            }
+        }
+       
+
     }
 
     private GameObject setPhotoInActive()
@@ -232,7 +244,7 @@ public class GalleryCoverFlow : MonoBehaviour {
         else
         {
             centerPhoto.GetComponentInChildren<UnityEngine.UI.Image>().color = new Color(intensify, intensify, intensify);
-            Debug.Log(intensify);
+
             intensify = intensify * 1.1f;
         }
         return intensify;

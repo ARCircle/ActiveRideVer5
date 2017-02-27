@@ -8,6 +8,9 @@ public class ChangeDifficulty : MonoBehaviour {
     private List<GameObject> ModalOptionDescRiptions = new List<GameObject>();
 
     //public bool isModalSetActive;
+
+    //Difficulty
+    //0: easy 1:normal 2:hard
     public int Difficulty;
     public int getDifficulty
     {
