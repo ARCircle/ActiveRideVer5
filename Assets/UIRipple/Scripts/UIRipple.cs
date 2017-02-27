@@ -76,8 +76,8 @@ public class UIRipple : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		
-        //if the mouse button is down
+		ModalOption md = GetComponent<ModalOption>(); //change this line for ModalOption
+		//if the mouse button is down
 		if (Input.GetMouseButtonDown(0) || (Input.GetKeyUp (KeyCode.W) )) //change this line for ModalOption
 		{
 			//if UI only..

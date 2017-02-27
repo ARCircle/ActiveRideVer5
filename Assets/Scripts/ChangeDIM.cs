@@ -3,14 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ChangeDIM : MonoBehaviour {
-
-    //DIMval 0-1
     public float DIMVal;
-    public float getDIMVal
-    {
-        private set { DIMVal = value; }
-        get { return DIMVal; }
-    }
 
     private UnityEngine.UI.Image gaugeCtrl;
 

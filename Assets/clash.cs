@@ -13,6 +13,8 @@ public class clash : MonoBehaviour{
 	private float lowRangeY;
 	private float maxRangeY;
 
+	int flag = 0;
+
 	void catchShake(){
 
 		savePosition = transform.position;
@@ -31,6 +33,9 @@ public class clash : MonoBehaviour{
 	}
 
 	void Update(){
+
+		int flag = ParticleController.flag ();
+
 		if(lifeTime < 0.0f){
 			transform.position = savePosition;
 			lifeTime = 0.0f;
@@ -43,7 +48,7 @@ public class clash : MonoBehaviour{
 			transform.position = new Vector3 (x_val, y_val, transform.position.z);
 		}
 
-		if (Input.GetKeyDown ("space"))
+		if (flag == 1)
 			catchShake ();
 	}
 }
