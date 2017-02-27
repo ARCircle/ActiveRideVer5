@@ -23,9 +23,18 @@ public class PauserScript : MonoBehaviour {
     private GameObject Enemy;
     private GameObject EventSystemObject;
 
-    //for select
+    //for 2Player
+    private GameObject Player1;
+    private GameObject Player2;
+
+
+    //for select, double select
     private GameObject PlayerSelectControllerObject;
     private GameObject CameraObject;
+    private GameObject CameraObject2;
+
+    //for stageselect
+    private GameObject StageSelectControllerObject;
 
     public bool isModalOption;
     private bool isPause;
@@ -167,8 +176,114 @@ public class PauserScript : MonoBehaviour {
 
                 break;
             case "2PlayerMode":
+                RootObject = GameObject.Find("Canvas");
+                if(GetComponentInParentAndChildren<Time2PMode>(RootObject) != null)
+                    GetComponentInParentAndChildren<LockOnChangeTest>(RootObject).enabled = !ModalFlag;
+
+                EventSystemObject = GameObject.Find("EventSystem");
+
+                int SelectNumber1 = DoublePlayerSelectController.Selectnumber1();
+                int SelectNumber2 = DoublePlayerSelectController.Selectnumber2();
+
+                switch (SelectNumber1)
+                {
+                    case 1:
+                        //BANSHEE
+                        Player = GameObject.Find("BANSHEE1");
+                        GetComponentInParentAndChildren<PlayerShoot_B1>(Player).enabled = !ModalFlag;
+                        GetComponentInParentAndChildren<PlayerMove_B1>(Player).enabled = !ModalFlag;
+
+                        break;
+                    case 2:
+                        //UNICORN
+                        Player = GameObject.Find("UNICORN1");
+                        GetComponentInParentAndChildren<PlayerShoot_U1>(Player).enabled = !ModalFlag;
+                        GetComponentInParentAndChildren<PlayerMove_U1>(Player).enabled = !ModalFlag;
+
+                        break;
+                    case 3:
+                        //PHOENIX
+                        Player = GameObject.Find("PHENEX1");
+                        GetComponentInParentAndChildren<PlayerShoot_P1>(Player).enabled = !ModalFlag;
+                        GetComponentInParentAndChildren<PlayerMove_P1>(Player).enabled = !ModalFlag;
+
+                        break;
+                    default: break;
+
+                }
+
+                switch (SelectNumber2)
+                {
+                    case 1:
+                        //BANSHEE
+                        Player = GameObject.Find("BANSHEE2");
+                        GetComponentInParentAndChildren<PlayerShoot_B2>(Player).enabled = !ModalFlag;
+                        GetComponentInParentAndChildren<PlayerMove_B2>(Player).enabled = !ModalFlag;
+
+                        break;
+                    case 2:
+                        //UNICORN
+                        Player = GameObject.Find("UNICORN2");
+                        GetComponentInParentAndChildren<PlayerShoot_U2>(Player).enabled = !ModalFlag;
+                        GetComponentInParentAndChildren<PlayerMove_U2>(Player).enabled = !ModalFlag;
+
+                        break;
+                    case 3:
+                        //PHOENIX
+                        Player = GameObject.Find("PHENEX2");
+                        GetComponentInParentAndChildren<PlayerShoot_P2>(Player).enabled = !ModalFlag;
+                        GetComponentInParentAndChildren<PlayerMove_P2>(Player).enabled = !ModalFlag;
+
+                        break;
+                    default: break;
+
+                }
+
+                if (Player1 != null)
+                {
+                    GetComponentInParentAndChildren<PlayerAp1>(Player1).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<PlayerMotion1>(Player1).enabled = !ModalFlag;
+
+                    GetComponentInParentAndChildren<LockOn1>(Player1).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<BoostEffect1>(Player1).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<Compass>(Player1).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<Marker1>(Player1).enabled = !ModalFlag;
+
+                    //子オブジェクト
+                    GetComponentInParentAndChildren<BattleManager_Battle1>(Player1).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<lose1>(Player1).enabled = !ModalFlag;
+
+                    //GetComponentInParentAndChildren<ScreenOverlay>(Player1).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<ScreenOverlayManager>(Player1).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<CamVibrationManager>(Player1).enabled = !ModalFlag;
+                }
+
+                if (Player2 != null)
+                {
+                    GetComponentInParentAndChildren<PlayerAp2>(Player2).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<PlayerMotion2>(Player2).enabled = !ModalFlag;
+
+                    GetComponentInParentAndChildren<LockOn2>(Player2).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<BoostEffect2>(Player2).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<Compass>(Player2).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<Marker2>(Player2).enabled = !ModalFlag;
+
+                    //子オブジェクト
+                    GetComponentInParentAndChildren<BattleManager_Battle2>(Player2).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<lose2>(Player2).enabled = !ModalFlag;
+
+                    //GetComponentInParentAndChildren<ScreenOverlay>(Player2).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<ScreenOverlayManager>(Player2).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<CamVibrationManager>(Player2).enabled = !ModalFlag;
+                }
+
                 break;
             case "stageselect":
+                StageSelectControllerObject = GameObject.Find("StageSelectController");
+                GetComponentInParentAndChildren<StageSelectController>(StageSelectControllerObject).enabled = !ModalFlag;
+
+                CameraObject = GameObject.Find("Camera");
+                GetComponentInParentAndChildren<CameraController>(CameraObject).enabled = !ModalFlag;
                 break;
             case "select":
                 CameraObject = GameObject.Find("Camera");
@@ -179,8 +294,20 @@ public class PauserScript : MonoBehaviour {
 
                 break;
             case "selectsceneDouble":
+                CameraObject = GameObject.Find("Camera");
+                GetComponentInParentAndChildren<MainCameraController>(CameraObject).enabled = !ModalFlag;
+
+                CameraObject2 = GameObject.Find("Camera2");
+                GetComponentInParentAndChildren<MainCameraController2>(CameraObject).enabled = !ModalFlag;
+
+                PlayerSelectControllerObject = GameObject.Find("PlayerSelectController");
+                GetComponentInParentAndChildren<DoublePlayerSelectController>(PlayerSelectControllerObject).enabled = !ModalFlag;
+
                 break;
-            case "Result": 
+            case "Result":
+                RootObject = GameObject.Find("Canvas");
+                GetComponentInParentAndChildren<ResultScript>(RootObject).enabled = !ModalFlag;
+
                 break;
 
             default: break;
