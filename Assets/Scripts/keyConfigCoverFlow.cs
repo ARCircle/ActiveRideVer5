@@ -25,13 +25,18 @@ public class keyConfigCoverFlow : MonoBehaviour {
         get { return NumberOfObject; }
     }
 
-    private int Z_MAX = 20;
-    private int Y_MAX = 35;
+    private int Z_MAX = 30;
+    private int Y_MAX = 100;
     private int Y_OFFSET = -50;
     private int CenterConfigIndex;
+    private int NumberOfActiveConfig = 3;
 
     private float X, Y, Z;
     private float Rotate_X, Rotate_Y, Rotate_Z;
+
+    //Yamlファイルのインスタンス作成, inputManagerFileを作成
+    private DesirializationYaml desirializationYaml = new DesirializationYaml();
+    DesirializationYaml.InputManagerFile inputManageFile;
 
     // Use this for initialization
     void Start()
@@ -61,7 +66,6 @@ public class keyConfigCoverFlow : MonoBehaviour {
 
         }
         KeyConfigBehaviour KeyConfigBehaviour_Instance = new KeyConfigBehaviour();
-        Debug.Log("keyConfig_Instance.getCanInputConfigKey:" + KeyConfigBehaviour_Instance.getCanInputConfigKey);
 
         if (Input.GetKeyDown(KeyCode.D) && !keyConfig_Instance.getCanInputConfigKey)
         {
@@ -130,7 +134,11 @@ public class keyConfigCoverFlow : MonoBehaviour {
             eachConfigsInKeyConfig[nLoop].transform.FindChild("Val").gameObject.GetComponent<UnityEngine.UI.Text>().text
                 = getValueOfConfig(eachConfigsInKeyConfig[nLoop], nLoop);
 
-            if (nLoop < 3)
+            eachConfigsInKeyConfig[nLoop].transform.FindChild("Conf").gameObject.GetComponent<UnityEngine.UI.Text>().fontSize = 20;
+            eachConfigsInKeyConfig[nLoop].transform.FindChild("Val").gameObject.GetComponent<UnityEngine.UI.Text>().fontSize = 20;
+
+            //出現するConfigの数を制限
+            if (nLoop < NumberOfActiveConfig)
             {
                 eachConfigsInKeyConfig[nLoop].SetActive(true);
             }
@@ -139,7 +147,7 @@ public class keyConfigCoverFlow : MonoBehaviour {
                 eachConfigsInKeyConfig[nLoop].SetActive(false);
             }
 
-            if(nLoop == 1) {
+            if(nLoop == Mathf.Floor(NumberOfActiveConfig / 2)) {
                 SelectConfig = eachConfigsInKeyConfig[nLoop];
                 eachConfigsInKeyConfig[nLoop].transform.FindChild("Conf").gameObject.GetComponent<UnityEngine.UI.Text>().color = Color.white;
                 eachConfigsInKeyConfig[nLoop].transform.FindChild("Val").gameObject.GetComponent<UnityEngine.UI.Text>().color = Color.white;
@@ -154,9 +162,6 @@ public class keyConfigCoverFlow : MonoBehaviour {
         }
 
     }
-
-    private DesirializationYaml desirializationYaml = new DesirializationYaml();
-    DesirializationYaml.InputManagerFile inputManageFile;
 
     private int SearchAxesFromInputManager(string Query){
 

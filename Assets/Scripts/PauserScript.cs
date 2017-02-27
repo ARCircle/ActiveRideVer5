@@ -2,8 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System;
-using System.IO;
-using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -99,6 +97,8 @@ public class PauserScript : MonoBehaviour {
 
                 GetComponentInParentAndChildren<OptionRotate>(RootObject).enabled = !ModalFlag;
                 GetComponentInParentAndChildren<CircularOption>(RootObject).enabled = !ModalFlag;
+
+                GetComponentInParentAndChildren<SetLineScale>(RootObject).enabled = !ModalFlag;
 
                 if (GetComponentInParentAndChildren<keyConfigCoverFlow>(RootObject) != null)
                     GetComponentInParentAndChildren<keyConfigCoverFlow>(RootObject).enabled = !ModalFlag;
