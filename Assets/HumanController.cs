@@ -32,7 +32,7 @@ public class HumanController : MonoBehaviour {
             Y_Offset += Y_Delta;
         }
 
-        Debug.Log(Y_Offset);
+        //Debug.Log(Y_Offset);
         this.transform.localPosition = Position + new Vector3(0, Y_Offset, 0);
     }
 }
