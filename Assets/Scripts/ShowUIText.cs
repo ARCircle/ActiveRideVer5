@@ -83,8 +83,9 @@ public class ShowUIText : MonoBehaviour {
         // 現在の行のテキストをuiTextに流し込み、現在の行番号を一つ追加
         // indexはアタッチ先のObjectにより指定, csvの列=1つのStoryに対応する
         uiText.text += sdataArrays[currentLine, index] + "\n";
-        Debug.Log(currentLine+","+index+ sdataArrays[currentLine, index]);
-        Debug.Log(uiText.name);
+        //Debug.Log(currentLine+","+index+ sdataArrays[currentLine, index]);
+        //Debug.Log(uiText.name);
+
         currentLine++;
     }
 
