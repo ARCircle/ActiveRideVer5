@@ -18,19 +18,19 @@ public class animationController : MonoBehaviour {
 
 	void Update () {
 	
-		int aniflag1 = camera1Controller.flag1 ();
-		int aniflag2 = camera1Controller.flag2 ();
-		int aniflag3 = camera1Controller.flag3 ();
+		int idle = motionController.idleflag ();
+		int moveforward = motionController.moveforwardflag ();
+		int boost = motionController.boostflag ();
 
-		if (aniflag1 == 1) {
+		if (idle == 1) {
 			animator.SetBool ("idle", true);
 		}
 
-		if (aniflag2 == 1) {
+		if (moveforward == 1) {
 			animator.SetBool ("anime", true);
 		}
 
-		if (aniflag3 == 1) {
+		if (boost == 1) {
 			animator.SetBool ("Boost", true);
 		}
 			
