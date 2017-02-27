@@ -22,10 +22,10 @@ public class ChangeCameraOnGallery : MonoBehaviour {
     private float CameraPosTo = -10.0f;
 
     private Vector3 DescriptionPosFrom = new Vector3(100f, 0f, 0f);
-    private Vector3 DescriptionPosTo = new Vector3(30f, 0f, -180f);
+    private Vector3 DescriptionPosTo = new Vector3(-200f,0f,200f/10f);
 
     private int CameraMoveFlag;
-    private bool DescriptionMoveFlag;
+    private int DescriptionMoveFlag;
 
     private int CameraIndex;
 
@@ -54,6 +54,7 @@ public class ChangeCameraOnGallery : MonoBehaviour {
     }
 
     // Update is called once per frame
+
     void Update () {
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -64,36 +65,49 @@ public class ChangeCameraOnGallery : MonoBehaviour {
         
         if (Input.GetKeyUp(KeyCode.LeftArrow) && GalleryCanvas.OnStoryFlag)
         {
-            UIsActiveControl(0);
+            posB.z = CameraPosFrom;
+            BANSHEE_Cam.transform.localPosition = posB;
+            CameraMoveFlag = 1;
+            DescriptionMoveFlag = 1;
+            Descriptions[0].transform.localPosition = DescriptionPosFrom;
+            Descriptions[0].SetActive(true);
+            BANSHEE_Cam.SetActive(true);
         }
 
         if (Input.GetKeyDown(KeyCode.W) && GalleryCanvas.OnStoryFlag )
         {
             CameraIndex++;
-
-            if (CameraIndex >= 3) { CameraIndex = 0; }
-
+            if (CameraIndex >= 3) CameraIndex = 0;
             switch (CameraIndex) {
                 case 0:
                     posB.z = CameraPosFrom;
                     BANSHEE_Cam.transform.localPosition = posB;
                     SetCameraInActive();
-
-                    UIsActiveControl(0);
+                    CameraMoveFlag = 1;
+                    DescriptionMoveFlag = 1;
+                    Descriptions[0].transform.localPosition = DescriptionPosFrom;
+                    Descriptions[0].SetActive(true);
+                    BANSHEE_Cam.SetActive(true);
                     break;
                 case 1:
                     posU.z = CameraPosFrom;
                     UNICORN_Cam.transform.localPosition = posU;
-
                     SetCameraInActive();
-                    UIsActiveControl(1);
+                    CameraMoveFlag = 2;
+                    DescriptionMoveFlag = 1;
+                    Descriptions[1].transform.localPosition = DescriptionPosFrom;
+                    Descriptions[1].SetActive(true);
+                    UNICORN_Cam.SetActive(true);
                     break;
                 case 2:
                     posP.z = CameraPosFrom;
                     PHOENIX_Cam.transform.localPosition = posP;
-
                     SetCameraInActive();
-                    UIsActiveControl(2);
+                    CameraMoveFlag = 3;
+                    DescriptionMoveFlag = 1;
+                    Descriptions[2].transform.localPosition = DescriptionPosFrom;
+                    Descriptions[2].SetActive(true);
+                    PHOENIX_Cam.SetActive(true);
                     break;
                 default:
                     CameraIndex = 0;
@@ -132,16 +146,16 @@ public class ChangeCameraOnGallery : MonoBehaviour {
 
     Vector3 MoveDescription(Vector3 pos)
     {
-        if(DescriptionMoveFlag)
+        if(DescriptionMoveFlag!= 0)
         {
 
             if (pos.x >= DescriptionPosTo.x)
             {
-                pos.z -= 10.0f;
-                pos.x -= 0.5f;
+                pos.z -= 5.0f;
+                pos.x -= 1.0f;
             }else
             {
-                DescriptionMoveFlag = false;
+                DescriptionMoveFlag = 0;
             }
 
         }
@@ -175,48 +189,14 @@ public class ChangeCameraOnGallery : MonoBehaviour {
         UNICORN_Cam.SetActive(false);
         PHOENIX_Cam.SetActive(false);
 
-        BANSHEE_Cam.gameObject.transform.parent.gameObject.SetActive(false);
-        UNICORN_Cam.gameObject.transform.parent.gameObject.SetActive(false);
-        PHOENIX_Cam.gameObject.transform.parent.gameObject.SetActive(false);
-
-        foreach (GameObject d in Descriptions)
+        foreach(GameObject d in Descriptions)
         {
             d.SetActive(false);
-            d.gameObject.GetComponent<ShowUIText>().enabled = false;
         }
     }
     IEnumerator wait()
     {
         yield return new WaitForSeconds(0.01f);
-    }
-
-    private void UIsActiveControl(int index)
-    {
-        CameraMoveFlag = index + 1;
-        DescriptionMoveFlag = true;
-        Descriptions[index].transform.localPosition = DescriptionPosTo;
-
-        Descriptions[index].SetActive(true);
-        Descriptions[index].gameObject.GetComponent<ShowUIText>().enabled = true;
-
-        switch (index)
-        {
-            case 0:
-                BANSHEE_Cam.SetActive(true);
-                BANSHEE_Cam.gameObject.transform.parent.gameObject.SetActive(true);
-                break;
-            case 1:
-                UNICORN_Cam.SetActive(true);
-                UNICORN_Cam.gameObject.transform.parent.gameObject.SetActive(true);
-                break;
-            case 2:
-                PHOENIX_Cam.SetActive(true);
-                PHOENIX_Cam.gameObject.transform.parent.gameObject.SetActive(true);
-                break;
-            default:
-                break;
-        }
-
     }
 
 }
