@@ -3,14 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ChangeVoiceVolume : MonoBehaviour {
-
-    //DIMval 0-1
     public float VoiceVal;
-    public float getVoiceVal
-    {
-        private set { VoiceVal = value; }
-        get { return VoiceVal; }
-    }
 
     private UnityEngine.UI.Image gaugeCtrl;
 
