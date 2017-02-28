@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 431692}
+  - component: {fileID: 65764913293828312}
   m_Layer: 0
   m_Name: build_4
   m_TagString: Untagged
@@ -25,6 +26,7 @@ GameObject:
   - component: {fileID: 434916}
   - component: {fileID: 3304246}
   - component: {fileID: 2384244}
+  - component: {fileID: 65066385516500714}
   m_Layer: 0
   m_Name: Box11
   m_TagString: Untagged
@@ -38,14 +40,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 130772}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.39991418, y: 0.39991418, z: 0.39991418}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 287.4, y: -2.1879811, z: -100.3}
+  m_LocalScale: {x: 1.7356875, y: 1.735687, z: 1.735687}
   m_Children:
   - {fileID: 434916}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &434916
 Transform:
   m_ObjectHideFlags: 1
@@ -53,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.517, y: 0, z: 0.504}
+  m_LocalPosition: {x: -9.42, y: -0.23, z: -22.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 431692}
@@ -108,3 +110,27 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 130772}
   m_IsPrefabParent: 1
+--- !u!65 &65066385516500714
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174022}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.6713953, y: 1.5090749, z: 1.9715271}
+  m_Center: {x: -1.5875106, y: 0.75327235, z: -0.5458458}
+--- !u!65 &65764913293828312
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130772}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
