@@ -23,6 +23,7 @@ public class UIMaskTransparent : MonoBehaviour {
 
     void OnEnable()
     {
+
         canUpdateMaskRange = true;
         mask_range = 1.0f;
 

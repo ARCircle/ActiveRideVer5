@@ -47,15 +47,17 @@ public class ShowUIText : MonoBehaviour
 
     private void OnEnable()
     {
+        //if (ModalOption.isModalSetActive == false)
+        //{
+            readCSVData(Application.dataPath + path, ref sdataArrays);
 
-        readCSVData(Application.dataPath + path, ref sdataArrays);
+            isShowText = true;
 
-        isShowText = true;
+            currentLine = 0;
+            TextUpdate();
 
-        currentLine = 0;
-        TextUpdate();
-
-        uiText.text = "";
+            uiText.text = "";
+        //}
 
     }
 
