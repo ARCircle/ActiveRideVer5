@@ -11,8 +11,8 @@ public class GalleryCoverFlow : MonoBehaviour
     public List<GameObject> PhotosinGallery = new List<GameObject>();
 
     private GameObject tmpPhoto;
-
     private GameObject centerPhoto;
+    public GameObject centerPhotoFrame;
 
     private SpriteRenderer spriteRenderer;
 
@@ -53,6 +53,23 @@ public class GalleryCoverFlow : MonoBehaviour
     void Update()
     {
 
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
+        {
+            intensify = 0.1f;
+
+            centerPhoto = setPhotoInActive();
+            ChangeDescriptionText(centerPhoto);
+            ChangeCenterPhotoSize();
+            
+            SetTransitionToPhoto(centerPhoto);
+
+            //in ViewCenterFrame.cs
+            //中央のフレームを再表示
+            centerPhotoFrame.gameObject.GetComponent<ViewCenterFrame>().enabled = true;
+
+            viewConvexPhoto();
+        }
+
         if (Input.GetKeyDown(KeyCode.W))
         {
             tmpPhoto = PhotosinGallery[0];
@@ -61,16 +78,6 @@ public class GalleryCoverFlow : MonoBehaviour
                 PhotosinGallery[nLoop] = PhotosinGallery[nLoop + 1];
             }
             PhotosinGallery[NumberOfObject - 1] = tmpPhoto;
-
-            intensify = 0.1f;
-
-            centerPhoto = setPhotoInActive();
-            ChangeDescriptionText(centerPhoto);
-            ChangeCenterPhotoSize();
-
-            SetTransitionToPhoto(centerPhoto);
-
-            viewConvexPhoto();
 
         }
 
@@ -82,16 +89,6 @@ public class GalleryCoverFlow : MonoBehaviour
                 PhotosinGallery[nLoop] = PhotosinGallery[nLoop - 1];
             }
             PhotosinGallery[0] = tmpPhoto;
-
-            intensify = 0.1f;
-
-            centerPhoto = setPhotoInActive();
-            ChangeDescriptionText(centerPhoto);
-            ChangeCenterPhotoSize();
-
-            SetTransitionToPhoto(centerPhoto);
-
-            viewConvexPhoto();
 
         }
 
