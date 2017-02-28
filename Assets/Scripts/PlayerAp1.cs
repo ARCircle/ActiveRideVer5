@@ -10,6 +10,9 @@ public class PlayerAp1 : MonoBehaviour {
 	public static int armorPoint;
 	public static int armorPointMax = 5000;
     float downPoint = 0;
+    bool downFlag = false;
+    float downTime = 0;
+    bool DmgFlag = true;
 
 	public Text armorText;
 
@@ -31,7 +34,8 @@ public class PlayerAp1 : MonoBehaviour {
 
 		//ゲーム開始時にはノイズを無効にする
 		MainCamera.GetComponent<NoiseAndScratches> ().enabled = false;
-	}
+        
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -66,34 +70,57 @@ public class PlayerAp1 : MonoBehaviour {
 		//ゲージの長さを体力の割合に合わせて伸縮させる
 		gaugeImage.transform.localScale = new Vector3(percentageArmorpoint, 1, 1);
 
+        if (downFlag)
+        {
+            Debug.LogError("1Pダウン状態移動");
+            DmgFlag = false;
+        //    GetComponent<CharacterController>().enabled = false;
+            downTime += Time.deltaTime;
+            if(downTime >= 2)
+            {
+                downFlag = false;
+                DmgFlag = true;
+                //  GetComponent<CharacterController>().enabled = true;
+                downTime = 0;
+                Debug.LogError("1Pダウン状態解除");
+                downPoint = 0;
+            }
+        }
+
 
 	}
 
 	private void OnCollisionEnter(Collision collider) {
         //敵の弾と衝突したらダメージ
 
-
-        Debug.Log("いえい");
-		if (collider.gameObject.tag == "Shot_B") {
-			armorPoint -= ShotPlayer_B2.damage;
-			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
-            downPoint += ShotPlayer_B2.damage / 100;
-        }
-        else if (collider.gameObject.tag == "Shot_U") {
-			armorPoint -= ShotPlayer_U2.damage;
-			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
-            downPoint += ShotPlayer_U2.damage;
-        }
-        else if (collider.gameObject.tag == "Shot_P") {
-			armorPoint -= ShotPlayer_P2.damage;
-			armorPoint = Mathf.Clamp(armorPoint, 0, armorPointMax);
-            downPoint += ShotPlayer_P2.damage;
-        }
-
-        if (downPoint >= 5)
+        if (DmgFlag)
         {
-            Destroy(this);
+            if (collider.gameObject.tag == "Shot_B")
+            {
+                armorPoint -= ShotPlayer_B2.damage;
+                armorPoint = Mathf.Clamp(armorPoint, 0, armorPointMax);
+                downPoint += ShotPlayer_B2.damage / 100;
+            }
+            else if (collider.gameObject.tag == "Shot_U")
+            {
+                armorPoint -= ShotPlayer_U2.damage;
+                armorPoint = Mathf.Clamp(armorPoint, 0, armorPointMax);
+                downPoint += ShotPlayer_U2.damage / 100;
+            }
+            else if (collider.gameObject.tag == "Shot_P")
+            {
+                armorPoint -= ShotPlayer_P2.damage;
+                armorPoint = Mathf.Clamp(armorPoint, 0, armorPointMax);
+                downPoint += ShotPlayer_P2.damage / 100;
+            }
         }
+
+        if (downPoint > 5)
+        {
+            
+            downFlag = true;
+        }
+
     }
 
 	//敵とのあたり判定
