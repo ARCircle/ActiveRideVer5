@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChangeCameraOnGallery : MonoBehaviour {
+public class ChangeCameraOnGallery : MonoBehaviour
+{
 
     public GameObject MainCam;
     public GameObject BANSHEE_Cam;
@@ -23,15 +24,16 @@ public class ChangeCameraOnGallery : MonoBehaviour {
     private float CameraPosTo = -10.0f;
 
     private Vector3 DescriptionPosFrom = new Vector3(100f, 0f, 0f);
-    private Vector3 DescriptionPosTo = new Vector3(30f, 0f, -195f);
+    private Vector3 DescriptionPosTo = new Vector3(30f, 0f, -275f);
 
     private int CameraMoveFlag;
-    private int DescriptionMoveFlag;
+    private bool DescriptionMoveFlag;
 
     private int CameraIndex;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
 
         BANSHEE_Cam.transform.localPosition = new Vector3(0, 0, CameraPosFrom);
         UNICORN_Cam.transform.localPosition = new Vector3(0, 0, CameraPosFrom);
@@ -48,67 +50,55 @@ public class ChangeCameraOnGallery : MonoBehaviour {
     {
         //Descriptions[0].SetActive(true);
         //BANSHEE_Cam.SetActive(true);
-        
+
         //Pauseから復帰時にfalseになるため
         //カメラ位置が飛ばされるのを防止
         MainCam.SetActive(true);
     }
 
     // Update is called once per frame
-
-    void Update () {
+    void Update()
+    {
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             SetCameraInActive();
             MainCam.SetActive(true);
         }
-        
+
         if (Input.GetKeyUp(KeyCode.LeftArrow) && GalleryCanvas.OnStoryFlag)
         {
-            posB.z = CameraPosFrom;
-            BANSHEE_Cam.transform.localPosition = posB;
-            CameraMoveFlag = 1;
-            DescriptionMoveFlag = 1;
-            Descriptions[0].transform.localPosition = DescriptionPosFrom;
-            Descriptions[0].SetActive(true);
-            BANSHEE_Cam.SetActive(true);
+            UIsActiveControl(0);
         }
 
-        if (Input.GetKeyDown(KeyCode.W) && GalleryCanvas.OnStoryFlag )
+        if (Input.GetKeyDown(KeyCode.W) && GalleryCanvas.OnStoryFlag)
         {
             CameraIndex++;
-            if (CameraIndex >= 3) CameraIndex = 0;
-            switch (CameraIndex) {
+
+            if (CameraIndex >= 3) { CameraIndex = 0; }
+
+            switch (CameraIndex)
+            {
                 case 0:
                     posB.z = CameraPosFrom;
                     BANSHEE_Cam.transform.localPosition = posB;
                     SetCameraInActive();
-                    CameraMoveFlag = 1;
-                    DescriptionMoveFlag = 1;
-                    Descriptions[0].transform.localPosition = DescriptionPosFrom;
-                    Descriptions[0].SetActive(true);
-                    BANSHEE_Cam.SetActive(true);
+
+                    UIsActiveControl(0);
                     break;
                 case 1:
                     posU.z = CameraPosFrom;
                     UNICORN_Cam.transform.localPosition = posU;
+
                     SetCameraInActive();
-                    CameraMoveFlag = 2;
-                    DescriptionMoveFlag = 1;
-                    Descriptions[1].transform.localPosition = DescriptionPosFrom;
-                    Descriptions[1].SetActive(true);
-                    UNICORN_Cam.SetActive(true);
+                    UIsActiveControl(1);
                     break;
                 case 2:
                     posP.z = CameraPosFrom;
                     PHOENIX_Cam.transform.localPosition = posP;
+
                     SetCameraInActive();
-                    CameraMoveFlag = 3;
-                    DescriptionMoveFlag = 1;
-                    Descriptions[2].transform.localPosition = DescriptionPosFrom;
-                    Descriptions[2].SetActive(true);
-                    PHOENIX_Cam.SetActive(true);
+                    UIsActiveControl(2);
                     break;
                 default:
                     CameraIndex = 0;
@@ -147,16 +137,17 @@ public class ChangeCameraOnGallery : MonoBehaviour {
 
     Vector3 MoveDescription(Vector3 pos)
     {
-        if(DescriptionMoveFlag!= 0)
+        if (DescriptionMoveFlag)
         {
 
             if (pos.x >= DescriptionPosTo.x)
             {
-                pos.z -= 5.0f;
-                pos.x -= 1.0f;
-            }else
+                pos.z -= 10.0f;
+                pos.x -= 0.5f;
+            }
+            else
             {
-                DescriptionMoveFlag = 0;
+                DescriptionMoveFlag = false;
             }
 
         }
@@ -175,14 +166,15 @@ public class ChangeCameraOnGallery : MonoBehaviour {
                 Camera.transform.localPosition = pos;
                 //wait();
                 //終端まで達したら元の箇所に戻す
-            }else
+            }
+            else
             {
                 CameraMoveFlag = 0;
             }
 
         }
         return pos;
-    } 
+    }
     private void SetCameraInActive()
     {
         //MainCam.SetActive(false);
@@ -190,10 +182,16 @@ public class ChangeCameraOnGallery : MonoBehaviour {
         UNICORN_Cam.SetActive(false);
         PHOENIX_Cam.SetActive(false);
 
-        foreach(GameObject d in Descriptions)
+        BANSHEE_Cam.gameObject.transform.parent.gameObject.SetActive(false);
+        UNICORN_Cam.gameObject.transform.parent.gameObject.SetActive(false);
+        PHOENIX_Cam.gameObject.transform.parent.gameObject.SetActive(false);
+
+        foreach (GameObject d in Descriptions)
         {
             d.SetActive(false);
+            d.gameObject.GetComponent<ShowUIText>().enabled = false;
         }
+
         foreach (GameObject c in Characters)
         {
             c.SetActive(false);
@@ -236,4 +234,5 @@ public class ChangeCameraOnGallery : MonoBehaviour {
         }
 
     }
+
 }
