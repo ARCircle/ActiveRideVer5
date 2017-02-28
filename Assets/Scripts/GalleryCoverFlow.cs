@@ -1,39 +1,42 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GalleryCoverFlow : MonoBehaviour {
+public class GalleryCoverFlow : MonoBehaviour
+{
 
-	public List<GameObject> PhotosinGallery = new List<GameObject>();
+    public List<GameObject> PhotosinGallery = new List<GameObject>();
 
-	private GameObject tmpPhoto;
+    private GameObject tmpPhoto;
 
     private GameObject centerPhoto;
 
     private SpriteRenderer spriteRenderer;
 
-	protected int NumberOfObject;
+    protected int NumberOfObject;
 
     private float X, Y, Z;
     private float Rotate_X, Rotate_Y, Rotate_Z;
 
-	private int Z_MAX = 60;
-	private int Y_MAX = 250;
+    private int Z_MAX = 60;
+    private int Y_MAX = 250;
     private int X_MAX = 100;
 
-	private int CenterButtonIndex;
+    private int CenterButtonIndex;
 
     private float intensify = 0.1f;
 
     public Material UI_mat;
 
     public GameObject TextOfPhotos;
-    private string[] DescriptionText = { "あああ", "いいい", "ううう", "えええ", "おおお", "がはは" }; 
+    private string[] DescriptionText = { "あああ", "いいい", "ううう", "えええ", "おおお", "がはは" };
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         NumberOfObject = PhotosinGallery.Count;
         Debug.Log(NumberOfObject);
@@ -47,16 +50,17 @@ public class GalleryCoverFlow : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
 
-		if (Input.GetKeyDown(KeyCode.W))
-		{
-			tmpPhoto = PhotosinGallery[0];
-			for (int nLoop = 0; nLoop < NumberOfObject - 1 ; nLoop++)
-			{
-				PhotosinGallery[nLoop] = PhotosinGallery[nLoop + 1];
-			}
-			PhotosinGallery[NumberOfObject - 1] = tmpPhoto;
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            tmpPhoto = PhotosinGallery[0];
+            for (int nLoop = 0; nLoop < NumberOfObject - 1; nLoop++)
+            {
+                PhotosinGallery[nLoop] = PhotosinGallery[nLoop + 1];
+            }
+            PhotosinGallery[NumberOfObject - 1] = tmpPhoto;
 
             intensify = 0.1f;
 
@@ -71,13 +75,13 @@ public class GalleryCoverFlow : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.S))
-		{
-			tmpPhoto = PhotosinGallery[NumberOfObject - 1];
-			for (int nLoop = NumberOfObject - 1; nLoop > 0; nLoop--)
-			{
-				PhotosinGallery[nLoop] = PhotosinGallery[nLoop - 1];
-			}
-			PhotosinGallery[0] = tmpPhoto;
+        {
+            tmpPhoto = PhotosinGallery[NumberOfObject - 1];
+            for (int nLoop = NumberOfObject - 1; nLoop > 0; nLoop--)
+            {
+                PhotosinGallery[nLoop] = PhotosinGallery[nLoop - 1];
+            }
+            PhotosinGallery[0] = tmpPhoto;
 
             intensify = 0.1f;
 
@@ -96,15 +100,16 @@ public class GalleryCoverFlow : MonoBehaviour {
     }
 
     static void Swap<T>(ref T lhs, ref T rhs)
-	{
-		T temp;
-		temp = lhs;
-		lhs = rhs;
-		rhs = temp;
-	}
+    {
+        T temp;
+        temp = lhs;
+        lhs = rhs;
+        rhs = temp;
+    }
 
     //なんだか汚いのでもっとスマートにかきたい
-    private void ChangeDescriptionText(GameObject CenterOfPhoto){
+    private void ChangeDescriptionText(GameObject CenterOfPhoto)
+    {
         //int index = Int32.Parse(CenterOfPhoto.tag);
         //TextOfPhotos.GetComponent<UnityEngine.UI.Text>().text = DescriptionText[index]; 
         switch (CenterOfPhoto.name)
@@ -127,17 +132,17 @@ public class GalleryCoverFlow : MonoBehaviour {
             case "Picture6":
                 TextOfPhotos.GetComponent<UnityEngine.UI.Text>().text = DescriptionText[5];
                 break;
-            default:break;
+            default: break;
         }
 
     }
 
-	private void viewConvexPhoto()
-	{
-		for (int nLoop = 0; nLoop < NumberOfObject; nLoop++)
-		{
-			Z = Mathf.Abs(Z_MAX * Mathf.Cos((nLoop - 1) * (360 / NumberOfObject) * (Mathf.PI / 180)));
-			Y = 1.2f * Y_MAX * Mathf.Sin((nLoop - 1) * (360 / NumberOfObject) * (Mathf.PI / 180));
+    private void viewConvexPhoto()
+    {
+        for (int nLoop = 0; nLoop < NumberOfObject; nLoop++)
+        {
+            Z = Mathf.Abs(Z_MAX * Mathf.Cos((nLoop - 1) * (360 / NumberOfObject) * (Mathf.PI / 180)));
+            Y = 1.2f * Y_MAX * Mathf.Sin((nLoop - 1) * (360 / NumberOfObject) * (Mathf.PI / 180));
             X = 1.2f * X_MAX * Mathf.Sin((nLoop - 1) * (360 / NumberOfObject) * (Mathf.PI / 180));
 
             Rotate_X = 60 * Mathf.Sin((nLoop - 1) * (360 / NumberOfObject) * (Mathf.PI / 180));
@@ -199,29 +204,43 @@ public class GalleryCoverFlow : MonoBehaviour {
                 Debug.Log("test" + PhotosinGallery[nLoop].GetComponent<UIMaskTransparent>().UI_mask_mat);
                 PhotosinGallery[nLoop].GetComponent<UIMaskTransparent>().enabled = false;
             }
+
+            if (PhotosinGallery[nLoop] != centerPhoto)
+            {
+                PhotosinGallery[nLoop].GetComponentInChildren<UnityEngine.UI.Image>().material = null;
+
+                UnityEngine.Object target = PhotosinGallery[nLoop].GetComponent<UIMaskTransparent>();
+                UnityEngine.Object.Destroy(target);
+            }
+            else
+            {
+
+                PhotosinGallery[nLoop].GetComponent<UIMaskTransparent>().enabled = true;
+                PhotosinGallery[nLoop].GetComponentInChildren<UnityEngine.UI.Image>().material = UI_mat;
+            }
         }
 
-        centerPhoto.GetComponent<UIMaskTransparent>().enabled = true;
-        
+
     }
 
     private GameObject setPhotoInActive()
-	{
-		for (int nLoop = 0; nLoop < NumberOfObject ; nLoop++)
-		{
+    {
+        for (int nLoop = 0; nLoop < NumberOfObject; nLoop++)
+        {
             if (nLoop >= NumberOfObject / 2)
-			{
-				PhotosinGallery[nLoop].SetActive(false);
-			}else
-			{
-				PhotosinGallery[nLoop].SetActive(true);
-                
+            {
+                PhotosinGallery[nLoop].SetActive(false);
+            }
+            else
+            {
+                PhotosinGallery[nLoop].SetActive(true);
+
             }
 
-		}
+        }
 
         return PhotosinGallery[(NumberOfObject / 2) - 2];
-	}
+    }
     float FlashSprite(float intensify)
     {
         if (intensify >= 1f)
@@ -232,13 +251,10 @@ public class GalleryCoverFlow : MonoBehaviour {
         else
         {
             centerPhoto.GetComponentInChildren<UnityEngine.UI.Image>().color = new Color(intensify, intensify, intensify);
-            Debug.Log(intensify);
+
             intensify = intensify * 1.1f;
         }
         return intensify;
     }
-    private void FlushSprite(float value)
-    {
-      
-    }
+
 }

@@ -43,11 +43,6 @@ public class OptionRotate : MonoBehaviour
 
 		//ModalOptionの加算ロード
 		UnityEngine.SceneManagement.SceneManager.LoadScene("ModalOption", LoadSceneMode.Additive);
-
-        /*
-        CenterIndex = (int)Mathf.Ceil(buttons.Count / 2);
-        buttons[CenterIndex].transform.localScale = new Vector3(1.5f, 1.5f, 0);
-        */
         
         AudioSource[] audioSources = GetComponents<AudioSource>();
         audioSource1 = audioSources[0];
