@@ -1,8 +1,6 @@
+#warning Upgrade NOTE: unity_Scale shader variable was removed; replaced 'unity_Scale.w' with '1.0'
 
-// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
-
-Shader "FX/Water" {
-
+Shader "FX/Water" { 
 Properties {
 	_WaveScale ("Wave scale", Range (0.02,0.15)) = 0.063
 	_ReflDistort ("Reflection distort", Range (0,1.5)) = 0.44
@@ -80,10 +78,7 @@ v2f vert(appdata v)
 	
 	// scroll bump waves
 	float4 temp;
-
-	float4 wpos = mul (unity_ObjectToWorld, v.vertex);
-	temp.xyzw = wpos.xzxz * _WaveScale4 + _WaveOffset;
-
+	temp.xyzw = v.vertex.xzxz * _WaveScale4 / 1.0 + _WaveOffset;
 	o.bumpuv0 = temp.xy;
 	o.bumpuv1 = temp.wz;
 	
