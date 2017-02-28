@@ -28,6 +28,13 @@ public class SetLineScale : MonoBehaviour {
             this.transform.localScale = new Vector3(LineScale, 1f, 1f);
         }
 
+        //TODO: fix no good coding
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
+        {
+            LineScale = 1 * DefaultLineScale;
+            this.transform.localScale = new Vector3(LineScale, 1f, 1f);
+        }
+
         return LineScale;
     }
 }

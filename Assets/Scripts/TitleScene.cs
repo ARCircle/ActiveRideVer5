@@ -37,7 +37,8 @@ public class TitleScene : MonoBehaviour {
 		if (timer > 6) {
 
 			//ボタンを押したら遷移
-			if (Input.anyKeyDown) {
+			if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.DownArrow)) {
+        
 				audioSource.PlayOneShot(audioSource.clip);
 				//Application.LoadLevel("SelectMenu");
 				timer = 0;

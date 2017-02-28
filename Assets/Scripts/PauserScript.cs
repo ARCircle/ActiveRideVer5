@@ -8,8 +8,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PauserScript : MonoBehaviour {
- 
+public class PauserScript : MonoBehaviour
+{
+
     private static ModalOption modalOption = new ModalOption();
 
     private GameObject RootObject;
@@ -31,19 +32,22 @@ public class PauserScript : MonoBehaviour {
     private bool isPause;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-        
-        Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "is Active");
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "is Active" + isModalOption);
 
         if (isModalOption)
         {
             SelectObjectDependOnSceneName(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, ModalOption.isModalSetActive);
-        }else
+        }
+        else
         {
             // カットイン実装用
             // isPauseを外部スクリプトからコントロール, ポーズの呼び出し
@@ -57,7 +61,8 @@ public class PauserScript : MonoBehaviour {
     //TODO: 例外処理
     public void SelectObjectDependOnSceneName(string SceneName, bool ModalFlag)
     {
-        switch (SceneName) {
+        switch (SceneName)
+        {
             case "Title":
                 RootObject = GameObject.Find("TitleCanvas");
 
@@ -106,7 +111,7 @@ public class PauserScript : MonoBehaviour {
                     GetComponentInParentAndChildren<ChangeVoiceVolume>(RootObject).enabled = !ModalFlag;
                 if (GetComponentInParentAndChildren<ChangeSEVolume>(RootObject) != null)
                     GetComponentInParentAndChildren<ChangeSEVolume>(RootObject).enabled = !ModalFlag;
-                    break;
+                break;
             case "Main":
 
                 //validate Null Exception
@@ -126,7 +131,8 @@ public class PauserScript : MonoBehaviour {
 
                 int SelectNumber = PlayerSelectController.Selectnumber();
 
-                switch (SelectNumber) {
+                switch (SelectNumber)
+                {
                     case 1:
                         //BANSHEE
                         Player = GameObject.Find("BANSHEE1playMode");
@@ -142,8 +148,8 @@ public class PauserScript : MonoBehaviour {
                     default: break;
 
                 }
-                
-                if(Player != null)
+
+                if (Player != null)
                 {
                     GetComponentInParentAndChildren<PlayerAp>(Player).enabled = !ModalFlag;
                     GetComponentInParentAndChildren<PlayerMove>(Player).enabled = !ModalFlag;
@@ -180,11 +186,11 @@ public class PauserScript : MonoBehaviour {
                 break;
             case "selectsceneDouble":
                 break;
-            case "Result": 
+            case "Result":
                 break;
 
             default: break;
-                 
+
         }
 
     }
@@ -197,7 +203,7 @@ public class PauserScript : MonoBehaviour {
     /// <summary>
     /// 親や子オブジェクトも含めた範囲から指定のコンポーネントを取得する
     /// </summary>
-    public static T GetComponentInParentAndChildren<T>(GameObject gameObject) 
+    public static T GetComponentInParentAndChildren<T>(GameObject gameObject)
     {
 
         if (gameObject.GetComponentInParent<T>() != null)

@@ -102,7 +102,7 @@ public class ModalOption : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyUp(KeyCode.O))
+		if (Input.GetKeyUp(KeyCode.DownArrow))
 		{
             if (isModalSetActive == false) {
                 isPause = true;
@@ -119,7 +119,7 @@ public class ModalOption : MonoBehaviour {
             }
 
         }
-        Debug.Log(Time.timeScale);
+
 		if (isModalSetActive == true) {
 
             if (isPause)
