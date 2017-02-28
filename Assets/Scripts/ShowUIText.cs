@@ -5,7 +5,8 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShowUIText : MonoBehaviour {
+public class ShowUIText : MonoBehaviour
+{
 
     // 敵データ格納用の配列データ(とりあえず初期値はnull値)
     private int[,] stageMapDatas = null;
@@ -70,7 +71,8 @@ public class ShowUIText : MonoBehaviour {
 
                 TextUpdate();
             }
-        } else
+        }
+        else
         {
             isShowText = false;
             currentLine = 0;
@@ -83,9 +85,8 @@ public class ShowUIText : MonoBehaviour {
         // 現在の行のテキストをuiTextに流し込み、現在の行番号を一つ追加
         // indexはアタッチ先のObjectにより指定, csvの列=1つのStoryに対応する
         uiText.text += sdataArrays[currentLine, index] + "\n";
-        //Debug.Log(currentLine+","+index+ sdataArrays[currentLine, index]);
-        //Debug.Log(uiText.name);
-
+        Debug.Log(currentLine + "," + index + sdataArrays[currentLine, index]);
+        Debug.Log(uiText.name);
         currentLine++;
     }
 
@@ -130,7 +131,7 @@ public class ShowUIText : MonoBehaviour {
         // 確認表示用の変数(行数、列数)を格納する
         this.height = h;    //行数   
         this.width = w;    //列数
-        
+
     }
 
 }

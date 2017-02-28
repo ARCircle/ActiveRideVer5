@@ -29,6 +29,7 @@ public class keyConfigCoverFlow : MonoBehaviour {
     private int Y_MAX = 100;
     private int Y_OFFSET = -50;
     private int CenterConfigIndex;
+
     private int NumberOfActiveConfig = 3;
 
     private float X, Y, Z;
