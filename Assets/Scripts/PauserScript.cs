@@ -87,12 +87,19 @@ public class PauserScript : MonoBehaviour
                 GetComponentInParentAndChildren<ChangeCameraOnGallery>(RootObject).enabled = !ModalFlag;
                 GetComponentInParentAndChildren<GalleryCanvas>(RootObject).enabled = !ModalFlag;
 
+                foreach (var components in GetComponentsInParentAndChildren<BackGroundController>(RootObject))
+                {
+                    components.enabled = !ModalFlag;
+                }
+
                 if (GetComponentInParentAndChildren<GalleryCoverFlow>(RootObject) != null)
                     GetComponentInParentAndChildren<GalleryCoverFlow>(RootObject).enabled = !ModalFlag;
 
                 StoryCanvas = GameObject.Find("StoryCanvases");
 
-                foreach(var components in GetComponentsInParentAndChildren<ShowUIText>(StoryCanvas))
+                GetComponentInParentAndChildren<BackGroundFactory>(StoryCanvas).enabled = !ModalFlag;
+
+                foreach (var components in GetComponentsInParentAndChildren<ShowUIText>(StoryCanvas))
                 {
                     components.enabled = !ModalFlag;
                 }
