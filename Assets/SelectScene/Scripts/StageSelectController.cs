@@ -34,16 +34,16 @@ public class StageSelectController : MonoBehaviour {
 
 	void Update () {
 
-		if (Input.GetKeyDown ("a")) {
+		if (Input.GetAxis("Horizontal") < 0.0f) {
 			audioSource1.PlayOneShot(audioSource1.clip);
 			MoveToLeft ();
 		}
-		if (Input.GetKeyDown ("d")) {
+		if (Input.GetAxis("Horizontal") > 0.0f) {
 			audioSource1.PlayOneShot(audioSource1.clip);
 			MoveToRight ();
 		}
 
-		if(flag == 0 && Input.GetButtonDown ("U")) {
+		if(flag == 0 && Input.GetButtonDown ("Cancel")) {
 			audioSource4.PlayOneShot(audioSource4.clip);
 
 				CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
