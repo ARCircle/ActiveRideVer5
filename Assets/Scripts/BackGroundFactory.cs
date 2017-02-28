@@ -25,7 +25,10 @@ public class BackGroundFactory : MonoBehaviour {
 
     private void OnEnable()
     {
-        instance.SetActive(true);
+        if (instance != null)
+        {
+            instance.SetActive(true);
+        }
 
     }
 

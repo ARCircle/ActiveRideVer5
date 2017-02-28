@@ -22,10 +22,9 @@ public class ViewCenterFrame : MonoBehaviour {
 
     void OnEnable()
     {
-
         fill = 0.0f;
 
-        gaugeCtrl.fillAmount = fill;
+        //gaugeCtrl.fillAmount = fill;
 
         canViewOwn = true;
     }
