@@ -115,7 +115,7 @@ public class LockOnChangeTest : MonoBehaviour {
         {
             //Rayが当たるオブジェクトがあった場合はそのオブジェクト名をログに表示
             Debug.Log(hit.collider.gameObject.name);
-            Debug.DrawRay(ray.origin, ray.direction * 1000, Color.red, 100, false);
+            Debug.DrawRay(ray.origin, ray.direction * 1000, Color.red, 0, false);
         }
         
 
