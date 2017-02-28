@@ -7,7 +7,9 @@ public class keyConfigCoverFlow : MonoBehaviour {
 
     private static KeyConfigBehaviour keyConfig_Instance = new KeyConfigBehaviour();
 
-    public List<GameObject> eachConfigsInKeyConfig = new List<GameObject>();
+    public List<GameObject> eachConfigsInKeyConfig_JoyStick = new List<GameObject>();
+    public List<GameObject> eachConfigsInKeyConfig_Key = new List<GameObject>();
+    private List<GameObject> eachConfigsInKeyConfig = new List<GameObject>();
 
     private GameObject tmpConfig;
 
@@ -40,10 +42,22 @@ public class keyConfigCoverFlow : MonoBehaviour {
     private DesirializationYaml desirializationYaml = new DesirializationYaml();
     DesirializationYaml.InputManagerFile inputManageFile;
 
+    //TODO getisJoyStickConfigして, 代替としてのKey入力にも対応
+    private bool isJoyStickConfig = true;
+
     // Use this for initialization
     void Start()
     {
-        NumberOfObject = eachConfigsInKeyConfig.Count;
+        if (isJoyStickConfig)
+        {
+            NumberOfObject = eachConfigsInKeyConfig_JoyStick.Count;
+            eachConfigsInKeyConfig = eachConfigsInKeyConfig_JoyStick;
+        }else
+        {
+            NumberOfObject = eachConfigsInKeyConfig_Key.Count;
+            eachConfigsInKeyConfig = eachConfigsInKeyConfig_Key;
+        }
+
         getNumberOfOject = NumberOfObject;
 
         viewConvexConfig();
@@ -67,7 +81,6 @@ public class keyConfigCoverFlow : MonoBehaviour {
             setConfigInActive();
 
         }
-        KeyConfigBehaviour KeyConfigBehaviour_Instance = new KeyConfigBehaviour();
 
         if (Input.GetKeyDown(KeyCode.D) && !keyConfig_Instance.getCanInputConfigKey)
         {
@@ -213,34 +226,66 @@ public class keyConfigCoverFlow : MonoBehaviour {
         {
             case "Horizontal2(p)":
                 Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Horizontal2")];
-                ValueOfConfig = Axes.PositiveButton;
+                ValueOfConfig = Axes.AltPositiveButton;
                 break;
             case "Horizontal2(n)":
                 Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Horizontal2")];
-                ValueOfConfig = Axes.NegativeButton;
+                ValueOfConfig = Axes.AltNegativeButton;
                 break;
             case "Horizontal(p)":
                 Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Horizontal")];
-                ValueOfConfig = Axes.PositiveButton;
+                ValueOfConfig = Axes.AltPositiveButton;
                 break;
             case "Horizontal(n)":
                 Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Horizontal")];
-                ValueOfConfig = Axes.NegativeButton;
+                ValueOfConfig = Axes.AltNegativeButton;
                 break;
             case "Vertical2(p)":
                 Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Vertical2")];
-                ValueOfConfig = Axes.PositiveButton;
+                ValueOfConfig = Axes.AltPositiveButton;
                 break;
             case "Vertical2(n)":
                 Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Vertical2")];
-                ValueOfConfig = Axes.NegativeButton;
+                ValueOfConfig = Axes.AltNegativeButton;
                 break;
             case "Vertical(p)":
                 Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Vertical")];
-                ValueOfConfig = Axes.PositiveButton;
+                ValueOfConfig = Axes.AltPositiveButton;
                 break;
             case "Vertical(n)":
                 Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Vertical")];
+                ValueOfConfig = Axes.AltNegativeButton;
+                break;
+            case "Horizontal4(p)":
+                Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Horizontal4")];
+                ValueOfConfig = Axes.PositiveButton;
+                break;
+            case "Horizontal4(n)":
+                Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Horizontal4")];
+                ValueOfConfig = Axes.NegativeButton;
+                break;
+            case "Horizontal3(p)":
+                Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Horizontal3")];
+                ValueOfConfig = Axes.PositiveButton;
+                break;
+            case "Horizontal3(n)":
+                Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Horizontal3")];
+                ValueOfConfig = Axes.NegativeButton;
+                break;
+            case "Vertical4(p)":
+                Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Vertical4")];
+                ValueOfConfig = Axes.PositiveButton;
+                break;
+            case "Vertical4(n)":
+                Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Vertical4")];
+                ValueOfConfig = Axes.NegativeButton;
+                break;
+            case "Vertical3(p)":
+                Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Vertical3")];
+                ValueOfConfig = Axes.PositiveButton;
+                break;
+            case "Vertical3(n)":
+                Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Vertical3")];
                 ValueOfConfig = Axes.NegativeButton;
                 break;
             case "Jump":
@@ -261,19 +306,23 @@ public class keyConfigCoverFlow : MonoBehaviour {
                 break;
             case "Lock":
                 Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Lock")];
-                ValueOfConfig = Axes.AltPositiveButton;
+                ValueOfConfig = Axes.PositiveButton;
                 break;
             case "Lock2":
                 Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Lock2")];
-                ValueOfConfig = Axes.AltPositiveButton;
+                ValueOfConfig = Axes.PositiveButton;
                 break;
             case "Boost":
                 Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Boost")];
-                ValueOfConfig = Axes.AltPositiveButton;
+                ValueOfConfig = Axes.PositiveButton;
                 break;
             case "Boost2":
                 Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Boost2")];
-                ValueOfConfig = Axes.AltPositiveButton;
+                ValueOfConfig = Axes.PositiveButton;
+                break;
+            case "CamReset":
+                Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("CamReset")];
+                ValueOfConfig = Axes.PositiveButton;
                 break;
             default:
                 break;

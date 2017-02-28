@@ -127,8 +127,7 @@ public class OptionRotate : MonoBehaviour
 
         //キー入力を受け付け, フラグ値を指定
         //TODO: マウスホイールにも対応する?
-        if ( (Input.GetKeyUp(KeyCode.S) && !ModalOption.isModalSetActive) ||
-            (Input.GetAxis("Mouse ScrollWheel") < 0f))
+        if ( (Input.GetKeyUp(KeyCode.S) && !ModalOption.isModalSetActive))
         {
             
             bCenterIndex--;
@@ -144,8 +143,7 @@ public class OptionRotate : MonoBehaviour
             
     	}
 
-        if ( (Input.GetKeyUp(KeyCode.W) && !ModalOption.isModalSetActive) ||
-            (Input.GetAxis("Mouse ScrollWheel") > 0f))
+        if ( (Input.GetKeyUp(KeyCode.W) && !ModalOption.isModalSetActive))
         {
 			
             //CenterButton.transform.Rotate(new Vector3(0, 0, -72));
