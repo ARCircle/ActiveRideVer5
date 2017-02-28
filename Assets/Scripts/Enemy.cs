@@ -65,12 +65,12 @@ public class Enemy : MonoBehaviour {
 			enemyLevel = 3;
 		else if (timer < 20) {
 			enemyLevel = 4;
-			shotIntervalMax = 0.75F;
+			shotIntervalMax = 0.5F;
 		}
-		else{
+		else if(timer < 25){
 			enemyLevel = 5;
 			//レベル４：攻撃間隔が短くなる
-			shotIntervalMax = 0.65F;
+			shotIntervalMax = 0.5F;
 		}
 		
 		//レベル２：プレイヤーが一定範囲に近づいたら攻撃

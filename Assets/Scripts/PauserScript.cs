@@ -8,14 +8,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PauserScript : MonoBehaviour {
- 
+public class PauserScript : MonoBehaviour
+{
+    //TODO: OnEnableが止まらない問題の解消
+
     private static ModalOption modalOption = new ModalOption();
 
     private GameObject RootObject;
 
     //for Option
     private GameObject BackgroundObject;
+
+    //for Gallery
+    private GameObject StoryCanvas;
 
     //MainとかのUI中心以外の画面に使うときはGameObjectのModalOptionをScene内にコピーする必要あり
     //for Main
@@ -31,19 +36,22 @@ public class PauserScript : MonoBehaviour {
     private bool isPause;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-        
-        Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "is Active");
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "is Active" + isModalOption);
 
         if (isModalOption)
         {
             SelectObjectDependOnSceneName(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, ModalOption.isModalSetActive);
-        }else
+        }
+        else
         {
             // カットイン実装用
             // isPauseを外部スクリプトからコントロール, ポーズの呼び出し
@@ -57,7 +65,8 @@ public class PauserScript : MonoBehaviour {
     //TODO: 例外処理
     public void SelectObjectDependOnSceneName(string SceneName, bool ModalFlag)
     {
-        switch (SceneName) {
+        switch (SceneName)
+        {
             case "Title":
                 RootObject = GameObject.Find("TitleCanvas");
 
@@ -77,7 +86,35 @@ public class PauserScript : MonoBehaviour {
                 //どのUIgroupをSetActiveにするかを保存する
                 GetComponentInParentAndChildren<ChangeCameraOnGallery>(RootObject).enabled = !ModalFlag;
                 GetComponentInParentAndChildren<GalleryCanvas>(RootObject).enabled = !ModalFlag;
-                //GetComponentInParentAndChildren<GalleryCoverFlow>(RootObject).enabled = !ModalFlag;
+
+                foreach (var components in GetComponentsInParentAndChildren<BackGroundController>(RootObject))
+                {
+                    components.enabled = !ModalFlag;
+                }
+
+                if (GetComponentInParentAndChildren<GalleryCoverFlow>(RootObject) != null)
+                    GetComponentInParentAndChildren<GalleryCoverFlow>(RootObject).enabled = !ModalFlag;
+
+                StoryCanvas = GameObject.Find("StoryCanvases");
+
+                GetComponentInParentAndChildren<BackGroundFactory>(StoryCanvas).enabled = !ModalFlag;
+
+                foreach (var components in GetComponentsInParentAndChildren<ShowUIText>(StoryCanvas))
+                {
+                    components.enabled = !ModalFlag;
+                }
+                foreach (var components in GetComponentsInParentAndChildren<UIMaskTransparent>(StoryCanvas))
+                {
+                    components.enabled = !ModalFlag;
+                }
+                foreach (var components in GetComponentsInParentAndChildren<HumanController>(StoryCanvas))
+                {
+                    components.enabled = !ModalFlag;
+                }
+                foreach (var components in GetComponentsInParentAndChildren<BackGroundController>(StoryCanvas))
+                {
+                    components.enabled = !ModalFlag;
+                }
 
                 break;
             case "Option":
@@ -106,7 +143,7 @@ public class PauserScript : MonoBehaviour {
                     GetComponentInParentAndChildren<ChangeVoiceVolume>(RootObject).enabled = !ModalFlag;
                 if (GetComponentInParentAndChildren<ChangeSEVolume>(RootObject) != null)
                     GetComponentInParentAndChildren<ChangeSEVolume>(RootObject).enabled = !ModalFlag;
-                    break;
+                break;
             case "Main":
 
                 //validate Null Exception
@@ -126,7 +163,8 @@ public class PauserScript : MonoBehaviour {
 
                 int SelectNumber = PlayerSelectController.Selectnumber();
 
-                switch (SelectNumber) {
+                switch (SelectNumber)
+                {
                     case 1:
                         //BANSHEE
                         Player = GameObject.Find("BANSHEE1playMode");
@@ -142,8 +180,8 @@ public class PauserScript : MonoBehaviour {
                     default: break;
 
                 }
-                
-                if(Player != null)
+
+                if (Player != null)
                 {
                     GetComponentInParentAndChildren<PlayerAp>(Player).enabled = !ModalFlag;
                     GetComponentInParentAndChildren<PlayerMove>(Player).enabled = !ModalFlag;
@@ -180,11 +218,11 @@ public class PauserScript : MonoBehaviour {
                 break;
             case "selectsceneDouble":
                 break;
-            case "Result": 
+            case "Result":
                 break;
 
             default: break;
-                 
+
         }
 
     }
@@ -197,7 +235,7 @@ public class PauserScript : MonoBehaviour {
     /// <summary>
     /// 親や子オブジェクトも含めた範囲から指定のコンポーネントを取得する
     /// </summary>
-    public static T GetComponentInParentAndChildren<T>(GameObject gameObject) 
+    public static T GetComponentInParentAndChildren<T>(GameObject gameObject)
     {
 
         if (gameObject.GetComponentInParent<T>() != null)
@@ -210,5 +248,18 @@ public class PauserScript : MonoBehaviour {
         }
 
         return gameObject.GetComponent<T>();
+    }
+
+    /// <summary>
+    /// 親や子オブジェクトも含めた範囲から指定のコンポーネントを全て取得する
+    /// </summary>
+    public static List<T> GetComponentsInParentAndChildren<T>(GameObject gameObject)
+    {
+        List<T> _list = new List<T>(gameObject.GetComponents<T>());
+
+        _list.AddRange(new List<T>(gameObject.GetComponentsInChildren<T>()));
+        _list.AddRange(new List<T>(gameObject.GetComponentsInParent<T>()));
+
+        return _list;
     }
 }

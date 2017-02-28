@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
+
 using UnityEngine.UI;
 
 public class TitleScene : MonoBehaviour {
 
 	public Text blinkText;
+
+	public GameObject ModalWindow;
+	private bool ModalDiagloFrag = true;
 
 	float timer;
 
@@ -16,10 +19,7 @@ public class TitleScene : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        //ModalOptionの加算ロード
-        UnityEngine.SceneManagement.SceneManager.LoadScene("ModalOption", LoadSceneMode.Additive);
-
-        MainSoundObject = GameObject.Find ("MainSoundObject");
+		MainSoundObject = GameObject.Find ("MainSoundObject");
 
 		//ModalWindow.SetActive(false);
 		audioSource = GetComponent<AudioSource>();
@@ -37,16 +37,18 @@ public class TitleScene : MonoBehaviour {
 		if (timer > 6) {
 
 			//ボタンを押したら遷移
-			if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.O)) {
+			if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.DownArrow)) {
+        
 				audioSource.PlayOneShot(audioSource.clip);
 				//Application.LoadLevel("SelectMenu");
 				timer = 0;
 				CameraFade.StartAlphaFade (Color.black, false, 0.3f, 0.3f, () => {
-                    UnityEngine.SceneManagement.SceneManager.LoadScene("SelectMenu");
-                });
+					Application.LoadLevel ("SelectMenu");
+				});
 			}
 
 		}
+
 
 		//ボタンを押させるためのメッセージを点滅させる
 		blinkText.color = new Color(1, 1, 1, Mathf.PingPong(Time.time, 1));

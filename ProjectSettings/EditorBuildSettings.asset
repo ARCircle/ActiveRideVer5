@@ -6,12 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scene/Option.unity
-  - enabled: 1
-    path: Assets/Scene/ModalOption.unity
-  - enabled: 1
-    path: Assets/Scene/Gallery.unity
-  - enabled: 1
     path: Assets/Scene/Main.unity
   - enabled: 1
     path: Assets/Scene/Result.unity
@@ -25,3 +19,11 @@ EditorBuildSettings:
     path: Assets/Scene/oshida_kari.unity
   - enabled: 1
     path: Assets/Scene/2PlayerMode.unity
+  - enabled: 1
+    path: Assets/Scene/Background.unity
+  - enabled: 1
+    path: Assets/Scene/Animation.unity
+  - enabled: 1
+    path: Assets/Scene/ModalOption.unity
+  - enabled: 1
+    path: Assets/Scene/Gallery.unity

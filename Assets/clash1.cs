@@ -4,7 +4,7 @@ using System.Collections;
 public class clash1 : MonoBehaviour{
 
 	public float setshakeTime;
-	float shakerange;
+	float shakerange = 0.15f;
 
 	private float lifeTime;
 	private Vector3 savePosition;
@@ -13,8 +13,7 @@ public class clash1 : MonoBehaviour{
 	private float lowRangeY;
 	private float maxRangeY;
 
-	float time1 = 0.0f;
-	float time2 = 0.0f;
+	float time;
 
 	void catchShake(){
 
@@ -24,6 +23,8 @@ public class clash1 : MonoBehaviour{
 		lowRangeX = savePosition.x - shakerange;
 		maxRangeX = savePosition.x + shakerange;
 		lifeTime = setshakeTime;
+
+		time = 0.0f;
 	}
 
 	void Start(){
@@ -35,18 +36,19 @@ public class clash1 : MonoBehaviour{
 
 	void Update(){
 
-		int flag = camera1Controller.flag3 ();
+		//time += Time.deltaTime;
 
-		if (flag == 0) {
-			time1 += Time.deltaTime;
-			shakerange = 0.01f*time1;
-		} else {
-			time2 += Time.deltaTime;
-			if (time2 >= 1.0f)
-				shakerange = -0.13f * time2 + 0.15f;
-			else
-				shakerange = -0.02f / 3.0f * time2 + 0.08f / 3.0f;
+		//shakerange = 0.01f * time;
+
+		/*
+		if (time >= 3.5f) {
+			shakerange = 0.55f * time-1.89f;
 		}
+
+		if (time >= 3.8f) {
+			shakerange = -0.01167f * time + 0.01143f;
+		}*/
+
 
 		if(lifeTime < 0.0f){
 			transform.position = savePosition;
@@ -59,8 +61,7 @@ public class clash1 : MonoBehaviour{
 			float y_val = Random.Range (lowRangeY, maxRangeY);
 			transform.position = new Vector3 (x_val, y_val, transform.position.z);
 		}
-
-		//if (Input.GetKeyDown ("space"))
-			catchShake ();
+			
+		catchShake ();
 	}
 }
