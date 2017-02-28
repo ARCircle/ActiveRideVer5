@@ -8,8 +8,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 496560}
-  - component: {fileID: 20574568}
-  - component: {fileID: 6425300}
   m_Layer: 0
   m_Name: stone_39
   m_TagString: Untagged
@@ -113,16 +111,16 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106096}
-  m_LocalRotation: {x: 0.7071066, y: 0, z: 0, w: -0.70710695}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.57085377, y: 0.4172838, z: 0.41728362, w: -0.57085425}
+  m_LocalPosition: {x: 0.40908813, y: -0.05163455, z: 0.58189964}
+  m_LocalScale: {x: 1.3228197, y: 1.3228201, z: 1.3228201}
   m_Children:
   - {fileID: 416676}
   - {fileID: 410728}
   - {fileID: 426290}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -72.332}
 --- !u!23 &2307112
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -237,45 +235,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106608}
   m_Mesh: {fileID: 4300002, guid: 62bf74ed38f072040b0418a6a29dc4ea, type: 3}
---- !u!64 &6425300
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 106096}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 0c1edd5fdecd3624dbd50c19a3f21ad8, type: 3}
---- !u!205 &20574568
-LODGroup:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 106096}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: 0.059720278, y: 0.042131007, z: 0.052124918}
-  m_Size: 1.3849583
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LODs:
-  - screenRelativeHeight: 0.25
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 2377424}
-  - screenRelativeHeight: 0.125
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 2307112}
-  - screenRelativeHeight: 0.01
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 2384444}
-  m_Enabled: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

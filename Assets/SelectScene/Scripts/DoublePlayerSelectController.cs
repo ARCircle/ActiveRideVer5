@@ -51,28 +51,28 @@ public class DoublePlayerSelectController : MonoBehaviour {
 
 	void Update () {
 
-		if (Input.GetKeyDown ("a")) {
+		if (Input.GetAxis ("Horizontal")<0.0f) {
 			audioSource1.PlayOneShot (audioSource1.clip);
 			MoveToLeft1 ();
 		}
 
-		if (Input.GetKeyDown ("d")) {
+		if (Input.GetAxis ("Horizontal")>0.0f) {
 			audioSource1.PlayOneShot (audioSource1.clip);
 			MoveToRight1 ();
 		}
 
-		if (Input.GetKeyDown ("left")) {
+		if (Input.GetAxis ("Horizontal2")<0.0f) {
 			audioSource1.PlayOneShot (audioSource1.clip);
 			MoveToLeft2 ();
 		}
 
-		if (Input.GetKeyDown ("right")) {
+		if (Input.GetAxis ("Horizontal2")>0.0f) {
 			audioSource1.PlayOneShot (audioSource1.clip);
 			MoveToRight2 ();
 		}
 
 
-		if(flag1 == 0 && flag2 ==0  && Input.GetButtonDown ("U")) {
+		if(flag1 == 0 && flag2 ==0  && Input.GetButtonDown ("Cancel")) {
 				audioSource4.PlayOneShot(audioSource4.clip);
 				CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
 					Application.LoadLevel ("SelectMenu");
