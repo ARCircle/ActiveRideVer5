@@ -12,6 +12,7 @@ public class HumanController : MonoBehaviour {
     private float TimeLeft;
 
     private Vector3 Position;
+
 	// Use this for initialization
 	void Start () {
         Position = this.transform.localPosition;
