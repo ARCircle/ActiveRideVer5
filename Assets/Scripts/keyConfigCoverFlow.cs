@@ -26,8 +26,9 @@ public class keyConfigCoverFlow : MonoBehaviour {
     }
 
     private int Z_MAX = 30;
-    private int Y_MAX = 100;
-    private int Y_OFFSET = -50;
+    private int Y_MAX = 120;
+    private int X_OFFSET = -10;
+    private int Y_OFFSET = -70;
     private int CenterConfigIndex;
 
     private int NumberOfActiveConfig = 3;
@@ -95,8 +96,9 @@ public class keyConfigCoverFlow : MonoBehaviour {
     {
         for (int nLoop = 0; nLoop < NumberOfObject; nLoop++)
         {
-            Z = Mathf.Abs(Z_MAX * Mathf.Cos((nLoop - 1) * (360 / NumberOfObject) * (Mathf.PI / 180)));
+            X = X_OFFSET;
             Y = Y_OFFSET + 1.2f * Y_MAX * Mathf.Sin((nLoop - 1) * (360 / NumberOfObject) * (Mathf.PI / 180));
+            Z = Mathf.Abs(Z_MAX * Mathf.Cos((nLoop - 1) * (360 / NumberOfObject) * (Mathf.PI / 180)));
 
             Rotate_X = 60 * Mathf.Sin((nLoop - 1) * (360 / NumberOfObject) * (Mathf.PI / 180));
 
@@ -105,7 +107,7 @@ public class keyConfigCoverFlow : MonoBehaviour {
                 getCenterConfig = eachConfigsInKeyConfig[nLoop];
             }
 
-            eachConfigsInKeyConfig[nLoop].transform.localPosition = new Vector3(0, Y, -Z);
+            eachConfigsInKeyConfig[nLoop].transform.localPosition = new Vector3(X, Y, -Z);
             eachConfigsInKeyConfig[nLoop].transform.localEulerAngles = new Vector3(Rotate_X, 0, 0);
 
         }
@@ -135,8 +137,8 @@ public class keyConfigCoverFlow : MonoBehaviour {
             eachConfigsInKeyConfig[nLoop].transform.FindChild("Val").gameObject.GetComponent<UnityEngine.UI.Text>().text
                 = getValueOfConfig(eachConfigsInKeyConfig[nLoop], nLoop);
 
-            eachConfigsInKeyConfig[nLoop].transform.FindChild("Conf").gameObject.GetComponent<UnityEngine.UI.Text>().fontSize = 20;
-            eachConfigsInKeyConfig[nLoop].transform.FindChild("Val").gameObject.GetComponent<UnityEngine.UI.Text>().fontSize = 20;
+            eachConfigsInKeyConfig[nLoop].transform.FindChild("Conf").gameObject.GetComponent<UnityEngine.UI.Text>().fontSize = 28;
+            eachConfigsInKeyConfig[nLoop].transform.FindChild("Val").gameObject.GetComponent<UnityEngine.UI.Text>().fontSize = 28;
 
             //出現するConfigの数を制限
             if (nLoop < NumberOfActiveConfig)

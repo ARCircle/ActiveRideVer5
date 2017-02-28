@@ -47,8 +47,9 @@ public class ShowUIText : MonoBehaviour
 
     private void OnEnable()
     {
-        //if (ModalOption.isModalSetActive == false)
-        //{
+        //ModalOptionが解除された時は無効
+        if (!Input.GetKeyUp(KeyCode.DownArrow))
+        {
             readCSVData(Application.dataPath + path, ref sdataArrays);
 
             isShowText = true;
@@ -57,7 +58,7 @@ public class ShowUIText : MonoBehaviour
             TextUpdate();
 
             uiText.text = "";
-        //}
+        }
 
     }
 
