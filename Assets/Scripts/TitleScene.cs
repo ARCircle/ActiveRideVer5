@@ -8,7 +8,7 @@ public class TitleScene : MonoBehaviour {
 	public Text blinkText;
 
 	public GameObject ModalWindow;
-	private bool ModalDialogFrag = true;
+	private bool ModalDiagloFrag = true;
 
 	float timer;
 
@@ -43,11 +43,12 @@ public class TitleScene : MonoBehaviour {
 				//Application.LoadLevel("SelectMenu");
 				timer = 0;
 				CameraFade.StartAlphaFade (Color.black, false, 0.3f, 0.3f, () => {
-                    UnityEngine.SceneManagement.SceneManager.LoadScene("SelectMenu");
-                });
+					Application.LoadLevel ("SelectMenu");
+				});
 			}
 
 		}
+
 
 		//ボタンを押させるためのメッセージを点滅させる
 		blinkText.color = new Color(1, 1, 1, Mathf.PingPong(Time.time, 1));

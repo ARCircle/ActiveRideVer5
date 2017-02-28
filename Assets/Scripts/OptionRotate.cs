@@ -216,7 +216,7 @@ public class OptionRotate : MonoBehaviour
 
     }
 
-    IEnumerator wait()
+    private IEnumerator wait()
     {
         yield return new WaitForSeconds(0.01f);
     }

@@ -8,6 +8,7 @@ public class UIMaskTransparent : MonoBehaviour {
 
     //[Range(0, 1)]
     private float mask_range;
+    private float maskRangeDelta = 0.02f;
 
     private bool canUpdateMaskRange;
 
@@ -16,7 +17,7 @@ public class UIMaskTransparent : MonoBehaviour {
         Debug.Log("UI_Mask" + UI_mask_mat);
 
         mask_range = 1.0f;
-        UI_mask_mat.SetFloat("_Range", 1.0f);
+        this.UI_mask_mat.SetFloat("_Range", 1.0f);
 
         canUpdateMaskRange = true;
     }
@@ -33,12 +34,12 @@ public class UIMaskTransparent : MonoBehaviour {
 
         if(mask_range >= 0.0f && canUpdateMaskRange)
         {
-            mask_range -= 0.05f;
+            mask_range -= maskRangeDelta;
         }else
         {
             canUpdateMaskRange = false;
         }
 
-        UI_mask_mat.SetFloat("_Range", mask_range);
+        this.UI_mask_mat.SetFloat("_Range", mask_range);
 	}
 }

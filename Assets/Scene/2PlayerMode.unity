@@ -1318,13 +1318,14 @@ GameObject:
   - component: {fileID: 331649688}
   - component: {fileID: 331649690}
   - component: {fileID: 331649689}
+  - component: {fileID: 331649691}
   m_Layer: 5
   m_Name: SubLockOn2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &331649688
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1376,6 +1377,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 331649687}
+--- !u!114 &331649691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 331649687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297281520e4c4534d9e54a91c08175b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockMoveSpeed2: 0
+  target2: {fileID: 0}
 --- !u!1 &375723026
 GameObject:
   m_ObjectHideFlags: 0
@@ -2321,13 +2335,14 @@ GameObject:
   - component: {fileID: 702634820}
   - component: {fileID: 702634822}
   - component: {fileID: 702634821}
+  - component: {fileID: 702634823}
   m_Layer: 5
   m_Name: SubLockOn1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &702634820
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2379,6 +2394,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 702634819}
+--- !u!114 &702634823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 702634819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de2e7e5facc1bab4fb3a743873e98e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockMoveSpeed1: 0
+  target1: {fileID: 0}
 --- !u!1 &708656007
 GameObject:
   m_ObjectHideFlags: 0
