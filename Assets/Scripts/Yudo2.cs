@@ -35,12 +35,12 @@ public class Yudo2: MonoBehaviour {
 		float rightPower;
 
 		float difX = difLocal.x;
-		if( difX > 5 )
+		if( difX > 1 )
 		{
 			leftPower = 1.1f;
 			rightPower = 0.9f;
 		}
-		else if( difX < -5 )
+		else if( difX < -1 )
 		{
 			leftPower = 0.9f;
 			rightPower = 1.1f;
@@ -51,12 +51,12 @@ public class Yudo2: MonoBehaviour {
 		}
 
 		float difY = difLocal.y;
-		if( difY > 5 )
+		if( difY > 1 )
 		{
 			upPower = 0.9f;
 			downPower = 1.1f;
 		}
-		else if( difY < -5 )
+		else if( difY < -1 )
 		{
 			upPower = 1.1f;
 			downPower = 0.9f;

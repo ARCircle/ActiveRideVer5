@@ -19,11 +19,6 @@ public class FadeScript : MonoBehaviour {
     public GameObject PHEN_obj;
     public GameObject UNIC_obj;
 
-    private Vector3 ObjRotateval = new Vector3(0, 0.2f, 0);
-    private const int Rotate_x_ThreadThold = 30;
-
-    float speed = 0.1f;
-
     // Use this for initialization
     void Start () {
         isFadein = true;
@@ -60,6 +55,8 @@ public class FadeScript : MonoBehaviour {
         blue = GetComponent<Image>().color.b;
         alpha = GetComponent<Image>().color.a;
 
+        //ObjToFadeIn = ChangePrefab.GetGameObj();
+
     }
 
     // Update is called once per frame
@@ -93,21 +90,7 @@ public class FadeScript : MonoBehaviour {
             }
         }
 
-        System.Random ObjRotateval_x_seed = new System.Random();
-        int ObjRotateval_x_rand = ObjRotateval_x_seed.Next(-1, 1);
-        ObjRotateval.x = ObjRotateval_x_rand;
-
-        if(ObjRotateval.x <= -Rotate_x_ThreadThold) ObjRotateval.x = 1;
-        if(ObjRotateval.x >= Rotate_x_ThreadThold) ObjRotateval.x = -1;
-   
-        //BANS_obj.transform.Rotate(new Vector3(ObjRotateval.y / 5f, ObjRotateval.y, 0));
-        //PHEN_obj.transform.Rotate(new Vector3(ObjRotateval.y / 5f, ObjRotateval.y, 0));
-        //UNIC_obj.transform.Rotate(new Vector3(ObjRotateval.y / 5f, ObjRotateval.y, 0));
-
-        ObjToFadeIn.transform.Rotate(new Vector3(ObjRotateval.y / 5f, ObjRotateval.y, 0));
-
     }
-
     IEnumerator wait()
     {
         yield return new WaitForSeconds(1);

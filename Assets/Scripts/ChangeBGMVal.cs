@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class ChangeBGMVal : MonoBehaviour {
 
+    //BGMVal 0 to 1
     public float BGMVal;
+    public float getBGMVal
+    {
+        private set { BGMVal = value; }
+        get { return BGMVal; }
+    }
+
     private UnityEngine.UI.Image gaugeCtrl;
 
     public GameObject OnText;

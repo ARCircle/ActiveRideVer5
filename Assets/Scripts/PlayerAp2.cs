@@ -9,8 +9,9 @@ public class PlayerAp2 : MonoBehaviour {
 
 	public static int armorPoint;
 	public static int armorPointMax = 5000;
+    float downPoint = 0;
 
-	public Text armorText;
+    public Text armorText;
 
 	int displayArmorPoint;
 
@@ -67,18 +68,30 @@ public class PlayerAp2 : MonoBehaviour {
 	}
 
 	private void OnCollisionEnter(Collision collider) {
-		//敵の弾と衝突したらダメージ
+        //敵の弾と衝突したらダメージ
 
+
+        Debug.Log("むーん");
 		if (collider.gameObject.tag == "Shot_B") {
 			armorPoint -= ShotPlayer_B1.damage;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
-		}else if (collider.gameObject.tag == "Shot_U") {
+            downPoint += ShotPlayer_B1.damage;
+        }
+        else if (collider.gameObject.tag == "Shot_U") {
 			armorPoint -= ShotPlayer_U1.damage;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
-		}else if (collider.gameObject.tag == "Shot_P") {
+            downPoint += ShotPlayer_U1.damage;
+        }
+        else if (collider.gameObject.tag == "Shot_P") {
 			armorPoint -= ShotPlayer_P1.damage;
 			armorPoint = Mathf.Clamp(armorPoint, 0, armorPointMax);
-		}
+            downPoint += ShotPlayer_P1.damage;
+        }
+
+        if(downPoint >= 5)
+        {
+            Destroy(this);
+        }
 
 	}
 

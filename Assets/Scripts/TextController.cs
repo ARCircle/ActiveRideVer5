@@ -51,19 +51,19 @@ public class TextController : MonoBehaviour
 		switch (currentLine)
 		{
 		case 1:
-			Debug.Log ("case1");
+			//Debug.Log ("case1");
 			idle.enabled = true;
 			speak.enabled = false;
 			break;
 
 		case 2:
-			Debug.Log ("case2");
+			//Debug.Log ("case2");
 			idle.enabled = false;
 			speak.enabled = true;
 			break;
 
 		default:
-			Debug.Log ("default");
+			//Debug.Log ("default");
 			break;
 		}
 
