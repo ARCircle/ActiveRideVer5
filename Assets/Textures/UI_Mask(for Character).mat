@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: UI_Mask
+  m_Name: UI_Mask(for Character)
   m_Shader: {fileID: 4800000, guid: 15dafa0f75d32bb45b856f010520a156, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -24,7 +24,7 @@ Material:
     - first:
         name: _MaskTex
       second:
-        m_Texture: {fileID: 2800000, guid: bcb71a4b482ab4f48bd14ef57f3e4c0c, type: 3}
+        m_Texture: {fileID: 2800000, guid: f7458b1d3b62800439b87552eb8984bf, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -33,7 +33,7 @@ Material:
       second: 15
     - first:
         name: _Range
-      second: 0.12000038
+      second: -0.019999612
     - first:
         name: _Stencil
       second: 0

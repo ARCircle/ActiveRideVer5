@@ -17,12 +17,13 @@ public class ChangeCameraOnGallery : MonoBehaviour {
     private Vector3 Dpos;
 
     public List<GameObject> Descriptions = new List<GameObject>();
+    public List<GameObject> Characters = new List<GameObject>();
 
     private float CameraPosFrom = -20.0f;
     private float CameraPosTo = -10.0f;
 
     private Vector3 DescriptionPosFrom = new Vector3(100f, 0f, 0f);
-    private Vector3 DescriptionPosTo = new Vector3(-200f,0f,200f/10f);
+    private Vector3 DescriptionPosTo = new Vector3(30f, 0f, -195f);
 
     private int CameraMoveFlag;
     private int DescriptionMoveFlag;
@@ -193,10 +194,46 @@ public class ChangeCameraOnGallery : MonoBehaviour {
         {
             d.SetActive(false);
         }
+        foreach (GameObject c in Characters)
+        {
+            c.SetActive(false);
+            c.gameObject.GetComponent<UIMaskTransparent>().enabled = false;
+        }
     }
     IEnumerator wait()
     {
         yield return new WaitForSeconds(0.01f);
     }
 
+    private void UIsActiveControl(int index)
+    {
+        CameraMoveFlag = index + 1;
+        DescriptionMoveFlag = true;
+        Descriptions[index].transform.localPosition = DescriptionPosTo;
+
+        Descriptions[index].SetActive(true);
+        Descriptions[index].gameObject.GetComponent<ShowUIText>().enabled = true;
+
+        Characters[index].SetActive(true);
+        Characters[index].gameObject.GetComponent<UIMaskTransparent>().enabled = true;
+
+        switch (index)
+        {
+            case 0:
+                BANSHEE_Cam.SetActive(true);
+                BANSHEE_Cam.gameObject.transform.parent.gameObject.SetActive(true);
+                break;
+            case 1:
+                UNICORN_Cam.SetActive(true);
+                UNICORN_Cam.gameObject.transform.parent.gameObject.SetActive(true);
+                break;
+            case 2:
+                PHOENIX_Cam.SetActive(true);
+                PHOENIX_Cam.gameObject.transform.parent.gameObject.SetActive(true);
+                break;
+            default:
+                break;
+        }
+
+    }
 }
