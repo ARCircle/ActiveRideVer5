@@ -127,6 +127,7 @@ public class PauserScript : MonoBehaviour
 
                 GetComponentInParentAndChildren<OptionRotate>(RootObject).enabled = !ModalFlag;
                 GetComponentInParentAndChildren<CircularOption>(RootObject).enabled = !ModalFlag;
+                GetComponentInParentAndChildren<SetLineScale>(RootObject).enabled = !ModalFlag;
 
                 if (GetComponentInParentAndChildren<keyConfigCoverFlow>(RootObject) != null)
                     GetComponentInParentAndChildren<keyConfigCoverFlow>(RootObject).enabled = !ModalFlag;

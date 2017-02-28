@@ -33,7 +33,7 @@ Material:
       second: 15
     - first:
         name: _Range
-      second: -0.00000015646219
+      second: -0.019999612
     - first:
         name: _Stencil
       second: 0

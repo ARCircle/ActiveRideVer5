@@ -14,7 +14,7 @@ public class UIMaskTransparent : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        Debug.Log("UI_Mask" + UI_mask_mat);
+        //Debug.Log("UI_Mask" + UI_mask_mat);
 
         mask_range = 1.0f;
         this.UI_mask_mat.SetFloat("_Range", 1.0f);
