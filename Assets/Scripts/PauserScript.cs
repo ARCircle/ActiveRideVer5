@@ -10,6 +10,7 @@ using UnityEngine.UI;
 
 public class PauserScript : MonoBehaviour
 {
+    //TODO: OnEnableが止まらない問題の解消
 
     private static ModalOption modalOption = new ModalOption();
 
@@ -17,6 +18,9 @@ public class PauserScript : MonoBehaviour
 
     //for Option
     private GameObject BackgroundObject;
+
+    //for Gallery
+    private GameObject StoryCanvas;
 
     //MainとかのUI中心以外の画面に使うときはGameObjectのModalOptionをScene内にコピーする必要あり
     //for Main
@@ -82,7 +86,35 @@ public class PauserScript : MonoBehaviour
                 //どのUIgroupをSetActiveにするかを保存する
                 GetComponentInParentAndChildren<ChangeCameraOnGallery>(RootObject).enabled = !ModalFlag;
                 GetComponentInParentAndChildren<GalleryCanvas>(RootObject).enabled = !ModalFlag;
-                //GetComponentInParentAndChildren<GalleryCoverFlow>(RootObject).enabled = !ModalFlag;
+
+                foreach (var components in GetComponentsInParentAndChildren<BackGroundController>(RootObject))
+                {
+                    components.enabled = !ModalFlag;
+                }
+
+                if (GetComponentInParentAndChildren<GalleryCoverFlow>(RootObject) != null)
+                    GetComponentInParentAndChildren<GalleryCoverFlow>(RootObject).enabled = !ModalFlag;
+
+                StoryCanvas = GameObject.Find("StoryCanvases");
+
+                GetComponentInParentAndChildren<BackGroundFactory>(StoryCanvas).enabled = !ModalFlag;
+
+                foreach (var components in GetComponentsInParentAndChildren<ShowUIText>(StoryCanvas))
+                {
+                    components.enabled = !ModalFlag;
+                }
+                foreach (var components in GetComponentsInParentAndChildren<UIMaskTransparent>(StoryCanvas))
+                {
+                    components.enabled = !ModalFlag;
+                }
+                foreach (var components in GetComponentsInParentAndChildren<HumanController>(StoryCanvas))
+                {
+                    components.enabled = !ModalFlag;
+                }
+                foreach (var components in GetComponentsInParentAndChildren<BackGroundController>(StoryCanvas))
+                {
+                    components.enabled = !ModalFlag;
+                }
 
                 break;
             case "Option":
@@ -216,5 +248,18 @@ public class PauserScript : MonoBehaviour
         }
 
         return gameObject.GetComponent<T>();
+    }
+
+    /// <summary>
+    /// 親や子オブジェクトも含めた範囲から指定のコンポーネントを全て取得する
+    /// </summary>
+    public static List<T> GetComponentsInParentAndChildren<T>(GameObject gameObject)
+    {
+        List<T> _list = new List<T>(gameObject.GetComponents<T>());
+
+        _list.AddRange(new List<T>(gameObject.GetComponentsInChildren<T>()));
+        _list.AddRange(new List<T>(gameObject.GetComponentsInParent<T>()));
+
+        return _list;
     }
 }

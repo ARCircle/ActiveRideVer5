@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: UI_Mask(For Character)
+  m_Name: UI_Mask(for Picture)
   m_Shader: {fileID: 4800000, guid: 15dafa0f75d32bb45b856f010520a156, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -33,7 +33,7 @@ Material:
       second: 15
     - first:
         name: _Range
-      second: 0.9
+      second: -0.00000015646219
     - first:
         name: _Stencil
       second: 0
