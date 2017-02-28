@@ -18,12 +18,13 @@ public class ChangeCameraOnGallery : MonoBehaviour
     private Vector3 Dpos;
 
     public List<GameObject> Descriptions = new List<GameObject>();
+    public List<GameObject> Characters = new List<GameObject>();
 
     private float CameraPosFrom = -20.0f;
     private float CameraPosTo = -10.0f;
 
     private Vector3 DescriptionPosFrom = new Vector3(100f, 0f, 0f);
-    private Vector3 DescriptionPosTo = new Vector3(30f, 0f, -180f);
+    private Vector3 DescriptionPosTo = new Vector3(30f, 0f, -275f);
 
     private int CameraMoveFlag;
     private bool DescriptionMoveFlag;
@@ -190,6 +191,12 @@ public class ChangeCameraOnGallery : MonoBehaviour
             d.SetActive(false);
             d.gameObject.GetComponent<ShowUIText>().enabled = false;
         }
+
+        foreach (GameObject c in Characters)
+        {
+            c.SetActive(false);
+            c.gameObject.GetComponent<UIMaskTransparent>().enabled = false;
+        }
     }
     IEnumerator wait()
     {
@@ -204,6 +211,9 @@ public class ChangeCameraOnGallery : MonoBehaviour
 
         Descriptions[index].SetActive(true);
         Descriptions[index].gameObject.GetComponent<ShowUIText>().enabled = true;
+
+        Characters[index].SetActive(true);
+        Characters[index].gameObject.GetComponent<UIMaskTransparent>().enabled = true;
 
         switch (index)
         {
@@ -226,4 +236,3 @@ public class ChangeCameraOnGallery : MonoBehaviour
     }
 
 }
-
