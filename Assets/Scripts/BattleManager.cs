@@ -2,7 +2,7 @@
 using System.Collections;
 
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+
 using UnityStandardAssets.ImageEffects;
 
 public class BattleManager : MonoBehaviour {
@@ -29,7 +29,7 @@ public class BattleManager : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-
+	
 		battleStatus = BATTLE_START;
 	
 		timer = 0;

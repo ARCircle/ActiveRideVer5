@@ -39,82 +39,71 @@ public class PauserScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
     }
 	
 	// Update is called once per frame
 	void Update () {
         
-        Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "is Active");
+        Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        SelectObjectDependOnSceneName(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
 
-        if (isModalOption)
-        {
-            SelectObjectDependOnSceneName(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, ModalOption.isModalSetActive);
-        }else
-        {
-            // カットイン実装用
-            // isPauseを外部スクリプトからコントロール, ポーズの呼び出し
-            SelectObjectDependOnSceneName(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, isPause);
-        }
-        //Debug.Log(!ModalOption.isModalSetActive);
+        Debug.Log(!ModalOption.isModalSetActive);
 
     }
 
 
     //TODO: 例外処理
-    public void SelectObjectDependOnSceneName(string SceneName, bool ModalFlag)
+    private void SelectObjectDependOnSceneName(string SceneName)
     {
+        GameObject RootObject;
         switch (SceneName) {
             case "Title":
                 RootObject = GameObject.Find("TitleCanvas");
 
-                GetComponentInParentAndChildren<FadeScript>(RootObject).enabled = !ModalFlag;
-                GetComponentInParentAndChildren<TitleScene>(RootObject).enabled = !ModalFlag;
+                GetComponentInParentAndChildren<FadeScript>(RootObject).enabled = !ModalOption.isModalSetActive;
+                GetComponentInParentAndChildren<TitleScene>(RootObject).enabled = !ModalOption.isModalSetActive;
+
                 break;
             case "SelectMenu":
                 RootObject = GameObject.Find("SelectCanvas");
 
-                GetComponentInParentAndChildren<CanvasRotate>(RootObject).enabled = !ModalFlag;
-                GetComponentInParentAndChildren<CircularUI>(RootObject).enabled = !ModalFlag;
+                GetComponentInParentAndChildren<CanvasRotate>(RootObject).enabled = !ModalOption.isModalSetActive;
+                GetComponentInParentAndChildren<CircularUI>(RootObject).enabled = !ModalOption.isModalSetActive;
 
                 break;
             case "Gallery":
                 RootObject = GameObject.Find("GalleryCanvas");
 
                 //どのUIgroupをSetActiveにするかを保存する
-                GetComponentInParentAndChildren<ChangeCameraOnGallery>(RootObject).enabled = !ModalFlag;
-                GetComponentInParentAndChildren<GalleryCanvas>(RootObject).enabled = !ModalFlag;
-                //GetComponentInParentAndChildren<GalleryCoverFlow>(RootObject).enabled = !ModalFlag;
+                GetComponentInParentAndChildren<ChangeCameraOnGallery>(RootObject).enabled = !ModalOption.isModalSetActive;
+                GetComponentInParentAndChildren<GalleryCanvas>(RootObject).enabled = !ModalOption.isModalSetActive;
+                //GetComponentInParentAndChildren<GalleryCoverFlow>(RootObject).enabled = !ModalOption.isModalSetActive;
 
                 break;
             case "Option":
-
-                BackgroundObject = GameObject.Find("BackgroundCamera");
-                GetComponentInParentAndChildren<MoveStage>(BackgroundObject).enabled = !ModalFlag;
-
                 RootObject = GameObject.Find("OptionCanvas");
                 //GetComponent<OptionRotate>().enabled = !ModalOption.isPause;
 
-                GetComponentInParentAndChildren<OptionRotate>(RootObject).enabled = !ModalFlag;
-                GetComponentInParentAndChildren<CircularOption>(RootObject).enabled = !ModalFlag;
+                GetComponentInParentAndChildren<OptionRotate>(RootObject).enabled = !ModalOption.isModalSetActive;
+                GetComponentInParentAndChildren<CircularOption>(RootObject).enabled = !ModalOption.isModalSetActive;
 
                 GetComponentInParentAndChildren<SetLineScale>(RootObject).enabled = !ModalFlag;
 
                 if (GetComponentInParentAndChildren<keyConfigCoverFlow>(RootObject) != null)
-                    GetComponentInParentAndChildren<keyConfigCoverFlow>(RootObject).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<keyConfigCoverFlow>(RootObject).enabled = !ModalOption.isModalSetActive;
                 if (GetComponentInParentAndChildren<KeyConfigBehaviour>(RootObject) != null)
-                    GetComponentInParentAndChildren<KeyConfigBehaviour>(RootObject).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<KeyConfigBehaviour>(RootObject).enabled = !ModalOption.isModalSetActive;
 
                 if (GetComponentInParentAndChildren<ChangeBGMVal>(RootObject) != null)
-                    GetComponentInParentAndChildren<ChangeBGMVal>(RootObject).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<ChangeBGMVal>(RootObject).enabled = !ModalOption.isModalSetActive;
                 if (GetComponentInParentAndChildren<ChangeDifficulty>(RootObject) != null)
-                    GetComponentInParentAndChildren<ChangeDifficulty>(RootObject).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<ChangeDifficulty>(RootObject).enabled = !ModalOption.isModalSetActive;
                 if (GetComponentInParentAndChildren<ChangeDIM>(RootObject) != null)
-                    GetComponentInParentAndChildren<ChangeDIM>(RootObject).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<ChangeDIM>(RootObject).enabled = !ModalOption.isModalSetActive;
                 if (GetComponentInParentAndChildren<ChangeVoiceVolume>(RootObject) != null)
-                    GetComponentInParentAndChildren<ChangeVoiceVolume>(RootObject).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<ChangeVoiceVolume>(RootObject).enabled = !ModalOption.isModalSetActive;
                 if (GetComponentInParentAndChildren<ChangeSEVolume>(RootObject) != null)
-                    GetComponentInParentAndChildren<ChangeSEVolume>(RootObject).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<ChangeSEVolume>(RootObject).enabled = !ModalOption.isModalSetActive;
                     break;
             case "Main":
 

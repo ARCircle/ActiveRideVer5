@@ -3,14 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ChangeSEVolume : MonoBehaviour {
-
-    //SEval 0 to 1
     public float SEVal;
-    public float getSEVal
-    {
-        private set { SEVal = value; }
-        get { return SEVal; }
-    }
 
     private UnityEngine.UI.Image gaugeCtrl;
 
@@ -23,6 +16,7 @@ public class ChangeSEVolume : MonoBehaviour {
     private float tmpVolume;
 
     private bool isBGM;
+
 
 	[SerializeField]
 	UnityEngine.Audio.AudioMixer mixer;

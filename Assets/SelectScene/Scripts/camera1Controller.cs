@@ -10,20 +10,17 @@ public class camera1Controller : MonoBehaviour {
 	public GameObject camera5;
 	public GameObject camera6;
 	public GameObject camera7;
-	public ParticleSystem smoke;
+	public GameObject camera8;
+	public GameObject camera9;
+	public GameObject clashcamera1;
+	public GameObject clashcamera2;
+	public GameObject clashcamera3;
 
 	int scene = 1;
-	static int aniflag1 = 0;
-	static int aniflag2 = 0;
-	static int aniflag3 = 0;
-	static int craflag = 0;
-	int flag = 0;
-
 	float time;
 
 	void Start () {
 
-		//smoke = GetComponent<ParticleSystem> ();
 		camera1.SetActive (true);
 		camera2.SetActive (false);
 		camera3.SetActive (false);
@@ -31,29 +28,29 @@ public class camera1Controller : MonoBehaviour {
 		camera5.SetActive (false);
 		camera6.SetActive (false);
 		camera7.SetActive (false);
-		smoke.Stop ();
+		camera8.SetActive (false);
+		camera9.SetActive (false);
+		clashcamera1.SetActive (false);
+		clashcamera2.SetActive (false);
+		clashcamera3.SetActive (false);
 		time = 0.0f;
-		flag1 ();
-		flag2 ();
-		flag3 ();
-		flag4 ();
-	
+
 	}
 	
-	// Update is called once per frame
+
 	void Update () {
 
 		time += Time.deltaTime;
 	
 		if(scene == 1 && time >= 10.0f){
 
-			camera1.SetActive (false);
+			CameraFade.StartAlphaFade(Color.black, true, 5.0f, 0.5f, () => { camera1.SetActive (false); });
 			camera2.SetActive (true);
 			scene = 2;
 			time = 0.0f;
 		}
 
-		if (scene == 2 && time >= 3.0f) {
+		if (scene == 2 && time >= 4.0f) {
 
 				camera2.SetActive (false);
 				camera3.SetActive (true);
@@ -83,9 +80,6 @@ public class camera1Controller : MonoBehaviour {
 			camera5.SetActive(false);
 			camera6.SetActive (true);
 			scene = 6;
-			aniflag1 = 1;
-			flag1 ();
-			smoke.Play ();
 			time = 0.0f;
 		}
 
@@ -97,35 +91,55 @@ public class camera1Controller : MonoBehaviour {
 			time = 0.0f;
 		}
 
-		if (scene == 7 && time >= 0.05f && flag == 0) {
-			aniflag2 = 1;
-			flag2 ();
-			flag = 1;
+		if(scene == 7 && time >= 2.0f){
+
+			camera7.SetActive(false);
+			clashcamera1.SetActive (true);
+			scene = 8;
 			time = 0.0f;
 		}
 
-		if (scene == 7 && time >= 4.0f && flag == 1) {
-			aniflag3 = 1;
-			flag3 ();
-			craflag = 1;
-			flag4 ();
+
+		if(scene == 8 && time >= 3.8f){
+
+			clashcamera1.SetActive(false);
+			clashcamera2.SetActive (true);
+			scene = 9;
+			time = 0.0f;
 		}
-			
+	
+		if(scene == 9 && time >= 0.5f){
+
+			//CameraFade.StartAlphaFade (Color.black, false, 5.0f, 1.5f, () => {
+				clashcamera2.SetActive(false);
+			//});
+			clashcamera3.SetActive (true);
+			scene = 10;
+			time = 0.0f;
+		}
+
+		if (scene == 10 && time >= 3.0f) {
+
+			clashcamera3.SetActive (false);
+			camera8.SetActive (true);
+			scene = 11;
+			time = 0.0f;
+		}
+
+		if (scene == 11 && time >= 2.3f) {
+
+			camera8.SetActive (false);
+			camera9.SetActive (true);
+			scene = 12;
+			time = 0.0f;
+		}
+
+		if (scene == 12 && time >= 3.0f) {
+			CameraFade.StartAlphaFade (Color.black, false, 5.0f, 0.5f, () => {
+				Application.LoadLevel ("Main");
+			});
+		}
 	}
 
-	public static int flag1(){
-		return aniflag1;
-	}
 
-	public static int flag2(){
-		return aniflag2;
-	}
-
-	public static int flag3(){
-		return aniflag3;
-	}
-
-	public static int flag4(){
-		return craflag;
-	}
 }
