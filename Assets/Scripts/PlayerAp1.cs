@@ -9,6 +9,7 @@ public class PlayerAp1 : MonoBehaviour {
 
 	public static int armorPoint;
 	public static int armorPointMax = 5000;
+    float downPoint = 0;
 
 	public Text armorText;
 
@@ -69,19 +70,31 @@ public class PlayerAp1 : MonoBehaviour {
 	}
 
 	private void OnCollisionEnter(Collision collider) {
-		//敵の弾と衝突したらダメージ
+        //敵の弾と衝突したらダメージ
 
+
+        Debug.Log("いえい");
 		if (collider.gameObject.tag == "Shot_B") {
 			armorPoint -= ShotPlayer_B2.damage;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
-		}else if (collider.gameObject.tag == "Shot_U") {
+            downPoint += ShotPlayer_B2.damage / 100;
+        }
+        else if (collider.gameObject.tag == "Shot_U") {
 			armorPoint -= ShotPlayer_U2.damage;
 			armorPoint = Mathf.Clamp (armorPoint, 0, armorPointMax);
-		}else if (collider.gameObject.tag == "Shot_P") {
+            downPoint += ShotPlayer_U2.damage;
+        }
+        else if (collider.gameObject.tag == "Shot_P") {
 			armorPoint -= ShotPlayer_P2.damage;
 			armorPoint = Mathf.Clamp(armorPoint, 0, armorPointMax);
-		}
-	}
+            downPoint += ShotPlayer_P2.damage;
+        }
+
+        if (downPoint >= 5)
+        {
+            Destroy(this);
+        }
+    }
 
 	//敵とのあたり判定
 	/*

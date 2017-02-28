@@ -14,7 +14,6 @@ public class SelfLockOn1 : MonoBehaviour
     public float lockMoveSpeed1;
     float EnemDis;
     RectTransform rectTransform = null;
-    [SerializeField]
     Transform target = null;
     GameObject player;
     Camera plcamera;
@@ -32,39 +31,61 @@ public class SelfLockOn1 : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player1");
         player = player.transform.parent.gameObject;
+        GameObject target_tmp = GameObject.FindGameObjectWithTag("Player2");
+        //target_tmp = player.transform.parent.gameObject;
+        target = target_tmp.transform;
         //Debug.LogError(player.name);
         cameraParent = Camera.main.transform.parent;
-        GameObject plcamera_tmp = GameObject.Find("CameraForRay");
+        GameObject plcamera_tmp = GameObject.Find("CameraForRay1");
         plcamera = plcamera_tmp.GetComponent<Camera>();
     }
 
     void Update()
 
     {
+       
         //ここからロックオンを動かすための処理
         posR = rectTransform.anchoredPosition;
 
-        if (Input.GetKey(KeyCode.I) && rectTransform.anchoredPosition.y < 270)
+        if (rectTransform.anchoredPosition.y < 270 && Input.GetAxis("Horizontal3") < 0)
         {
-            posR_tmp.y += lockMoveSpeed1;
+            posR_tmp.y += Input.GetAxis("Horizontal3");
         }
-        if (Input.GetKey(KeyCode.K) && rectTransform.anchoredPosition.y > -270)
+
+        if (rectTransform.anchoredPosition.y > -270 && Input.GetAxis("Horizontal3") > 0)
         {
-            posR_tmp.y -= lockMoveSpeed1;
+            posR_tmp.y += Input.GetAxis("Horizontal3");
+        }
+
+        if (rectTransform.anchoredPosition.x > -840 && Input.GetAxis("Vertical3") < 0)
+        {
+            posR_tmp.x += Input.GetAxis("Vertical3");
+        }
+
+        if (rectTransform.anchoredPosition.x < -120 && Input.GetAxis("Vertical3") > 0)
+        {
+            posR_tmp.x += Input.GetAxis("Vertical3");
         }
 
 
-        if (Input.GetKey(KeyCode.J) && rectTransform.anchoredPosition.x > -480)
-        {
-            posR_tmp.x -= lockMoveSpeed1;
-        }
-        if (Input.GetKey(KeyCode.L) && rectTransform.anchoredPosition.x < 480)
-        {
-            posR_tmp.x += lockMoveSpeed1;
-        }
 
+        /*	if (Input.GetKey (KeyCode.I)&&rectTransform.anchoredPosition.y < 270) {
+                posR_tmp.y += lockMoveSpeed;
+                }
+            if (Input.GetKey (KeyCode.K)&&rectTransform.anchoredPosition.y > -270) {
+                posR_tmp.y -= lockMoveSpeed;
+                }
+
+
+            if (Input.GetKey (KeyCode.J)&&rectTransform.anchoredPosition.x > -480) {
+                posR_tmp.x -= lockMoveSpeed;
+                }
+            if (Input.GetKey (KeyCode.L)&&rectTransform.anchoredPosition.x < 480) {
+                posR_tmp.x += lockMoveSpeed;
+                }
+        */
         rectTransform.anchoredPosition = posR + posR_tmp;
         posR_tmp.x = 0;
         posR_tmp.y = 0;
@@ -73,36 +94,36 @@ public class SelfLockOn1 : MonoBehaviour
         //ここまで
 
         //ここから範囲内に敵を捕らえ続けるための処理
-        posEnem = Camera.main.WorldToScreenPoint(target.position);
-        posEnem = new Vector2(posEnem.x / Camera.main.pixelWidth, posEnem.y / Camera.main.pixelHeight);
+        posEnem = plcamera.WorldToScreenPoint(target.position);
+        posEnem = new Vector2(posEnem.x / plcamera.pixelWidth, posEnem.y / plcamera.pixelHeight);
         //Debug.Log (posEnem);
 
         if (posEnem.x > 0.75f)
         {
-            LockOnChangeTest.playerRotate(cameraParent, new Vector3(0, 1, 0));
+            playerRotate(player, new Vector3(0, 1, 0));
         }
         if (posEnem.x < 0.25f)
         {
-            LockOnChangeTest.playerRotate(cameraParent, new Vector3(0, -1, 0));
+            playerRotate(player, new Vector3(0, -1, 0));
         }
         if (posEnem.y > 0.75f)
         {
-            LockOnChangeTest.playerRotate(cameraParent, new Vector3(-1, 0, 0));
+            playerRotate(cameraParent, new Vector3(-1, 0, 0));
         }
         if (posEnem.y < 0.25f)
         {
-            LockOnChangeTest.playerRotate(cameraParent, new Vector3(1, 0, 0));
+            playerRotate(cameraParent, new Vector3(1, 0, 0));
         }
 
         //ここまで
 
         //ロックオン先のオブジェクトの取得
         //posRを正規化してposR_transに代入
-        posR_trans = new Vector2(posR.x / 1920 + 0.5f, posR.y / 1080 + 0.5f);
+        posR_trans = new Vector2(posR.x * 2 / 1920 + 1, posR.y / 1080 + 0.5f);
 
         //posR_transをカメラ用に変形
-        posR_trans.x *= Camera.main.pixelWidth;
-        posR_trans.y *= Camera.main.pixelHeight;
+        posR_trans.x *= plcamera.pixelWidth;
+        posR_trans.y *= plcamera.pixelHeight;
         //Debug.Log(posR_trans);
         Ray ray = plcamera.ScreenPointToRay(posR_trans);
         Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
@@ -112,7 +133,7 @@ public class SelfLockOn1 : MonoBehaviour
         {
             //Rayが当たるオブジェクトがあった場合はそのオブジェクト名をログに表示
             Debug.Log(hit.collider.gameObject.name);
-            Debug.DrawRay(ray.origin, ray.direction * 1000, Color.red, 100, false);
+            Debug.DrawRay(ray.origin, ray.direction * 1000, Color.blue, 0, false);
         }
 
 
