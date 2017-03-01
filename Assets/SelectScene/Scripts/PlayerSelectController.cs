@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerSelectController : MonoBehaviour {
 
@@ -50,7 +51,7 @@ public class PlayerSelectController : MonoBehaviour {
 		if(flag == 0 && Input.GetButtonDown ("Cancel")) {
 			audioSource4.PlayOneShot(audioSource4.clip);
 			CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-				Application.LoadLevel ("SelectMenu");
+				SceneManager.LoadScene ("SelectMenu");
 			});
 		}
 
@@ -80,9 +81,27 @@ public class PlayerSelectController : MonoBehaviour {
 					audioSource3.PlayOneShot(audioSource3.clip);
 					timer = 0;
 					Selectnumber ();
-					CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-					Application.LoadLevel ("Main");
-					});
+
+					switch (targetLane) {
+
+					case 1:
+						CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
+							SceneManager.LoadScene ("AnimationBan");
+						});
+						break;
+					case 2:
+						CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
+							SceneManager.LoadScene ("AnimationUni");
+						});
+						break;
+					case 3:
+						CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
+							SceneManager.LoadScene ("AnimationPhe");
+						});
+						break;
+
+					}
+
 				}
 
 				if(Input.GetButtonDown ("Jump")) {

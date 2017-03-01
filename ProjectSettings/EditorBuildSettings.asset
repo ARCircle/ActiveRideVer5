@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scene/SelectMenu.unity
   - enabled: 1
     path: Assets/Scene/selectsceneDouble.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scene/oshida_kari.unity
   - enabled: 1
     path: Assets/Scene/2PlayerMode.unity
@@ -27,3 +27,15 @@ EditorBuildSettings:
     path: Assets/Scene/ModalOption.unity
   - enabled: 1
     path: Assets/Scene/Gallery.unity
+  - enabled: 1
+    path: Assets/Scene/2PlayerModeStage3.unity
+  - enabled: 1
+    path: Assets/Scene/2PlayerModeStage2.unity
+  - enabled: 1
+    path: Assets/Scene/2PlayerModeStage1.unity
+  - enabled: 1
+    path: Assets/Scene/AnimationBan.unity
+  - enabled: 1
+    path: Assets/Scene/AnimationPhe.unity
+  - enabled: 1
+    path: Assets/Scene/AnimationUni.unity

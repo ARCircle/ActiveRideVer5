@@ -1,15 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class StageSelectController : MonoBehaviour {
 
 	public int MinLane;
 	public int MaxLane;
+	public int Minmusic;
+	public int Maxmusic;
 
 	static int targetLane = 1;
+	static int music = 1;
 	public GameObject Selecter1;
 	public GameObject Selecter2;
 	public GameObject Selecter3;
+	public GameObject Music1;
+	public GameObject Music2;
+	public GameObject Music3;
 	public GameObject GameStart;
 
 	private AudioSource audioSource1;
@@ -18,6 +25,7 @@ public class StageSelectController : MonoBehaviour {
 	private AudioSource audioSource4;
 
 	int flag = 0;
+	int line = 0;
 
 	float timer;
 
@@ -34,20 +42,52 @@ public class StageSelectController : MonoBehaviour {
 
 	void Update () {
 
-		if (Input.GetKeyDown ("a")) {
+		if (Input.GetAxis("Horizontal") < 0.0f && line == 1) {
+			//timer = Time.deltaTime;
 			audioSource1.PlayOneShot(audioSource1.clip);
 			MoveToLeft ();
-		}
-		if (Input.GetKeyDown ("d")) {
-			audioSource1.PlayOneShot(audioSource1.clip);
-			MoveToRight ();
+			Debug.Log ("1left");
+			Debug.Log (targetLane);
 		}
 
-		if(flag == 0 && Input.GetButtonDown ("U")) {
+		if (Input.GetAxis("Horizontal") > 0.0f && line == 1) {
+			audioSource1.PlayOneShot(audioSource1.clip);
+			MoveToRight ();
+			Debug.Log ("1right");
+			Debug.Log (targetLane);
+		}
+
+		if (Input.GetAxis("Horizontal") < 0.0f && line == 0) {
+			audioSource1.PlayOneShot(audioSource1.clip);
+			MoveToLeft2 ();
+			Debug.Log ("2left");
+			Debug.Log (music);
+		}
+
+		if (Input.GetAxis("Horizontal") > 0.0f && line == 0) {
+			audioSource1.PlayOneShot(audioSource1.clip);
+			MoveToRight2 ();
+			Debug.Log ("2right");
+			Debug.Log (music);
+		}
+
+		if (Input.GetAxis("Vertical") > 0.0f && line != 1) {
+			audioSource1.PlayOneShot(audioSource1.clip);
+			line = 1;
+			Debug.Log ("line1");
+		}
+
+		if (Input.GetAxis("Vertical") < 0.0f && line != 0) {
+			audioSource1.PlayOneShot(audioSource1.clip);
+			line = 0;
+			Debug.Log ("line0");
+		}
+
+		if(flag == 0 && Input.GetButtonDown ("Cancel")) {
 			audioSource4.PlayOneShot(audioSource4.clip);
 
 				CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-					Application.LoadLevel ("SelectMenu");
+					SceneManager.LoadScene ("SelectMenu");
 				});
 
 		}
@@ -83,17 +123,17 @@ public class StageSelectController : MonoBehaviour {
 
 					case 1:
 						CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-							Application.LoadLevel ("Title");
+							SceneManager.LoadScene ("2PlayerModeStage1");
 						});
 						break;
 					case 2:
 						CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-							Application.LoadLevel ("selectsceneDouble");
+							SceneManager.LoadScene ("2PlayerModeStage2");
 						});
 						break;
 					case 3:
 						CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-							Application.LoadLevel ("select");
+							SceneManager.LoadScene ("2PlayerModeStage3");
 						});
 						break;
 
@@ -136,6 +176,28 @@ public class StageSelectController : MonoBehaviour {
 		}
 
 
+		if (music == 1) {
+			Music1.SetActive (true);
+			Music2.SetActive (false);
+			Music3.SetActive (false);
+			Musicnumber ();
+		}
+
+		if (music == 2) {
+			Music2.SetActive (true);
+			Music1.SetActive (false);
+			Music3.SetActive (false);
+			Musicnumber ();
+		}
+
+		if (music == 3) {
+			Music3.SetActive (true);
+			Music1.SetActive (false);
+			Music2.SetActive (false);
+			Musicnumber ();
+		}
+
+
 
 	}
 
@@ -151,6 +213,20 @@ public class StageSelectController : MonoBehaviour {
 	public void MoveToRight(){
 		if (targetLane < MaxLane)
 			targetLane++;
+	}
+
+	public void MoveToLeft2(){
+		if (music > Minmusic)
+			music--;
+	}
+
+	public void MoveToRight2(){
+		if (music < Maxmusic)
+			music++;
+	}
+
+	public static int Musicnumber(){
+		return music;
 	}
 
 }
