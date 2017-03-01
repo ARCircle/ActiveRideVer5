@@ -5,21 +5,23 @@ using UnityEngine;
 public class BackGroundFactory : MonoBehaviour {
 
     public GameObject BackGroundPrefab;
-    public List<GameObject> MotherObjects = new List<GameObject>();
+    public List<BackgroundMetaData> ParentObjects = new List<BackgroundMetaData>();
     private GameObject instance;
 
     // Use this for initialization
     void Start () {
-        foreach(var m in MotherObjects)
+        foreach(var p in ParentObjects)
         {
             instance = (GameObject)Instantiate(BackGroundPrefab);
-            instance.transform.parent = m.transform;
-            instance.transform.localPosition = m.transform.localPosition;
+            instance.transform.parent = p.ParentObject.transform;
+            //instance.transform.localPosition = p.ParentObject.transform.localPosition;
+            instance.transform.localPosition = new Vector3(0, 0, 0);
+            instance.transform.localRotation = p.ParentObject.transform.localRotation;
 
-            instance.transform.localScale = new Vector3(10, 10, 0);
-            instance.transform.localRotation = new Quaternion(0, 0, 0, 0);
+            instance.transform.localScale = p.Scale;
+            instance.transform.localRotation = p.localRotate;
 
-            instance.SetActive(false);
+            instance.SetActive(true);
         }
     }
 
@@ -34,10 +36,19 @@ public class BackGroundFactory : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (!instance.activeSelf)
+        if (instance != null)
         {
             instance.SetActive(true);
 
         }
+    }
+
+    //個々のBackground情報を格納するリスト
+    [System.Serializable]
+    public class BackgroundMetaData
+    {
+        public GameObject ParentObject;
+        public Vector3 Scale;
+        public Quaternion localRotate;
     }
 }
