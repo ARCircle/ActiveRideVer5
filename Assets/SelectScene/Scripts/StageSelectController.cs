@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class StageSelectController : MonoBehaviour {
 
@@ -86,7 +87,7 @@ public class StageSelectController : MonoBehaviour {
 			audioSource4.PlayOneShot(audioSource4.clip);
 
 				CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-					Application.LoadLevel ("SelectMenu");
+					SceneManager.LoadScene ("SelectMenu");
 				});
 
 		}
@@ -122,17 +123,17 @@ public class StageSelectController : MonoBehaviour {
 
 					case 1:
 						CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-							Application.LoadLevel ("2PlayerModeStage1");
+							SceneManager.LoadScene ("2PlayerModeStage1");
 						});
 						break;
 					case 2:
 						CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-							Application.LoadLevel ("2PlayerModeStage2");
+							SceneManager.LoadScene ("2PlayerModeStage2");
 						});
 						break;
 					case 3:
 						CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-							Application.LoadLevel ("2PlayerModeStage3");
+							SceneManager.LoadScene ("2PlayerModeStage3");
 						});
 						break;
 

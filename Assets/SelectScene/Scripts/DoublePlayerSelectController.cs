@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class DoublePlayerSelectController : MonoBehaviour {
 
@@ -75,7 +76,7 @@ public class DoublePlayerSelectController : MonoBehaviour {
 		if(flag1 == 0 && flag2 ==0  && Input.GetButtonDown ("Cancel")) {
 				audioSource4.PlayOneShot(audioSource4.clip);
 				CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-					Application.LoadLevel ("SelectMenu");
+					SceneManager.LoadScene("SelectMenu");
 				});
 		}
 
@@ -120,7 +121,7 @@ public class DoublePlayerSelectController : MonoBehaviour {
 					Selectnumber1 ();
 					Selectnumber2 ();
 					CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-						Application.LoadLevel ("2PlayerMode");
+						SceneManager.LoadScene("stageselect");
 					});
 
 				}
