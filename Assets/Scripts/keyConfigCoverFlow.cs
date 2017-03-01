@@ -222,6 +222,7 @@ public class keyConfigCoverFlow : MonoBehaviour {
         }
         */
         
+        //TODO: 表示する文字をDictionaryの対応先にする
         switch (NameOfConfig)
         {
             case "Horizontal2(p)":
