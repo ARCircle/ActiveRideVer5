@@ -13,6 +13,7 @@ public class PlayerAp1 : MonoBehaviour {
     bool downFlag = false;
     float downTime = 0;
     bool DmgFlag = true;
+    ParticleSystem smoke;
 
 	public Text armorText;
 
@@ -34,7 +35,9 @@ public class PlayerAp1 : MonoBehaviour {
 
 		//ゲーム開始時にはノイズを無効にする
 		MainCamera.GetComponent<NoiseAndScratches> ().enabled = false;
-        
+
+        GameObject smoke_tmp = gameObject.transform.FindChild("smoke").gameObject;
+        smoke = smoke_tmp.GetComponent<ParticleSystem>();
     }
 
 	// Update is called once per frame
@@ -76,7 +79,7 @@ public class PlayerAp1 : MonoBehaviour {
             DmgFlag = false;
         //    GetComponent<CharacterController>().enabled = false;
             downTime += Time.deltaTime;
-            if(downTime >= 2)
+            if(downTime >= 3)
             {
                 downFlag = false;
                 DmgFlag = true;
@@ -84,6 +87,7 @@ public class PlayerAp1 : MonoBehaviour {
                 downTime = 0;
                 Debug.LogError("1Pダウン状態解除");
                 downPoint = 0;
+                smoke.Stop();
             }
         }
 
@@ -119,6 +123,7 @@ public class PlayerAp1 : MonoBehaviour {
         {
             
             downFlag = true;
+            smoke.Play();
         }
 
     }

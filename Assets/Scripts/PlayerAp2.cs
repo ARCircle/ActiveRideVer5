@@ -76,7 +76,7 @@ public class PlayerAp2 : MonoBehaviour {
             DmgFlag = false;
            // GetComponent<CharacterController>().enabled = false;
             downTime += Time.deltaTime;
-            if (downTime >= 20)
+            if (downTime >= 3)
             {
                 downFlag = false;
                 DmgFlag = true;

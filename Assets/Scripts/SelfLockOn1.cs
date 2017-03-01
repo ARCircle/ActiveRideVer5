@@ -132,7 +132,7 @@ public class SelfLockOn1 : MonoBehaviour
         if (Physics.SphereCast(ray, 2, out hit))
         {
             //Rayが当たるオブジェクトがあった場合はそのオブジェクト名をログに表示
-            Debug.Log(hit.collider.gameObject.name);
+            Debug.LogWarning(hit.collider.gameObject.name);
             Debug.DrawRay(ray.origin, ray.direction * 1000, Color.blue, 0, false);
         }
 
