@@ -90,7 +90,7 @@ public static class InputManager {
             dead = 0.1f,
             sensitivity = 3f,
             snap = false,
-            invert = true,
+            invert = false,
             type = AxisType.JoystickAxis,
             axis = 1,
             joyNum = 1,
