@@ -122,6 +122,8 @@ public class KeyConfigBehaviour : MonoBehaviour
 
     private int selectedCurrentConfig;
 
+    private int JoystickCount;
+
     private KeyCode inputKey;
 
     private GameObject SelectConfigObject;
@@ -159,6 +161,7 @@ public class KeyConfigBehaviour : MonoBehaviour
 
         inputManageFile = desirializationYaml.DeserializeDefaultYaml();
 
+        JoystickCount = 0;
     }
 
     // Update is called once per frame
@@ -221,9 +224,12 @@ public class KeyConfigBehaviour : MonoBehaviour
 
             Debug.Log("JoyStickCount" + Input.GetJoystickNames().Count());
 
-            foreach (var name in Input.GetJoystickNames())
+            JoystickCount = 0;
+            foreach (string name in Input.GetJoystickNames())
             {
                 Debug.Log("JoyStickName" + name);
+                if (name != string.Empty) JoystickCount++;
+
             }
 
             if (inputKey != KeyCode.None && inputKey != KeyCode.Return)
@@ -501,7 +507,7 @@ public class KeyConfigBehaviour : MonoBehaviour
 
     private string SelectDictionaryByJoystickNum(int Player ,KeyCode inputkey)
     {
-        if (Input.GetJoystickNames().Count() == 2)
+        if (JoystickCount == 2)
         {
             return TransfarJoystickToString2P(inputKey, 2);
         }
