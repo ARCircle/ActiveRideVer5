@@ -40,7 +40,8 @@ public class ChangeCameraOnGallery : MonoBehaviour
         PHOENIX_Cam.transform.localPosition = new Vector3(0, 0, CameraPosFrom);
 
         SetCameraInActive();
-        MainCam.SetActive(true);
+        //MainCam.SetActive(true);
+        //UIsActiveControl(0);
 
         CameraIndex = 1;
     }
@@ -82,8 +83,8 @@ public class ChangeCameraOnGallery : MonoBehaviour
                 case 0:
                     posB.z = CameraPosFrom;
                     BANSHEE_Cam.transform.localPosition = posB;
-                    SetCameraInActive();
 
+                    SetCameraInActive();
                     UIsActiveControl(0);
                     break;
                 case 1:

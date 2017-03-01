@@ -22,10 +22,8 @@ public class FadeScript : MonoBehaviour {
     private System.Random ObjRotateval_x_seed;
     private int ObjRotateval_x_rand;
 
-    private Vector3 ObjRotateval = new Vector3(0, 0.2f, 0);
+    private Vector3 ObjRotateval = new Vector3(0, 0.1f, 0);
     private const int Rotate_x_ThreadThold = 30;
-
-    float speed = 0.1f;
 
     // Use this for initialization
     void Start () {

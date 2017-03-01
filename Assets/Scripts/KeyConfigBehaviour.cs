@@ -70,24 +70,8 @@ public class KeyConfigBehaviour : MonoBehaviour
     //TODO: 1P, 2Pを Input.GetJoystickNamesとかで取得, コメントアウト部の実現
     // -> 1P, 2Pで異なるconfigでのプレイを可能とする.
 
-    private Dictionary<KeyCode, string> ConfigTransfar2 = new Dictionary<KeyCode, string>()
+    private Dictionary<KeyCode, string> JoystickToConfig_1Player = new Dictionary<KeyCode, string>()
     {
-        /*
-        {KeyCode.Joystick1Button0, "joystick 1 button 0"},
-        {KeyCode.Joystick1Button1, "joystick 1 button 1"},
-        {KeyCode.Joystick1Button2, "joystick 1 button 2"},
-        {KeyCode.Joystick1Button3, "joystick 1 button 3"},
-        {KeyCode.Joystick1Button4, "joystick 1 button 4"},
-        {KeyCode.Joystick1Button5, "joystick 1 button 5"},
-        {KeyCode.Joystick1Button6, "joystick 1 button 6"},
-        {KeyCode.Joystick2Button0, "joystick 1 button 0"},
-        {KeyCode.Joystick2Button1, "joystick 2 button 1"},
-        {KeyCode.Joystick2Button2, "joystick 2 button 2"},
-        {KeyCode.Joystick2Button3, "joystick 2 button 3"},
-        {KeyCode.Joystick2Button4, "joystick 2 button 4"},
-        {KeyCode.Joystick2Button5, "joystick 2 button 5"},
-        {KeyCode.Joystick2Button6, "joystick 2 button 6"},
-        */
         {KeyCode.JoystickButton0, "joystick button 0"},
         {KeyCode.JoystickButton1, "joystick button 1"},
         {KeyCode.JoystickButton2, "joystick button 2"},
@@ -95,6 +79,27 @@ public class KeyConfigBehaviour : MonoBehaviour
         {KeyCode.JoystickButton4, "joystick button 4"},
         {KeyCode.JoystickButton5, "joystick button 5"},
         {KeyCode.JoystickButton6, "joystick button 6"},
+    };
+    private Dictionary<KeyCode, string> JoystickToConfig_2Player_JoyStick1 = new Dictionary<KeyCode, string>()
+    {
+        {KeyCode.JoystickButton0, "joystick 1 button 0"},
+        {KeyCode.JoystickButton1, "joystick 1 button 1"},
+        {KeyCode.JoystickButton2, "joystick 1 button 2"},
+        {KeyCode.JoystickButton3, "joystick 1 button 3"},
+        {KeyCode.JoystickButton4, "joystick 1 button 4"},
+        {KeyCode.JoystickButton5, "joystick 1 button 5"},
+        {KeyCode.JoystickButton6, "joystick 1 button 6"},
+    };
+
+    private Dictionary<KeyCode, string> JoystickToConfig_2Player_JoyStick2 = new Dictionary<KeyCode, string>()
+    {
+        {KeyCode.JoystickButton0, "joystick 2 button 0"},
+        {KeyCode.JoystickButton1, "joystick 2 button 1"},
+        {KeyCode.JoystickButton2, "joystick 2 button 2"},
+        {KeyCode.JoystickButton3, "joystick 2 button 3"},
+        {KeyCode.JoystickButton4, "joystick 2 button 4"},
+        {KeyCode.JoystickButton5, "joystick 2 button 5"},
+        {KeyCode.JoystickButton6, "joystick 2 button 6"},
     };
 
     //JoyStickによりKeyConfigを行う(通常)
@@ -116,6 +121,8 @@ public class KeyConfigBehaviour : MonoBehaviour
     }
 
     private int selectedCurrentConfig;
+
+    private int JoystickCount;
 
     private KeyCode inputKey;
 
@@ -154,6 +161,7 @@ public class KeyConfigBehaviour : MonoBehaviour
 
         inputManageFile = desirializationYaml.DeserializeDefaultYaml();
 
+        JoystickCount = 0;
     }
 
     // Update is called once per frame
@@ -214,9 +222,14 @@ public class KeyConfigBehaviour : MonoBehaviour
             NameOfConfig = SelectConfigObject.name;
             inputKey = GetKey(inputKey);
 
-            foreach (var name in Input.GetJoystickNames())
+            Debug.Log("JoyStickCount" + Input.GetJoystickNames().Count());
+
+            JoystickCount = 0;
+            foreach (string name in Input.GetJoystickNames())
             {
                 Debug.Log("JoyStickName" + name);
+                if (name != string.Empty) JoystickCount++;
+
             }
 
             if (inputKey != KeyCode.None && inputKey != KeyCode.Return)
@@ -280,26 +293,27 @@ public class KeyConfigBehaviour : MonoBehaviour
                         break;
                     case "Vertical4(p)":
                         inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Vertical4")].PositiveButton
-                            = TransfarJoystickToString(inputKey);
+                            = SelectDictionaryByJoystickNum(2, inputKey);
                         break;
                     case "Vertical4(n)":
                         inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Vertical4")].NegativeButton
-                            = TransfarJoystickToString(inputKey);
+                          = SelectDictionaryByJoystickNum(2, inputKey);
                         break;
                     case "Vertical3(p)":
                         inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Vertical3")].PositiveButton
-                            = TransfarJoystickToString(inputKey);
+                          = SelectDictionaryByJoystickNum(1, inputKey);
                         break;
                     case "Vertical3(n)":
                         inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Vertical3")].NegativeButton
-                            = TransfarJoystickToString(inputKey);
+                          = SelectDictionaryByJoystickNum(1, inputKey);
                         break;
                     case "Jump":
                         if (isJoyStickKeyConfig)
                         {
                             inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Jump")].PositiveButton
-                                = TransfarJoystickToString(inputKey);
-                        }else
+                                = SelectDictionaryByJoystickNum(1, inputKey);
+                        }
+                        else
                         {
                             inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Jump")].AltPositiveButton
                                 = TransfarKeyCode(inputKey);
@@ -309,7 +323,7 @@ public class KeyConfigBehaviour : MonoBehaviour
                         if (isJoyStickKeyConfig)
                         {
                             inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Jump2")].PositiveButton
-                                = TransfarJoystickToString(inputKey);
+                                = SelectDictionaryByJoystickNum(2, inputKey);
                         }
                         else
                         {
@@ -321,8 +335,9 @@ public class KeyConfigBehaviour : MonoBehaviour
                         if (isJoyStickKeyConfig)
                         {
                             inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Fire1")].PositiveButton
-                                = TransfarJoystickToString(inputKey);
-                        }else
+                                = SelectDictionaryByJoystickNum(1, inputKey);
+                        }
+                        else
                         {
                             inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Fire1")].AltPositiveButton
                                 = TransfarKeyCode(inputKey);
@@ -333,8 +348,9 @@ public class KeyConfigBehaviour : MonoBehaviour
                         if (isJoyStickKeyConfig)
                         {
                             inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Fire2")].PositiveButton
-                                = TransfarJoystickToString(inputKey);
-                        }else
+                                = SelectDictionaryByJoystickNum(2, inputKey);
+                        }
+                        else
                         {
                             inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Fire2")].AltPositiveButton
                                 = TransfarKeyCode(inputKey);
@@ -344,8 +360,9 @@ public class KeyConfigBehaviour : MonoBehaviour
                         if (isJoyStickKeyConfig)
                         {
                             inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Lock")].PositiveButton
-                                = TransfarJoystickToString(inputKey);
-                        }else
+                                = SelectDictionaryByJoystickNum(1, inputKey);
+                        }
+                        else
                         {
                             inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Lock")].AltPositiveButton
                                 = TransfarKeyCode(inputKey);
@@ -355,14 +372,16 @@ public class KeyConfigBehaviour : MonoBehaviour
                         if (isJoyStickKeyConfig)
                         {
                             inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Lock2")].PositiveButton
-                                = TransfarJoystickToString(inputKey);
-                        }else
+                                = SelectDictionaryByJoystickNum(2, inputKey);
+                        }
+                        else
                         {
-                            inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Lock2")].PositiveButton
+                            inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Lock2")].AltPositiveButton
                                 = TransfarKeyCode(inputKey);
                         }
                         break;
                     case "CamReset":
+                        //1P, 2Pで共通
                         inputManageFile.inputManager.Axes[SearchAxesFromInputManager("CamReset")].PositiveButton
                             = TransfarJoystickToString(inputKey);
                         break;
@@ -370,8 +389,9 @@ public class KeyConfigBehaviour : MonoBehaviour
                         if (isJoyStickKeyConfig)
                         {
                             inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Boost")].PositiveButton
-                                = TransfarJoystickToString(inputKey);
-                        }else
+                                = SelectDictionaryByJoystickNum(1, inputKey);
+                        }
+                        else
                         {
                             inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Boost")].AltPositiveButton
                                 = TransfarKeyCode(inputKey);
@@ -381,8 +401,9 @@ public class KeyConfigBehaviour : MonoBehaviour
                         if (isJoyStickKeyConfig)
                         {
                             inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Boost2")].PositiveButton
-                                = TransfarJoystickToString(inputKey);
-                        }else
+                                = SelectDictionaryByJoystickNum(2, inputKey);
+                        }
+                        else
                         {
                             inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Boost2")].AltPositiveButton
                                 = TransfarKeyCode(inputKey);
@@ -425,7 +446,17 @@ public class KeyConfigBehaviour : MonoBehaviour
 
     private string TransfarJoystickToString(KeyCode code)
     {
-        return ConfigTransfar2[code].ToString();
+        return JoystickToConfig_1Player[code].ToString();
+    }
+
+    private string TransfarJoystickToString2P(KeyCode code, int JoystickNum)
+    {
+        switch (JoystickNum)
+        {
+            case 1: return JoystickToConfig_2Player_JoyStick1[code].ToString();
+            case 2: return JoystickToConfig_2Player_JoyStick1[code].ToString();
+            default: return JoystickToConfig_1Player[code].ToString();
+        }
     }
 
     private bool SetKey(string KeyName, KeyCode keyCode)
@@ -474,8 +505,20 @@ public class KeyConfigBehaviour : MonoBehaviour
         return inputKey;
     }
 
-    //TODO Add or Change, Remove,を関数化 
+    private string SelectDictionaryByJoystickNum(int Player ,KeyCode inputkey)
+    {
+        if (JoystickCount == 2)
+        {
+            return TransfarJoystickToString2P(inputKey, 2);
+        }
+        else
+        {
+            return TransfarJoystickToString(inputKey);
+        }
+    }
 
+    //TODO Add or Change, Remove,を関数化 
+    
     //KeyConfig管理クラスの作成
     public void KeyConfig(string configFilePath)
     {

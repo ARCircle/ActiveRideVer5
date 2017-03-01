@@ -56,7 +56,7 @@ InputManager:
     joyNum: 1
   - SerializedVersion: 3
     m_Name: Jump
-    PositiveButton: joystick 1 button 2
+    PositiveButton: joystick 1 button 0
     AltPositiveButton: left alt
     Gravity: 1000
     Dead: 0.001
@@ -74,7 +74,7 @@ InputManager:
     joyNum: 2
   - SerializedVersion: 3
     m_Name: Jump2
-    PositiveButton: joystick 2 button 2
+    PositiveButton: joystick button 4
     AltPositiveButton: right alt
     Gravity: 1000
     Dead: 0.001
@@ -139,7 +139,7 @@ InputManager:
     Type: 2
   - SerializedVersion: 3
     m_Name: Horizontal3
-    AltNegativeButton: joystick button 3
+    AltNegativeButton: k
     AltPositiveButton: i
     Gravity: 3
     Dead: 0.1

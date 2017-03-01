@@ -13,8 +13,8 @@ public class MoveStage : MonoBehaviour {
     private float Angle;
 
     private const int radius = 500;
-    private const int MajorAxis = 200;
-    private const int MinorAxis = 150;
+    private int MajorAxis = 200;
+    private int MinorAxis = 150;
 
     private System.Random Offset_seed;
     private int Offset_rand;
@@ -35,18 +35,22 @@ public class MoveStage : MonoBehaviour {
         TimeLeft -= Time.deltaTime;
         if (TimeLeft <= 0.0)
         {
-            TimeLeft = 1.0f;
+            TimeLeft = 10.0f;
 
             Offset_seed = new System.Random();
-            Offset_rand = Offset_seed.Next(-1, 1);
+            Offset_rand = Offset_seed.Next(-100, 100);
         }else
         {
             Offset_rand = 0;
         }
 
         Angle += AngleDelta;
-        StagePos.x = Offset_rand + MajorAxis * Mathf.Sin(Angle);
-        StagePos.z = Offset_rand + MinorAxis * Mathf.Cos(Angle);
+
+        MajorAxis += Offset_rand;
+        MinorAxis += Offset_rand;
+
+        StagePos.x = MajorAxis * Mathf.Sin(Angle);
+        StagePos.z = MinorAxis * Mathf.Cos(Angle);
 
         StageRotate.y = Angle;
 

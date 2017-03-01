@@ -45,7 +45,7 @@ public class PauserScript : MonoBehaviour
     void Update()
     {
 
-        Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "is Active" + isModalOption);
+        Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "is Active, " + isModalOption);
 
         if (isModalOption)
         {

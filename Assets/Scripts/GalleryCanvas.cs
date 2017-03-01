@@ -90,7 +90,11 @@ public class GalleryCanvas : MonoBehaviour {
             //TODO: 初期Canvasを非表示, Story用のCanvas表示
             //canvas.SetActive(false);
             GetComponent<ChangeCameraOnGallery>().enabled = true;
+        }else
+        {
+            GetComponent<ChangeCameraOnGallery>().enabled = false;
         }
+
         if (OnPictureFlag)
         {
 
