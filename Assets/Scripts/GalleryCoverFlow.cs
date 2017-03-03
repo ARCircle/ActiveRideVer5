@@ -33,6 +33,16 @@ public class GalleryCoverFlow : MonoBehaviour
 
     public GameObject TextOfPhotos;
     private string[] DescriptionText = { "あああ", "いいい", "ううう", "えええ", "おおお", "がはは" };
+    public Dictionary<string, string> MappingDescription = new Dictionary<string, string>()
+    {
+        { "Picture1", "あああ" },
+        { "Picture2", "いいい" },
+        { "Picture3", "ううう" },
+        { "Picture4", "えええ" },
+        { "Picture5", "おおお" },
+        { "Picture6", "がはは" },
+
+    };
 
     // Use this for initialization
     void Start()
@@ -104,34 +114,12 @@ public class GalleryCoverFlow : MonoBehaviour
         rhs = temp;
     }
 
+
     //なんだか汚いのでもっとスマートにかきたい
     private void ChangeDescriptionText(GameObject CenterOfPhoto)
     {
-        //int index = Int32.Parse(CenterOfPhoto.tag);
-        //TextOfPhotos.GetComponent<UnityEngine.UI.Text>().text = DescriptionText[index]; 
-        switch (CenterOfPhoto.name)
-        {
-            case "Picture1":
-                TextOfPhotos.GetComponent<UnityEngine.UI.Text>().text = DescriptionText[0];
-                break;
-            case "Picture2":
-                TextOfPhotos.GetComponent<UnityEngine.UI.Text>().text = DescriptionText[1];
-                break;
-            case "Picture3":
-                TextOfPhotos.GetComponent<UnityEngine.UI.Text>().text = DescriptionText[2];
-                break;
-            case "Picture4":
-                TextOfPhotos.GetComponent<UnityEngine.UI.Text>().text = DescriptionText[3];
-                break;
-            case "Picture5":
-                TextOfPhotos.GetComponent<UnityEngine.UI.Text>().text = DescriptionText[4];
-                break;
-            case "Picture6":
-                TextOfPhotos.GetComponent<UnityEngine.UI.Text>().text = DescriptionText[5];
-                break;
-            default: break;
-        }
-
+        TextOfPhotos.GetComponent<UnityEngine.UI.Text>().text = MappingDescription[CenterOfPhoto.name].ToString();
+        
     }
 
     private void viewConvexPhoto()
@@ -146,8 +134,6 @@ public class GalleryCoverFlow : MonoBehaviour
 
             PhotosinGallery[nLoop].transform.localPosition = new Vector3(X, Y, -Z);
             PhotosinGallery[nLoop].transform.localEulerAngles = new Vector3(Rotate_X, 0, 0);
-
-            //PhotosinGallery[nLoop].transform.localEulerAngles = new Vector3(0, rotY, 0);
 
         }
     }
