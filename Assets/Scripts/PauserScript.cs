@@ -38,7 +38,7 @@ public class PauserScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -57,7 +57,6 @@ public class PauserScript : MonoBehaviour
             // isPauseを外部スクリプトからコントロール, ポーズの呼び出し
             SelectObjectDependOnSceneName(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, isPause);
         }
-        //Debug.Log(!ModalOption.isModalSetActive);
 
     }
 
@@ -65,6 +64,17 @@ public class PauserScript : MonoBehaviour
     //TODO: 例外処理
     public void SelectObjectDependOnSceneName(string SceneName, bool ModalFlag)
     {
+        if (ModalFlag)
+        {
+            //TimeScaleによる停止
+            Time.timeScale = 0;
+
+        }
+        if (!ModalFlag)
+        {
+            Time.timeScale = 1;
+        }
+
         switch (SceneName)
         {
             case "Title":

@@ -143,9 +143,6 @@ public class OptionRotate : MonoBehaviour
 
         if ( (Input.GetKeyUp(KeyCode.W) && !ModalOption.isModalSetActive))
         {
-			
-            //CenterButton.transform.Rotate(new Vector3(0, 0, -72));
-
             bCenterIndex++;
 			bCenterIndex = Verify_bIndex(bCenterIndex);
 
