@@ -78,7 +78,7 @@ public class ChangeCameraOnGallery : MonoBehaviour
             }
             else
             {
-                AirFrame_Cam[CameraIndex].gameObject.transform.parent.gameObject.transform.FindChild("AirFrame").transform.localRotation = new Quaternion(0, 0, 0, 0);
+                AirFrame_Cam[CameraIndex].gameObject.transform.parent.gameObject.transform.FindChild("AirFrame").transform.localRotation = new Quaternion(-10, 0, 0, 0);
                 AirFrameMoveFlag = false;
             }
         }

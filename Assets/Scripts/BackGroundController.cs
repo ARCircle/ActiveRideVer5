@@ -7,6 +7,8 @@ public class BackGroundController : MonoBehaviour {
 
     public GameObject Circle1;
     public GameObject Circle2;
+    public GameObject Circle3;
+    public GameObject Circle4;
 
 	// Use this for initialization
 	void Start () {
