@@ -12,6 +12,7 @@ public class BackGroundFactory : MonoBehaviour {
     void Start () {
         foreach(var p in ParentObjects)
         {
+
             instance = (GameObject)Instantiate(BackGroundPrefab);
             instance.transform.parent = p.ParentObject.transform;
             //instance.transform.localPosition = p.ParentObject.transform.localPosition;

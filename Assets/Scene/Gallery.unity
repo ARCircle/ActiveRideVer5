@@ -1963,6 +1963,8 @@ MonoBehaviour:
   - {fileID: 1124170545}
   - {fileID: 1618448956}
   - {fileID: 18152308}
+  Ring_Prefab: {fileID: 1373585297733578, guid: 4425ec5a4aab2f44b8d19d32aed1d72c,
+    type: 2}
   EachUIGroup:
   - {fileID: 543218460}
   - {fileID: 1497955647}
@@ -1973,7 +1975,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 294344863}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb42f145125fc6c46b739a5261b4822e, type: 3}
   m_Name: 

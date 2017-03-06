@@ -49,7 +49,6 @@ public class GalleryCoverFlow : MonoBehaviour
     {
 
         NumberOfObject = PhotosinGallery.Count;
-        Debug.Log(NumberOfObject);
 
         viewConvexPhoto();
         centerPhoto = setPhotoInActive();
@@ -58,6 +57,7 @@ public class GalleryCoverFlow : MonoBehaviour
         ChangeDescriptionText(centerPhoto);
 
     }
+
 
     // Update is called once per frame
     void Update()
@@ -203,7 +203,6 @@ public class GalleryCoverFlow : MonoBehaviour
             }
         }
 
-
     }
 
     private GameObject setPhotoInActive()
@@ -219,9 +218,7 @@ public class GalleryCoverFlow : MonoBehaviour
                 PhotosinGallery[nLoop].SetActive(true);
 
             }
-
         }
-
         return PhotosinGallery[(NumberOfObject / 2) - 2];
     }
     float FlashSprite(float intensify)
