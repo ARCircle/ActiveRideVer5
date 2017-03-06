@@ -8,9 +8,7 @@ public class ChangeCameraOnGallery : MonoBehaviour
     public GameObject MainCam;
     public GameObject[] AirFrame_Cam;
 
-    private Vector3 posB;
-    private Vector3 posU;
-    private Vector3 posP;
+    private Vector3[] AirFrame_Pos = new Vector3[3];
 
     private Vector3 Dpos;
 
@@ -94,55 +92,19 @@ public class ChangeCameraOnGallery : MonoBehaviour
 
             if (CameraIndex >= 3) { CameraIndex = 0; }
 
-            switch (CameraIndex)
-            {
-                case 0:
-                    posB.z = CameraPosFrom;
-                    AirFrame_Cam[0].transform.localPosition = posB;
-                    break;
-                case 1:
-                    posU.z = CameraPosFrom;
-                    AirFrame_Cam[1].transform.localPosition = posU;
-                    break;
-                case 2:
-                    posP.z = CameraPosFrom;
-                    AirFrame_Cam[2].transform.localPosition = posP;
-                    break;
-                default:
-                    CameraIndex = 0;
-                    break;
-            }
+            AirFrame_Pos[CameraIndex].z = CameraPosFrom;
+            AirFrame_Cam[CameraIndex].transform.localPosition = AirFrame_Pos[CameraIndex];
 
             SetCameraInActive();
             UIsActiveControl(CameraIndex);
         }
 
-        switch (CameraIndex)
-        {
-            //TODO: 位置の初期化
-            case 0:
-                posB = AirFrame_Cam[0].transform.localPosition;
-                posB = MoveCamera(AirFrame_Cam[0], posB);
-                AirFrame_Cam[0].transform.localPosition = posB;
-                Dpos = MoveDescription(Descriptions[0].transform.localPosition);
-                Descriptions[0].transform.localPosition = Dpos;
-                break;
-            case 1:
-                posU = AirFrame_Cam[1].transform.localPosition;
-                posU = MoveCamera(AirFrame_Cam[1], posU);
-                AirFrame_Cam[1].transform.localPosition = posU;
-                Dpos = MoveDescription(Descriptions[1].transform.localPosition);
-                Descriptions[1].transform.localPosition = Dpos;
-                break;
-            case 2:
-                posP = AirFrame_Cam[2].transform.localPosition;
-                posP = MoveCamera(AirFrame_Cam[2], posP);
-                AirFrame_Cam[2].transform.localPosition = posP;
-                Dpos = MoveDescription(Descriptions[2].transform.localPosition);
-                Descriptions[2].transform.localPosition = Dpos;
-                break;
-            default: break;
-        }
+        AirFrame_Pos[CameraIndex] = AirFrame_Cam[CameraIndex].transform.localPosition;
+        AirFrame_Pos[CameraIndex] = MoveCamera(AirFrame_Cam[CameraIndex], AirFrame_Pos[CameraIndex]);
+        AirFrame_Cam[CameraIndex].transform.localPosition = AirFrame_Pos[CameraIndex];
+        Dpos = MoveDescription(Descriptions[CameraIndex].transform.localPosition);
+        Descriptions[CameraIndex].transform.localPosition = Dpos;
+        
 
     }
 

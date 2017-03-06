@@ -160,7 +160,9 @@ public class GalleryCanvas : MonoBehaviour {
                 OnStoryFlag = true;
                 UIGroupSetActiveOnce = true;
                 Ring_Instance = CreateInstance(EachUIGroup[0], "Arrow2");
-                EachUIGroupSetActive(0);
+                EachUIGroupSetActive(2);
+                GetComponent<ChangeCameraOnGallery>().enabled = true;
+
             }
             else
             {
