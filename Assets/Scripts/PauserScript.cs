@@ -44,6 +44,8 @@ public class PauserScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //CutInするか否かを取得
+        isPause = CutinManager.canCutIn;
 
         Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "is Active, " + isModalOption);
 
