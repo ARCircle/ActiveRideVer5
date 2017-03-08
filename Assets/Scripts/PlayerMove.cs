@@ -170,8 +170,8 @@ public class PlayerMove : MonoBehaviour {
 			Camera.main.GetComponent<CameraMotionBlur> ().velocityScale = motionBlurValue;
 
 			//ブーストゲージの伸縮
-			gaugeImage.transform.localScale = new Vector3 ((float)boostPoint / boostPointMax, 1, 1);
-
+			//gaugeImage.transform.localScale = new Vector3 ((float)boostPoint / boostPointMax, 1, 1);
+			gaugeImage.fillAmount = (float)boostPoint / boostPointMax;
 
 
 			//攻撃動作の受付
