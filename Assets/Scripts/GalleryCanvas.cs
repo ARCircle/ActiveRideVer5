@@ -19,6 +19,7 @@ public class GalleryCanvas : MonoBehaviour {
     public static bool OnStoryFlag;
 
     private bool UIGroupSetActiveOnce;
+    public static bool canStoryBegin;
 
     public GameObject Ring_Prefab;
     private GameObject Ring_Instance;
@@ -77,6 +78,7 @@ public class GalleryCanvas : MonoBehaviour {
 
         OnPictureFlag = false;
         OnStoryFlag = false;
+        canStoryBegin = false;
     }
 
     private void OnEnable()
@@ -89,7 +91,7 @@ public class GalleryCanvas : MonoBehaviour {
     // Update is called once OnStoryFlag frame
     void Update()
     {
-        Debug.Log(OnStoryFlag);
+        canStoryBegin = false;
         pos = canvas.transform.position;
         //GetComponent<ChangeCameraOnGallery>().enabled = false;
         if (OnStoryFlag)
@@ -102,13 +104,13 @@ public class GalleryCanvas : MonoBehaviour {
                 }
                 else
                 {
-                    Debug.Log("do here");
                     TimeLeft = 1.0f;
                     Destroy(Ring_Instance);
                     UIGroupSetActiveOnce = false;
-                    EachUIGroup[2].SetActive(true);
-                    GetComponent<ChangeCameraOnGallery>().enabled = true;
+                    EachUIGroupSetActive(2);
 
+                    if (!canStoryBegin) { canStoryBegin = true; } else { canStoryBegin = false; }
+                    GetComponent<ChangeCameraOnGallery>().enabled = true;
                 }
             }
         }
@@ -157,12 +159,11 @@ public class GalleryCanvas : MonoBehaviour {
         {
             if (!OnPictureFlag)
             {
+                if (canStoryBegin) canStoryBegin = false;
                 OnStoryFlag = true;
                 UIGroupSetActiveOnce = true;
                 Ring_Instance = CreateInstance(EachUIGroup[0], "Arrow2");
-                EachUIGroupSetActive(2);
-                GetComponent<ChangeCameraOnGallery>().enabled = true;
-
+                GetComponent<ChangeCameraOnGallery>().enabled = false;
             }
             else
             {

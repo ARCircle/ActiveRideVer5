@@ -28,20 +28,12 @@ public class BackGroundFactory : MonoBehaviour {
 
     private void OnEnable()
     {
-        if (instance != null)
-        {
-            instance.SetActive(true);
-        }
 
     }
 
     // Update is called once per frame
     void Update () {
-        if (instance != null)
-        {
-            instance.SetActive(true);
-
-        }
+        
     }
 
     //個々のBackground情報を格納するリスト

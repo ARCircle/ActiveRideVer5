@@ -35,7 +35,7 @@ public class ChangeCameraOnGallery : MonoBehaviour
             Camera.transform.localPosition = new Vector3(0, 0, CameraPosFrom);
         }
 
-        SetCameraInActive();
+        //SetCameraInActive();
         //UIsActiveControl(0);
 
         CameraIndex = 0;
@@ -46,11 +46,12 @@ public class ChangeCameraOnGallery : MonoBehaviour
     private void OnEnable()
     {
         //Descriptions[0].SetActive(true);
-        //BANSHEE_Cam.SetActive(true);
+        //AirFrame_Cam[0].SetActive(false);
 
         //Pauseから復帰時にfalseになるため
         //カメラ位置が飛ばされるのを防止
         MainCam.SetActive(true);
+
     }
 
     // Update is called once per frame
@@ -63,10 +64,16 @@ public class ChangeCameraOnGallery : MonoBehaviour
             MainCam.SetActive(true);
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftArrow) && GalleryCanvas.OnStoryFlag)
+        if (GalleryCanvas.canStoryBegin)
         {
+            Debug.Log("do here");
+            //AirFrame_Pos[CameraIndex].z = CameraPosFrom;
+            //AirFrame_Cam[CameraIndex].transform.localPosition = AirFrame_Pos[CameraIndex];
+
+            SetCameraInActive();
             UIsActiveControl(0);
         }
+       
 
         if(Input.GetKeyUp(KeyCode.S) && GalleryCanvas.OnStoryFlag)
         {
@@ -76,7 +83,7 @@ public class ChangeCameraOnGallery : MonoBehaviour
             }
             else
             {
-                AirFrame_Cam[CameraIndex].gameObject.transform.parent.gameObject.transform.FindChild("AirFrame").transform.localRotation = new Quaternion(-10, 0, 0, 0);
+                AirFrame_Cam[CameraIndex].gameObject.transform.parent.gameObject.transform.FindChild("AirFrame").transform.localRotation = new Quaternion(0, 0, 0, 0);
                 AirFrameMoveFlag = false;
             }
         }
@@ -104,8 +111,7 @@ public class ChangeCameraOnGallery : MonoBehaviour
         AirFrame_Cam[CameraIndex].transform.localPosition = AirFrame_Pos[CameraIndex];
         Dpos = MoveDescription(Descriptions[CameraIndex].transform.localPosition);
         Descriptions[CameraIndex].transform.localPosition = Dpos;
-        
-
+      
     }
 
     Vector3 MoveDescription(Vector3 pos)
