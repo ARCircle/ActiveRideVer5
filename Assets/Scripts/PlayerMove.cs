@@ -32,7 +32,7 @@ public class PlayerMove : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		boostPoint = boostPointMax;
+		boostPoint = 0;
 
 		moveSpeed = Vector3.zero;
 

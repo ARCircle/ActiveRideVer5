@@ -43,7 +43,7 @@ public class PlayerAp : MonoBehaviour {
 			displayArmorPoint = (int)Mathf.Lerp(displayArmorPoint, armorPoint, 0.1F);
 
 		//現在の体力と最大体力をUI Textに表示する
-		armorText.text = string.Format("{0:0000}", displayArmorPoint, armorPointMax);
+		armorText.text = string.Format("{0:0000}", displayArmorPoint);
 
 		//残り体力の割合により文字・ゲージの色を変える
 		float percentageArmorpoint = (float)displayArmorPoint / armorPointMax;
@@ -52,7 +52,7 @@ public class PlayerAp : MonoBehaviour {
 			//armorText.color = myWhite;
 			gaugeImage.color = myWhite;
 		}else if( percentageArmorpoint > 0.3F){
-			//armorText.color = myYellow;
+			armorText.color = Color.yellow;
 			gaugeImage.color = myYellow;
 		}else{
 			armorText.color = Color.red;
@@ -64,7 +64,7 @@ public class PlayerAp : MonoBehaviour {
 
 		//ゲージの長さを体力の割合に合わせて伸縮させる
 		//gaugeImage.transform.localScale = new Vector3(percentageArmorpoint, 1, 1);
-		gaugeImage.fillAmount = (float)armorPoint / armorPointMax;
+		gaugeImage.fillAmount = (float)displayArmorPoint / armorPointMax;
 	}
 
 	private void OnCollisionEnter(Collision collider) {
