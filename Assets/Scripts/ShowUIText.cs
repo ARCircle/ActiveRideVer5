@@ -60,7 +60,6 @@ public class ShowUIText : MonoBehaviour
 
             uiText.text = "";
         }
-
     }
 
     void Update()
@@ -104,10 +103,10 @@ public class ShowUIText : MonoBehaviour
 
     // CSVデータを文字列型２次元配列に変換する
     //                      ファイルパス,変換される配列の値(参照渡し)
-    private void readCSVData(string path, ref string[,] sdata)
+    public void readCSVData(string path, ref string[,] sdata)
     {
         // ストリームリーダーsrに読み込む
-        StreamReader sr = new StreamReader(path);
+        StreamReader sr = new StreamReader(path, System.Text.Encoding.GetEncoding("shift_jis"));
         // ストリームリーダーをstringに変換
         string strStream = sr.ReadToEnd();
         // StringSplitOptionを設定(要はカンマとカンマに何もなかったら格納しないことにする)

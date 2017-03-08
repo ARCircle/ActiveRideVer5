@@ -70,7 +70,6 @@ public class PauserScript : MonoBehaviour
         {
             //TimeScaleによる停止
             Time.timeScale = 0;
-
         }
         if (!ModalFlag)
         {
@@ -158,7 +157,6 @@ public class PauserScript : MonoBehaviour
                     GetComponentInParentAndChildren<ChangeSEVolume>(RootObject).enabled = !ModalFlag;
                 break;
             case "Main":
-
                 //validate Null Exception
                 Player = GameObject.Find("UNICORN1playMode");
 
@@ -191,7 +189,6 @@ public class PauserScript : MonoBehaviour
                         Player = GameObject.Find("PHENEX1playMode");
                         break;
                     default: break;
-
                 }
 
                 if (Player != null)
@@ -235,9 +232,7 @@ public class PauserScript : MonoBehaviour
                 break;
 
             default: break;
-
         }
-
     }
 
     //  GameObjectExtension.cs

@@ -32,10 +32,16 @@ public class GalleryCoverFlow : MonoBehaviour
     public Material UI_mat;
 
     public GameObject TextOfPhotos;
+    public GameObject TitleOfPhotos;
+
+    private string[,] CSVdata;
+    private const string path = "/CSV/Picture.csv";
+
     private string[] DescriptionText = { "あああ", "いいい", "ううう", "えええ", "おおお", "がはは" };
-    public Dictionary<string, string> MappingDescription = new Dictionary<string, string>()
+    public Dictionary<string, string> MappingDescription = new Dictionary<string, string>();
+    /*
     {
-        { "Picture1", "あああ" },
+        { "Picture1", "あ\nああ" },
         { "Picture2", "いいい" },
         { "Picture3", "ううう" },
         { "Picture4", "えええ" },
@@ -43,10 +49,26 @@ public class GalleryCoverFlow : MonoBehaviour
         { "Picture6", "がはは" },
 
     };
+    */
+
+    public Dictionary<string, string> MappingTitle = new Dictionary<string, string>();
+    //string[,]配列に読み込んだCSVデータを(Title, Descriptionの)Dictionaryにマッピング
+    private void MappingCSV(ref string[,] data)
+    {
+        for(int i = 0; i < data.GetLength(0); i++)
+        {
+            MappingTitle.Add(data[i, 0], data[i, 1]);
+            MappingDescription.Add(data[i, 0], data[i, 2]);
+        }
+    }
 
     // Use this for initialization
     void Start()
     {
+        //CSVファイルよりTitleとDesctriptionを読み込み
+        ShowUIText showUIText = new ShowUIText();
+        showUIText.readCSVData(Application.dataPath + path, ref CSVdata);
+        MappingCSV(ref CSVdata);
 
         NumberOfObject = PhotosinGallery.Count;
 
@@ -55,7 +77,6 @@ public class GalleryCoverFlow : MonoBehaviour
 
         ChangeCenterPhotoSize();
         ChangeDescriptionText(centerPhoto);
-
     }
 
 
@@ -118,6 +139,7 @@ public class GalleryCoverFlow : MonoBehaviour
     //なんだか汚いのでもっとスマートにかきたい
     private void ChangeDescriptionText(GameObject CenterOfPhoto)
     {
+        TitleOfPhotos.GetComponent<UnityEngine.UI.Text>().text = MappingTitle[CenterOfPhoto.name].ToString();
         TextOfPhotos.GetComponent<UnityEngine.UI.Text>().text = MappingDescription[CenterOfPhoto.name].ToString();
         
     }
@@ -158,12 +180,6 @@ public class GalleryCoverFlow : MonoBehaviour
     {
 
         //トランジション用のコンポーネント割り当て
-        //if (centerPhoto.GetComponent<UIMaskTransparent>() != null)
-        //{
-        //    UnityEngine.Object target = centerPhoto.GetComponent<UIMaskTransparent>();
-        //    UnityEngine.Object.Destroy(target);
-        //}
-
         for (int nLoop = 0; nLoop < NumberOfObject; nLoop++)
         {
 
@@ -221,6 +237,7 @@ public class GalleryCoverFlow : MonoBehaviour
         }
         return PhotosinGallery[(NumberOfObject / 2) - 2];
     }
+
     float FlashSprite(float intensify)
     {
         if (intensify >= 1f)
