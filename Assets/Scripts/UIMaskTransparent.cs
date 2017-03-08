@@ -14,7 +14,7 @@ public class UIMaskTransparent : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        Debug.Log("UI_Mask" + UI_mask_mat);
+        //Debug.Log("UI_Mask" + UI_mask_mat);
 
         mask_range = 1.0f;
         this.UI_mask_mat.SetFloat("_Range", 1.0f);
@@ -24,9 +24,12 @@ public class UIMaskTransparent : MonoBehaviour {
 
     void OnEnable()
     {
-
-        canUpdateMaskRange = true;
-        mask_range = 1.0f;
+        //ModalOptionが解除された時は無効
+        if (!Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            canUpdateMaskRange = true;
+            mask_range = 1.0f;
+        }
 
     }
 

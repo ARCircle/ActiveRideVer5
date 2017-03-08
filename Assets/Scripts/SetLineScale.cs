@@ -5,8 +5,10 @@ using UnityEngine;
 public class SetLineScale : MonoBehaviour {
 
     private float LineScale;
-    private float DeltaScale_X = 0.1f;
-    private float MaxScale_X = 5.0f;
+
+    public float DeltaScale_X = 0.1f;
+    public float MaxScale_X ;
+
     private float DefaultLineScale = 0f;
 
 	// Use this for initialization

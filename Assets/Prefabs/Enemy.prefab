@@ -5,11 +5,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 442978}
-  - 33: {fileID: 3306108}
-  - 23: {fileID: 2375952}
+  - component: {fileID: 442978}
+  - component: {fileID: 3306108}
+  - component: {fileID: 2375952}
   m_Layer: 11
   m_Name: vehicle_enemyShip
   m_TagString: Untagged
@@ -22,12 +22,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 471800}
-  - 114: {fileID: 11416376}
-  - 65: {fileID: 6577776}
-  - 114: {fileID: 11470714}
+  - component: {fileID: 471800}
+  - component: {fileID: 11416376}
+  - component: {fileID: 6577776}
+  - component: {fileID: 11470714}
   m_Layer: 11
   m_Name: Enemy
   m_TagString: Enemy
@@ -47,6 +47,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 471800}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &471800
 Transform:
   m_ObjectHideFlags: 1
@@ -60,6 +61,7 @@ Transform:
   - {fileID: 442978}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2375952
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -69,18 +71,23 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: c547624e174de984882f0a14b4bb32e1, type: 2}
   - {fileID: 2100000, guid: 1e0350b97c61bfb4a91c62d756d01727, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -132,7 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8251de00c60d7c449a5d23d617b28a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  markerImage: {fileID: 11494518, guid: ba2218ff3611c9e43ab38ce062e13180, type: 2}
+  markerImage: {fileID: 114669337889692190, guid: 7a60ac1747ef0844ab07da72e7f873d3,
+    type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

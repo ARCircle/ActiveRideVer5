@@ -23,6 +23,7 @@ public class ShowUIText : MonoBehaviour
 
     // シナリオを格納する
     public UnityEngine.UI.Text uiText; // uiTextへの参照を保つ
+    public UnityEngine.UI.Text titleText; //タイトル
 
     int currentLine; // 現在の行番号
 
@@ -47,8 +48,9 @@ public class ShowUIText : MonoBehaviour
 
     private void OnEnable()
     {
-        //if (ModalOption.isModalSetActive == false)
-        //{
+        //ModalOptionが解除された時は無効
+        if (!Input.GetKeyUp(KeyCode.DownArrow))
+        {
             readCSVData(Application.dataPath + path, ref sdataArrays);
 
             isShowText = true;
@@ -57,7 +59,7 @@ public class ShowUIText : MonoBehaviour
             TextUpdate();
 
             uiText.text = "";
-        //}
+        }
 
     }
 
@@ -86,9 +88,15 @@ public class ShowUIText : MonoBehaviour
     {
         // 現在の行のテキストをuiTextに流し込み、現在の行番号を一つ追加
         // indexはアタッチ先のObjectにより指定, csvの列=1つのStoryに対応する
-        uiText.text += sdataArrays[currentLine, index] + "\n";
-        Debug.Log(currentLine + "," + index + sdataArrays[currentLine, index]);
-        Debug.Log(uiText.name);
+        if (currentLine >= 1)
+        {
+            uiText.text += sdataArrays[currentLine, index] + "\n";
+            //Debug.Log(currentLine + "," + index + sdataArrays[currentLine, index]);
+            //Debug.Log(uiText.name);
+        }else
+        {
+            titleText.text = sdataArrays[currentLine, index] + "\n";
+        }
         currentLine++;
     }
 

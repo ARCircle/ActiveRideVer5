@@ -141,34 +141,34 @@ public class DesirializationYaml
                     m_Name: Horizontal2
                     descriptiveName:
                     descriptiveNegativeName:
-                    negativeButton: left
-                    positiveButton: right
-                    altNegativeButton: 
-                    altPositiveButton: 
+                    negativeButton:
+                    positiveButton:
+                    altNegativeButton: left
+                    altPositiveButton: right
                     gravity: 3
-                    dead: 0.002
+                    dead: 0.1
                     sensitivity: 3
                     snap: 0
                     invert: 0
-                    type: 0
+                    type: 2
                     axis: 0
-                    joyNum: 0
+                    joyNum: 2
                   - serializedVersion: 3
                     m_Name: Horizontal
                     descriptiveName: 
                     descriptiveNegativeName: 
-                    negativeButton: a
-                    positiveButton: d
-                    altNegativeButton: 
-                    altPositiveButton: 
+                    negativeButton: 
+                    positiveButton: 
+                    altNegativeButton: a
+                    altPositiveButton: d
                     gravity: 3
-                    dead: 0.001
+                    dead: 0.1
                     sensitivity: 3
                     snap: 0
                     invert: 0
-                    type: 0
+                    type: 2
                     axis: 0
-                    joyNum: 0
+                    joyNum: 1
                   - serializedVersion: 3
                     m_Name: Vertical2
                     descriptiveName: 
@@ -177,86 +177,86 @@ public class DesirializationYaml
                     positiveButton: up
                     altNegativeButton: 
                     altPositiveButton: 
-                    gravity: 3
-                    dead: 0.001
+                    gravity: 1
+                    dead: 0.1
                     sensitivity: 3
                     snap: 0
-                    invert: 0
-                    type: 0
-                    axis: 0
-                    joyNum: 0
+                    invert: 1
+                    type: 2
+                    axis: 1
+                    joyNum: 2
                   - serializedVersion: 3
                     m_Name: Vertical
                     descriptiveName: 
                     descriptiveNegativeName: 
-                    negativeButton: s
-                    positiveButton: w
-                    altNegativeButton: 
-                    altPositiveButton: 
-                    gravity: 3
-                    dead: 0.001
+                    negativeButton: 
+                    positiveButton: 
+                    altNegativeButton: s
+                    altPositiveButton: w
+                    gravity: 1
+                    dead: 0.1
                     sensitivity: 3
                     snap: 0
-                    invert: 0
-                    type: 0
-                    axis: 0
-                    joyNum: 0
+                    invert: 1
+                    type: 2
+                    axis: 1
+                    joyNum: 1
                   - serializedVersion: 3
                     m_Name: Fire1
                     descriptiveName: 
                     descriptiveNegativeName: 
                     negativeButton: 
-                    positiveButton: left ctrl
+                    positiveButton: joystick 1 button 0
                     altNegativeButton: 
-                    altPositiveButton: mouse 0
+                    altPositiveButton: left ctrl
                     gravity: 1000
                     dead: 0.001
                     sensitivity: 1000
                     snap: 0
                     invert: 0
-                    type: 0
+                    type: 2
                     axis: 0
-                    joyNum: 0
+                    joyNum: 1
                   - serializedVersion: 3
                     m_Name: Jump
                     descriptiveName: 
                     descriptiveNegativeName: 
                     negativeButton: 
-                    positiveButton: left shift
+                    positiveButton: joystick 1 button 2
                     altNegativeButton: 
-                    altPositiveButton: 
+                    altPositiveButton: left alt
                     gravity: 1000
                     dead: 0.001
                     sensitivity: 1000
                     snap: 0
                     invert: 0
-                    type: 0
+                    type: 2
                     axis: 0
-                    joyNum: 0
+                    joyNum: 1
                   - serializedVersion: 3
                     m_Name: Fire2
                     descriptiveName: 
                     descriptiveNegativeName: 
                     negativeButton: 
-                    positiveButton: right ctrl
+                    positiveButton: joystick 2 button 0
                     altNegativeButton: 
-                    altPositiveButton: 
+                    altPositiveButton: right ctrl
                     gravity: 1000
                     dead: 0.001
                     sensitivity: 1000
                     snap: 0
                     invert: 0
-                    type: 0
+                    type: 2
                     axis: 0
-                    joyNum: 0
+                    joyNum: 2
                   - serializedVersion: 3
                     m_Name: Jump2
                     descriptiveName: 
                     descriptiveNegativeName: 
                     negativeButton: 
-                    positiveButton: right shift
+                    positiveButton: joystick 2 button 2
                     altNegativeButton: 
-                    altPositiveButton: 
+                    altPositiveButton: right alt
                     gravity: 1000
                     dead: 0.001
                     sensitivity: 1000
@@ -270,7 +270,7 @@ public class DesirializationYaml
                     descriptiveName: 
                     descriptiveNegativeName: 
                     negativeButton: 
-                    positiveButton: joystick button 1
+                    positiveButton: joystick 1 button 3
                     altNegativeButton: 
                     altPositiveButton: q
                     gravity: 1000
@@ -278,15 +278,15 @@ public class DesirializationYaml
                     sensitivity: 1000
                     snap: 0
                     invert: 0
-                    type: 0
+                    type: 2
                     axis: 0
-                    joyNum: 0
+                    joyNum: 1
                   - serializedVersion: 3
                     m_Name: Lock2
                     descriptiveName: 
                     descriptiveNegativeName: 
                     negativeButton: 
-                    positiveButton: 
+                    positiveButton: joystick 2 button 3
                     altNegativeButton: 
                     altPositiveButton: p
                     gravity: 1000
@@ -294,9 +294,9 @@ public class DesirializationYaml
                     sensitivity: 1000
                     snap: 0
                     invert: 0
-                    type: 0
+                    type: 2
                     axis: 0
-                    joyNum: 0
+                    joyNum: 2
                   - serializedVersion: 3
                     m_Name: CamReset
                     descriptiveName: 
@@ -304,13 +304,13 @@ public class DesirializationYaml
                     negativeButton: 
                     positiveButton: joystick button 9
                     altNegativeButton: 
-                    altPositiveButton: e
+                    altPositiveButton: 
                     gravity: 1000
                     dead: 0.001
                     sensitivity: 1000
                     snap: 0
                     invert: 0
-                    type: 0
+                    type: 2
                     axis: 0
                     joyNum: 0
                   - serializedVersion: 3
@@ -318,7 +318,7 @@ public class DesirializationYaml
                     descriptiveName: 
                     descriptiveNegativeName: 
                     negativeButton: 
-                    positiveButton: 
+                    positiveButton: joystick 1 button 6
                     altNegativeButton: 
                     altPositiveButton: z
                     gravity: 1000
@@ -326,15 +326,15 @@ public class DesirializationYaml
                     sensitivity: 1000
                     snap: 0
                     invert: 0
-                    type: 0
+                    type: 2
                     axis: 0
-                    joyNum: 0
+                    joyNum: 1
                   - serializedVersion: 3
                     m_Name: Boost2
                     descriptiveName: 
                     descriptiveNegativeName: 
                     negativeButton: 
-                    positiveButton: 
+                    positiveButton: joystick 2 button 6
                     altNegativeButton: 
                     altPositiveButton: m
                     gravity: 1000
@@ -342,23 +342,23 @@ public class DesirializationYaml
                     sensitivity: 1000
                     snap: 0
                     invert: 0
-                    type: 0
+                    type: 2
                     axis: 0
-                    joyNum: 0
+                    joyNum: 2
                   - serializedVersion: 3
                     m_Name: Submit
                     descriptiveName: 
                     descriptiveNegativeName: 
                     negativeButton: 
-                    positiveButton: 
+                    positiveButton: joystick button 3
                     altNegativeButton: 
-                    altPositiveButton: space
+                    altPositiveButton: enter
                     gravity: 1000
                     dead: 0.001
                     sensitivity: 1000
                     snap: 0
                     invert: 0
-                    type: 0
+                    type: 2
                     axis: 0
                     joyNum: 0
                   - serializedVersion: 3
@@ -366,49 +366,81 @@ public class DesirializationYaml
                     descriptiveName: 
                     descriptiveNegativeName: 
                     negativeButton: 
-                    positiveButton: 
+                    positiveButton: joystick button 2
                     altNegativeButton: 
-                    altPositiveButton: space
+                    altPositiveButton: 
                     gravity: 1000
                     dead: 0.001
                     sensitivity: 1000
                     snap: 0
                     invert: 0
-                    type: 0
+                    type: 2
                     axis: 0
                     joyNum: 0
                   - serializedVersion: 3
-                    m_Name: Mouse ScrollWheel
+                    m_Name: Horizontal3
+                    descriptiveName: 
+                    descriptiveNegativeName: 
+                    negativeButton: 
+                    positiveButton: 
+                    altNegativeButton: k
+                    altPositiveButton: i
+                    gravity: 3
+                    dead: 0.1
+                    sensitivity: 3
+                    snap: 0
+                    invert: 0
+                    type: 2
+                    axis: 2
+                    joyNum: 1
+                  - serializedVersion: 3
+                    m_Name: Vertical3
+                    descriptiveName: 
+                    descriptiveNegativeName: 
+                    negativeButton: 
+                    positiveButton: 
+                    altNegativeButton: k
+                    altPositiveButton: i
+                    gravity: 3
+                    dead: 0.1
+                    sensitivity: 3
+                    snap: 0
+                    invert: 1
+                    type: 2
+                    axis: 2
+                    joyNum: 1
+                  - serializedVersion: 3
+                    m_Name: Horizontal4
                     descriptiveName: 
                     descriptiveNegativeName: 
                     negativeButton: 
                     positiveButton: 
                     altNegativeButton: 
-                    altPositiveButton: joystick button 1
-                    gravity: 1000
-                    dead: 0.001
-                    sensitivity: 1000
+                    altPositiveButton: 
+                    gravity: 3
+                    dead: 0.1
+                    sensitivity: 3
                     snap: 0
                     invert: 0
-                    type: 0
-                    axis: 0
-                    joyNum: 0
+                    type: 2
+                    axis: 2
+                    joyNum: 2
                   - serializedVersion: 3
-                    m_Name: U
+                    m_Name: Vertical4
                     descriptiveName: 
                     descriptiveNegativeName: 
                     negativeButton: 
                     positiveButton: 
                     altNegativeButton: 
-                    altPositiveButton: u
-                    gravity: 1000
-                    dead: 0.001
-                    sensitivity: 1000
+                    altPositiveButton: 
+                    gravity: 3
+                    dead: 0.1
+                    sensitivity: 3
                     snap: 0
-                    invert: 0
-                    type: 0
-                    axis: 0
-                    joyNum: 0
+                    invert: 1
+                    type: 2
+                    axis: 3
+                    joyNum: 2
 ";
 
 }
