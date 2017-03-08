@@ -42,7 +42,7 @@ public class PlayerShoot : MonoBehaviour {
 				Instantiate(shot, muzzle3.transform.position, MainCamera1.transform.rotation);
 				Instantiate(shot, muzzle4.transform.position, MainCamera1.transform.rotation);
 
-				Debug.Log ("撃ったよ");
+				//Debug.Log ("撃ったよ");
 
 				//マズルフラッシュを表示する
 				Instantiate(muzzleFlash, muzzle.transform.position, transform.rotation);

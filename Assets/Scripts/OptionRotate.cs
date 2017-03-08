@@ -133,8 +133,6 @@ public class OptionRotate : MonoBehaviour
             bCenterIndex--;
             bCenterIndex = Verify_bIndex(bCenterIndex);
 
-            //Debug.Log("Center: " + bCenterIndex + "bLeft" + bLeftIndex + "bRIght" +bRightIndex );
-
             audioSource2.PlayOneShot(audioSource2.clip);
 
 			SetActiveSettings (bCenterIndex);
