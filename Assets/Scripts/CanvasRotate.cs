@@ -13,6 +13,8 @@ public class CanvasRotate : MonoBehaviour {
 	public GameObject Buttons;
 	public GameObject Descriptions;
 
+    public GameObject Ring_Prefab;
+
 	GameObject MainSoundObject; 
 
 	private int Circle_val = 360;
@@ -135,7 +137,6 @@ public class CanvasRotate : MonoBehaviour {
 			index = 1;
 		}
 
-
 		return index;
 	}
 
@@ -144,15 +145,15 @@ public class CanvasRotate : MonoBehaviour {
 
         //キー入力を受け付け, フラグ値を指定
 		//TODO: マウスホイールにも対応する?
-		if ( Input.GetKeyUp(KeyCode.S) && !ModalOption.isModalSetActive )
+		if ( Input.GetKeyUp(KeyCode.S))
 		{
 			audioSource2.PlayOneShot(audioSource2.clip);
 			if (!RotateFlag_minus) RotateFlag_plus = true;
 		}
 
-		if ( Input.GetKeyUp(KeyCode.W) && !ModalOption.isModalSetActive )
+		if ( Input.GetKeyUp(KeyCode.W))
 		{
-			audioSource2.PlayOneShot(audioSource2.clip);
+            audioSource2.PlayOneShot(audioSource2.clip);
 			if (!RotateFlag_plus) RotateFlag_minus = true;
 		}
 
@@ -215,14 +216,23 @@ public class CanvasRotate : MonoBehaviour {
 			}
 
             d.description.transform.position = pos;
-
         }
-
 
         //シーン遷移
         if (Input.GetKeyUp(KeyCode.Q)  || Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.P) || Input.GetKeyUp(KeyCode.Return))
 		{
-			audioSource1.PlayOneShot(audioSource1.clip);
+            
+            GameObject instance;
+            instance = (GameObject)Instantiate(Ring_Prefab);
+            instance.transform.parent = Buttons.transform;
+
+            instance.transform.localPosition = BtnList[dIndex].button.transform.localPosition;
+            instance.transform.localScale = BtnList[dIndex].button.transform.localScale;
+            instance.GetComponent<RingController>().TargetCircularObject = BtnList[dIndex].button;
+
+            instance.SetActive(true);
+           
+            audioSource1.PlayOneShot(audioSource1.clip);
 			SceneManager(dIndex);
 		}
 
