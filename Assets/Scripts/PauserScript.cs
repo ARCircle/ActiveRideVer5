@@ -38,12 +38,14 @@ public class PauserScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //CutInするか否かを取得
+        isPause = CutinManager.canCutIn;
 
         Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "is Active, " + isModalOption);
 
@@ -57,7 +59,6 @@ public class PauserScript : MonoBehaviour
             // isPauseを外部スクリプトからコントロール, ポーズの呼び出し
             SelectObjectDependOnSceneName(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, isPause);
         }
-        //Debug.Log(!ModalOption.isModalSetActive);
 
     }
 
@@ -65,6 +66,16 @@ public class PauserScript : MonoBehaviour
     //TODO: 例外処理
     public void SelectObjectDependOnSceneName(string SceneName, bool ModalFlag)
     {
+        if (ModalFlag)
+        {
+            //TimeScaleによる停止
+            Time.timeScale = 0;
+        }
+        if (!ModalFlag)
+        {
+            Time.timeScale = 1;
+        }
+
         switch (SceneName)
         {
             case "Title":
@@ -94,6 +105,15 @@ public class PauserScript : MonoBehaviour
 
                 if (GetComponentInParentAndChildren<GalleryCoverFlow>(RootObject) != null)
                     GetComponentInParentAndChildren<GalleryCoverFlow>(RootObject).enabled = !ModalFlag;
+
+                foreach (var components in GetComponentsInParentAndChildren<ShowUIText>(RootObject))
+                {
+                    components.enabled = !ModalFlag;
+                }
+                foreach (var components in GetComponentsInParentAndChildren<UIMaskTransparent>(RootObject))
+                {
+                    components.enabled = !ModalFlag;
+                }
 
                 StoryCanvas = GameObject.Find("StoryCanvases");
 
@@ -146,7 +166,6 @@ public class PauserScript : MonoBehaviour
                     GetComponentInParentAndChildren<ChangeSEVolume>(RootObject).enabled = !ModalFlag;
                 break;
             case "Main":
-
                 //validate Null Exception
                 Player = GameObject.Find("UNICORN1playMode");
 
@@ -179,7 +198,6 @@ public class PauserScript : MonoBehaviour
                         Player = GameObject.Find("PHENEX1playMode");
                         break;
                     default: break;
-
                 }
 
                 if (Player != null)
@@ -223,9 +241,7 @@ public class PauserScript : MonoBehaviour
                 break;
 
             default: break;
-
         }
-
     }
 
     //  GameObjectExtension.cs

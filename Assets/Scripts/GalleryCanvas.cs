@@ -15,16 +15,18 @@ public class GalleryCanvas : MonoBehaviour {
     private int AngleUpdate = 90;
     private Vector3 GalleryPanelSize = new Vector3(500, 500, 0);
 
-    public static bool OnPictureFlag = false;
-    public static bool OnStoryFlag = false;
+    public static bool OnPictureFlag;
+    public static bool OnStoryFlag;
 
-    //private bool isUpMaxOnPicture = false;
-    //private bool isDownMaxOnPicture = false;
+    private bool UIGroupSetActiveOnce;
+    public static bool canStoryBegin;
 
-    //private bool isUpMaxOnStory = false;
-    //private bool isDownMaxOnStory = false;
+    public GameObject Ring_Prefab;
+    private GameObject Ring_Instance;
 
-	private Vector3 pos;
+    private Vector3 pos;
+
+    private float TimeLeft;
 
     public List<GameObject> EachUIGroup = new List<GameObject>();
 
@@ -72,32 +74,68 @@ public class GalleryCanvas : MonoBehaviour {
 
         EachUIGroupSetActive(0);
 
+        TimeLeft = 1.0f;
+
+        OnPictureFlag = false;
+        OnStoryFlag = false;
+        canStoryBegin = false;
     }
 
     private void OnEnable()
     {
         //Pause時にenabled=falseになるため
-        if(OnStoryFlag)GetComponent<ChangeCameraOnGallery>().enabled = true;
+        if(OnStoryFlag)
+            GetComponent<ChangeCameraOnGallery>().enabled = false;
     }
 
     // Update is called once OnStoryFlag frame
     void Update()
     {
+        canStoryBegin = false;
         pos = canvas.transform.position;
-
+        //GetComponent<ChangeCameraOnGallery>().enabled = false;
         if (OnStoryFlag)
         {
-            //TODO: 初期Canvasを非表示, Story用のCanvas表示
-            //canvas.SetActive(false);
-            GetComponent<ChangeCameraOnGallery>().enabled = true;
-        }else
+            if (UIGroupSetActiveOnce)
+            {
+                if (TimeLeft >= 0.0)
+                {
+                    TimeLeft -= Time.deltaTime;
+                }
+                else
+                {
+                    TimeLeft = 1.0f;
+                    Destroy(Ring_Instance);
+                    UIGroupSetActiveOnce = false;
+                    EachUIGroupSetActive(2);
+
+                    if (!canStoryBegin) { canStoryBegin = true; } else { canStoryBegin = false; }
+                    GetComponent<ChangeCameraOnGallery>().enabled = true;
+                }
+            }
+        }
+        else
         {
             GetComponent<ChangeCameraOnGallery>().enabled = false;
         }
 
         if (OnPictureFlag)
         {
-
+            if (UIGroupSetActiveOnce)
+            {
+                //Debug.Log(TimeLeft);
+                if (TimeLeft >= 0.0)
+                {
+                    TimeLeft -= Time.deltaTime;
+                }
+                else
+                {
+                    Destroy(Ring_Instance);
+                    EachUIGroupSetActive(1);
+                    TimeLeft = 1.0f;
+                    UIGroupSetActiveOnce = false;
+                }
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -105,7 +143,9 @@ public class GalleryCanvas : MonoBehaviour {
             if (!OnStoryFlag)
             {
                 OnPictureFlag = true;
-                EachUIGroupSetActive(1);
+                UIGroupSetActiveOnce = true;
+                Ring_Instance = CreateInstance(EachUIGroup[0], "Arrow1");
+                //EachUIGroupSetActive(0);
             }
             else
             {
@@ -119,8 +159,11 @@ public class GalleryCanvas : MonoBehaviour {
         {
             if (!OnPictureFlag)
             {
+                if (canStoryBegin) canStoryBegin = false;
                 OnStoryFlag = true;
-                EachUIGroupSetActive(2);
+                UIGroupSetActiveOnce = true;
+                Ring_Instance = CreateInstance(EachUIGroup[0], "Arrow2");
+                GetComponent<ChangeCameraOnGallery>().enabled = false;
             }
             else
             {
@@ -137,7 +180,6 @@ public class GalleryCanvas : MonoBehaviour {
             {
                 pos.x = pos.x - 10;
                 canvas.transform.position = pos;
-                wait();
             }
         }
         if (!OnPictureFlag && OnStoryFlag)
@@ -170,8 +212,21 @@ public class GalleryCanvas : MonoBehaviour {
 				});
 		}
     }
-    IEnumerator wait()
+
+    GameObject CreateInstance(GameObject EachUIGroup, string targetName)
     {
-        yield return new WaitForSeconds(0.01f);
+        GameObject instance;
+        GameObject target = EachUIGroup.transform.FindChild(targetName).gameObject;
+        instance = (GameObject)Instantiate(Ring_Prefab);
+        instance.transform.parent = EachUIGroup.transform;
+
+        instance.transform.localPosition = target.transform.localPosition;
+        instance.transform.localScale = target.transform.localScale;
+        instance.GetComponent<RingController>().TargetCircularObject = target;
+
+        instance.SetActive(true);
+
+        return instance;
+        //yield return new WaitForSeconds(2f);
     }
 }

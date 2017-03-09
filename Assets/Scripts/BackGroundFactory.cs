@@ -12,6 +12,7 @@ public class BackGroundFactory : MonoBehaviour {
     void Start () {
         foreach(var p in ParentObjects)
         {
+
             instance = (GameObject)Instantiate(BackGroundPrefab);
             instance.transform.parent = p.ParentObject.transform;
             //instance.transform.localPosition = p.ParentObject.transform.localPosition;
@@ -27,20 +28,12 @@ public class BackGroundFactory : MonoBehaviour {
 
     private void OnEnable()
     {
-        if (instance != null)
-        {
-            instance.SetActive(true);
-        }
 
     }
 
     // Update is called once per frame
     void Update () {
-        if (instance != null)
-        {
-            instance.SetActive(true);
-
-        }
+        
     }
 
     //個々のBackground情報を格納するリスト

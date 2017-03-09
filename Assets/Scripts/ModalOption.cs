@@ -115,23 +115,11 @@ public class ModalOption : MonoBehaviour {
                 isPause = false;
                 ModalCanvas.SetActive(false);
                 isModalSetActive = false;
-                Time.timeScale = 1;
             }
 
         }
 
 		if (isModalSetActive == true) {
-
-            if (isPause)
-            {
-                Time.timeScale = 0;
-
-            }
-            if (!isPause)
-            {
-                Time.timeScale = 1;
-            }
-
 
             if (Input.GetKeyUp(KeyCode.A))
 			{

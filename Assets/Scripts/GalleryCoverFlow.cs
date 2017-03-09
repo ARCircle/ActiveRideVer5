@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class GalleryCoverFlow : MonoBehaviour
 {
-
     public List<GameObject> PhotosinGallery = new List<GameObject>();
 
     private GameObject tmpPhoto;
@@ -32,32 +31,33 @@ public class GalleryCoverFlow : MonoBehaviour
     public Material UI_mat;
 
     public GameObject TextOfPhotos;
-    private string[] DescriptionText = { "あああ", "いいい", "ううう", "えええ", "おおお", "がはは" };
-    public Dictionary<string, string> MappingDescription = new Dictionary<string, string>()
-    {
-        { "Picture1", "あああ" },
-        { "Picture2", "いいい" },
-        { "Picture3", "ううう" },
-        { "Picture4", "えええ" },
-        { "Picture5", "おおお" },
-        { "Picture6", "がはは" },
+    public GameObject TitleOfPhotos;
 
-    };
+    private string[,] CSVdata;
+    private const string path = "/CSV/Picture1.csv";
+
+    private string[] DescriptionText = { "あああ", "いいい", "ううう", "えええ", "おおお", "がはは" };
+
+    public Dictionary<string, string> MappingDescription = new Dictionary<string, string>();
+    public Dictionary<string, string> MappingTitle = new Dictionary<string, string>();
 
     // Use this for initialization
     void Start()
     {
+        //CSVファイルよりTitleとDesctriptionを読み込み
+        ShowUIText showUIText = new ShowUIText();
+        showUIText.readCSVData(Application.dataPath + path, ref CSVdata);
+        MappingCSV(ref CSVdata);
 
         NumberOfObject = PhotosinGallery.Count;
-        Debug.Log(NumberOfObject);
 
         viewConvexPhoto();
         centerPhoto = setPhotoInActive();
 
         ChangeCenterPhotoSize();
         ChangeDescriptionText(centerPhoto);
-
     }
+
 
     // Update is called once per frame
     void Update()
@@ -101,9 +101,7 @@ public class GalleryCoverFlow : MonoBehaviour
             PhotosinGallery[0] = tmpPhoto;
 
         }
-
         intensify = FlashSprite(intensify);
-
     }
 
     static void Swap<T>(ref T lhs, ref T rhs)
@@ -114,12 +112,10 @@ public class GalleryCoverFlow : MonoBehaviour
         rhs = temp;
     }
 
-
-    //なんだか汚いのでもっとスマートにかきたい
     private void ChangeDescriptionText(GameObject CenterOfPhoto)
     {
-        TextOfPhotos.GetComponent<UnityEngine.UI.Text>().text = MappingDescription[CenterOfPhoto.name].ToString();
-        
+        TitleOfPhotos.GetComponent<UnityEngine.UI.Text>().text = MappingTitle[CenterOfPhoto.name].ToString();
+        TextOfPhotos.GetComponent<UnityEngine.UI.Text>().text = MappingDescription[CenterOfPhoto.name].ToString();    
     }
 
     private void viewConvexPhoto()
@@ -134,7 +130,6 @@ public class GalleryCoverFlow : MonoBehaviour
 
             PhotosinGallery[nLoop].transform.localPosition = new Vector3(X, Y, -Z);
             PhotosinGallery[nLoop].transform.localEulerAngles = new Vector3(Rotate_X, 0, 0);
-
         }
     }
 
@@ -155,36 +150,18 @@ public class GalleryCoverFlow : MonoBehaviour
     }
 
     private void SetTransitionToPhoto(GameObject centerPhoto)
-    {
-
+    { 
         //トランジション用のコンポーネント割り当て
-        //if (centerPhoto.GetComponent<UIMaskTransparent>() != null)
-        //{
-        //    UnityEngine.Object target = centerPhoto.GetComponent<UIMaskTransparent>();
-        //    UnityEngine.Object.Destroy(target);
-        //}
-
         for (int nLoop = 0; nLoop < NumberOfObject; nLoop++)
         {
 
-            if (PhotosinGallery[nLoop].GetComponent<UIMaskTransparent>() != null)
+            if (PhotosinGallery[nLoop].GetComponent<UIMaskTransparent>() == null)
             {
-                //UnityEngine.Object target = PhotosinGallery[nLoop].GetComponent<UIMaskTransparent>();
-                //UnityEngine.Object.Destroy(target);
-
-                //Debug.Log(PhotosinGallery[nLoop].GetComponent<UIMaskTransparent>());
-                //PhotosinGallery[nLoop].GetComponent<UIMaskTransparent>().enabled = true;
-
-            }
-            else if (PhotosinGallery[nLoop].GetComponent<UIMaskTransparent>() == null)
-            {
-
                 PhotosinGallery[nLoop].GetComponentInChildren<UnityEngine.UI.Image>().material = UI_mat;
 
                 PhotosinGallery[nLoop].AddComponent<UIMaskTransparent>();
 
                 PhotosinGallery[nLoop].GetComponent<UIMaskTransparent>().UI_mask_mat = UI_mat;
-                Debug.Log("test" + PhotosinGallery[nLoop].GetComponent<UIMaskTransparent>().UI_mask_mat);
                 PhotosinGallery[nLoop].GetComponent<UIMaskTransparent>().enabled = false;
             }
 
@@ -197,12 +174,10 @@ public class GalleryCoverFlow : MonoBehaviour
             }
             else
             {
-
                 PhotosinGallery[nLoop].GetComponent<UIMaskTransparent>().enabled = true;
                 PhotosinGallery[nLoop].GetComponentInChildren<UnityEngine.UI.Image>().material = UI_mat;
             }
         }
-
 
     }
 
@@ -217,13 +192,11 @@ public class GalleryCoverFlow : MonoBehaviour
             else
             {
                 PhotosinGallery[nLoop].SetActive(true);
-
             }
-
         }
-
         return PhotosinGallery[(NumberOfObject / 2) - 2];
     }
+
     float FlashSprite(float intensify)
     {
         if (intensify >= 1f)
@@ -238,6 +211,16 @@ public class GalleryCoverFlow : MonoBehaviour
             intensify = intensify * 1.1f;
         }
         return intensify;
+    }
+
+    //string[,]配列に読み込んだCSVデータを(Title, Descriptionの)Dictionaryにマッピング
+    private void MappingCSV(ref string[,] data)
+    {
+        for (int i = 0; i < data.GetLength(0); i++)
+        {
+            MappingTitle.Add(data[i, 0], data[i, 1]);
+            MappingDescription.Add(data[i, 0], data[i, 2]);
+        }
     }
 
 }
