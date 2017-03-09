@@ -106,6 +106,15 @@ public class PauserScript : MonoBehaviour
                 if (GetComponentInParentAndChildren<GalleryCoverFlow>(RootObject) != null)
                     GetComponentInParentAndChildren<GalleryCoverFlow>(RootObject).enabled = !ModalFlag;
 
+                foreach (var components in GetComponentsInParentAndChildren<ShowUIText>(RootObject))
+                {
+                    components.enabled = !ModalFlag;
+                }
+                foreach (var components in GetComponentsInParentAndChildren<UIMaskTransparent>(RootObject))
+                {
+                    components.enabled = !ModalFlag;
+                }
+
                 StoryCanvas = GameObject.Find("StoryCanvases");
 
                 GetComponentInParentAndChildren<BackGroundFactory>(StoryCanvas).enabled = !ModalFlag;

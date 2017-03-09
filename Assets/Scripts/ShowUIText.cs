@@ -35,8 +35,6 @@ public class ShowUIText : MonoBehaviour
         //データパスを設定
         //このデータパスは、Assetフォルダ以下の位置を書くので/で階層を区切り、CSVデータ名まで書かないと読み込んでくれない
         //データを読み込む(引数：データパス)
-        Debug.Log(Application.dataPath + path);
-
         readCSVData(Application.dataPath + path, ref sdataArrays);
 
         isShowText = true;
@@ -118,9 +116,8 @@ public class ShowUIText : MonoBehaviour
         // カンマ分けの準備(区分けする文字を設定する)
         char[] spliter = new char[1] { ',' };
 
-        // 行数設定
+        // 行数と列数設定
         int h = lines.Length;
-        // 列数設定
         int w = lines[0].Split(spliter, option).Length;
 
         // 返り値の2次元配列の要素数を設定
