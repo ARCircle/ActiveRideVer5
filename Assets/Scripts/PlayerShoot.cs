@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerShoot : MonoBehaviour {
 
 	public Camera MainCamera1;
+
+	public Image gaugeImage;
 
 	public GameObject shot;
 	public GameObject muzzle;
@@ -15,7 +18,7 @@ public class PlayerShoot : MonoBehaviour {
 
 
 	float shotInterval = 0;
-	public float shotIntervalMax = 0.5F;
+	public float shotIntervalMax = 5.0F;
 
 	AudioSource audioSource;
 
@@ -31,7 +34,7 @@ public class PlayerShoot : MonoBehaviour {
 		//発射間隔を設定する
 		shotInterval += Time.deltaTime;
 		//Debug.Log (shotInterval);
-		if(shotInterval > shotIntervalMax){
+		if(shotInterval >= shotIntervalMax){
 
 			//弾を発射する
 			if( Input.GetButton("Fire1") ){
@@ -56,6 +59,9 @@ public class PlayerShoot : MonoBehaviour {
 
 				//音を重ねて再生する
 				audioSource.PlayOneShot(audioSource.clip);
+
+
+				gaugeImage.fillAmount = shotInterval / shotIntervalMax;
 			}
 
 		}

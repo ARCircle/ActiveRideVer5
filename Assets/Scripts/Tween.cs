@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
-public class Tween_UI : MonoBehaviour {
-
+public class Tween : MonoBehaviour {
 
 	//public：地点AとB
 	public Transform From,To;
@@ -21,17 +19,16 @@ public class Tween_UI : MonoBehaviour {
 
 
 	void Start () {
-
+		
 		timer = 0;
 
 		//地点Aを初期位置へ
 		transform.position = From.position;
 	}
-		
+
+
 
 	void Update () {
-
-
 
 		timer += Time.deltaTime;
 

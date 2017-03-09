@@ -38,24 +38,24 @@ public class PlayerAp : MonoBehaviour {
 		//体力をUI Textに表示する
 		//armorText.text = armorPoint.ToString();
 
-		//現在の体力と表示用体力が異なっていれば、現在の体力になるまで加減算する
+		//現在の体力と表示用体力が異なっていれば、現在の体力になるまで加減算する。動きのある体力変化。
 		if (displayArmorPoint != armorPoint) 
 			displayArmorPoint = (int)Mathf.Lerp(displayArmorPoint, armorPoint, 0.1F);
 
 		//現在の体力と最大体力をUI Textに表示する
-		armorText.text = string.Format("{0:0000} / {1:0000}", displayArmorPoint, armorPointMax);
+		armorText.text = string.Format("{0:0000}", displayArmorPoint);
 
-		//残り体力の割合により文字の色を変える
+		//残り体力の割合により文字・ゲージの色を変える
 		float percentageArmorpoint = (float)displayArmorPoint / armorPointMax;
 
 		if( percentageArmorpoint > 0.5F){
-			armorText.color = myWhite;
-			gaugeImage.color = new Color(0.25F, 0.7F, 0.6F);
+			//armorText.color = myWhite;
+			gaugeImage.color = myWhite;
 		}else if( percentageArmorpoint > 0.3F){
-			armorText.color = myYellow;
+			armorText.color = Color.yellow;
 			gaugeImage.color = myYellow;
 		}else{
-			armorText.color = myRed;
+			armorText.color = Color.red;
 			gaugeImage.color = myRed;
 
 			//プレイヤーの体力が一定以下になったらノイズを有効にする
@@ -63,7 +63,8 @@ public class PlayerAp : MonoBehaviour {
 		}
 
 		//ゲージの長さを体力の割合に合わせて伸縮させる
-		gaugeImage.transform.localScale = new Vector3(percentageArmorpoint, 1, 1);
+		//gaugeImage.transform.localScale = new Vector3(percentageArmorpoint, 1, 1);
+		gaugeImage.fillAmount = (float)displayArmorPoint / armorPointMax;
 	}
 
 	private void OnCollisionEnter(Collision collider) {
@@ -83,7 +84,7 @@ public class PlayerAp : MonoBehaviour {
 				Destroy (hit.gameObject);
 			}
 			if(PlayerMove.flag == 1){
-				Debug.Log ("ふ");
+				//Debug.Log ("ふ");
 				Destroy (hit.gameObject);
 			}
 		}

@@ -22,14 +22,14 @@ public class ShootMode : MonoBehaviour {
 	void Update () {
 
 		if (Input.GetButton ("ShootMode1")) {
-			Camera.main.fieldOfView = 40;
+
+			float FieldOfView = Camera.main.fieldOfView;
 			right.enabled = true;
 			left.enabled = true;
 			LockOnCursor.enabled = false;
 			Lock_Shoot.enabled = true;
-
-			//Mathf.Clamp (Camera.main.fieldOfView += 2, 40, 60);
-			//Camera.main.fieldOfView += 2; 
+			Camera.main.fieldOfView = Mathf.Clamp (FieldOfView-4, 40, 60);
+ 
 		} else {
 			Camera.main.fieldOfView = 60;
 			right.enabled = false;
