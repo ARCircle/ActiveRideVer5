@@ -88,7 +88,7 @@ public class PauserScript : MonoBehaviour
                 RootObject = GameObject.Find("SelectCanvas");
 
                 GetComponentInParentAndChildren<CanvasRotate>(RootObject).enabled = !ModalFlag;
-                GetComponentInParentAndChildren<CircularUI>(RootObject).enabled = !ModalFlag;
+                //GetComponentInParentAndChildren<CircularUI>(RootObject).enabled = !ModalFlag;
 
                 break;
             case "Gallery":

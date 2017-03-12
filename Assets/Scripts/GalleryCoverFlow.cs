@@ -1,8 +1,8 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class GalleryCoverFlow : MonoBehaviour
@@ -218,6 +218,7 @@ public class GalleryCoverFlow : MonoBehaviour
     {
         for (int i = 0; i < data.GetLength(0); i++)
         {
+            data[i, 2] = data[i, 2].Replace("*" , Environment.NewLine);
             MappingTitle.Add(data[i, 0], data[i, 1]);
             MappingDescription.Add(data[i, 0], data[i, 2]);
         }

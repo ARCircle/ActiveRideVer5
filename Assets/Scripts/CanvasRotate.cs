@@ -227,6 +227,7 @@ public class CanvasRotate : MonoBehaviour {
             instance.transform.parent = Buttons.transform;
 
             instance.transform.localPosition = BtnList[dIndex].button.transform.localPosition;
+            instance.transform.localRotation = new Quaternion(15,0,0,0);
             instance.transform.localScale = BtnList[dIndex].button.transform.localScale;
             instance.GetComponent<RingController>().TargetCircularObject = BtnList[dIndex].button;
 
