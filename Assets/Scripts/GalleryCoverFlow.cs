@@ -62,7 +62,7 @@ public class GalleryCoverFlow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log(centerPhotoFrame.gameObject.GetComponent<ViewCenterFrame>().enabled);
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
         {
             intensify = 0.1f;
