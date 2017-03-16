@@ -138,7 +138,8 @@ public class GalleryCanvas : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow) 
+            || Input.GetAxisRaw("Horizontal") < 0 || Input.GetAxisRaw("Horizontal2") < 0)
         {
             if (!OnStoryFlag)
             {
@@ -155,7 +156,8 @@ public class GalleryCanvas : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow)
+            || Input.GetAxisRaw("Horizontal") > 0 || Input.GetAxisRaw("Horizontal2") > 0)
         {
             if (!OnPictureFlag)
             {
@@ -193,8 +195,11 @@ public class GalleryCanvas : MonoBehaviour {
             }
         }
 
-		if ( (OnPictureFlag && Input.GetKeyDown(KeyCode.LeftArrow)) ||
-			(OnStoryFlag && Input.GetKeyDown(KeyCode.RightArrow)) )
+		if ( (OnPictureFlag && (Input.GetKeyDown(KeyCode.LeftArrow)
+            || Input.GetAxisRaw("Horizontal") > 0 || Input.GetAxisRaw("Horizontal2") > 0)) 
+            || (OnStoryFlag && (Input.GetKeyDown(KeyCode.RightArrow)
+            || Input.GetAxisRaw("Horizontal") < 0 || Input.GetAxisRaw("Horizontal2") < 0)
+            ) )
         {
             OnPictureFlag = false;
             OnStoryFlag = false;
@@ -204,7 +209,7 @@ public class GalleryCanvas : MonoBehaviour {
             canvas.transform.position = pos;
         }
 
-		if (Input.GetKeyUp (KeyCode.Q)) {
+		if (Input.GetKeyUp (KeyCode.Q) || Input.GetButtonUp("Cancel")) {
 
 			CameraFade.StartAlphaFade(Color.black, false, 0.6f, 0.6f, () =>
 				{

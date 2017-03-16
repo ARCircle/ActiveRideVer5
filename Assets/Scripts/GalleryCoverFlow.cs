@@ -63,7 +63,10 @@ public class GalleryCoverFlow : MonoBehaviour
     void Update()
     {
         Debug.Log(centerPhotoFrame.gameObject.GetComponent<ViewCenterFrame>().enabled);
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S)
+            || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical2") > 0
+            || Input.GetAxisRaw("Vertical") < 0 || Input.GetAxisRaw("Vertical2") < 0
+            )
         {
             intensify = 0.1f;
 
@@ -80,7 +83,8 @@ public class GalleryCoverFlow : MonoBehaviour
             viewConvexPhoto();
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) 
+            || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical2") > 0)
         {
             tmpPhoto = PhotosinGallery[0];
             for (int nLoop = 0; nLoop < NumberOfObject - 1; nLoop++)
@@ -91,7 +95,8 @@ public class GalleryCoverFlow : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S)
+            || Input.GetAxisRaw("Vertical") < 0 || Input.GetAxisRaw("Vertical2") < 0)
         {
             tmpPhoto = PhotosinGallery[NumberOfObject - 1];
             for (int nLoop = NumberOfObject - 1; nLoop > 0; nLoop--)

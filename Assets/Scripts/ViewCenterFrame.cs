@@ -26,6 +26,8 @@ public class ViewCenterFrame : MonoBehaviour {
     void OnEnable()
     {
         fill = 0.0f;
+
+        gaugeCtrl = this.GetComponent<UnityEngine.UI.Image>();
         gaugeCtrl.fillAmount = fill;
 
         canViewOwn = true;
