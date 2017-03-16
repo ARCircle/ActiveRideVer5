@@ -69,7 +69,8 @@ public class keyConfigCoverFlow : MonoBehaviour {
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.A) && !keyConfig_Instance.getCanInputConfigKey)
+        if ((Input.GetKeyDown(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0 )
+            && !keyConfig_Instance.getCanInputConfigKey)
         {
             tmpConfig = eachConfigsInKeyConfig[0];
             for (int nLoop = 0; nLoop < NumberOfObject - 1; nLoop++)
@@ -82,7 +83,8 @@ public class keyConfigCoverFlow : MonoBehaviour {
 
         }
 
-        if (Input.GetKeyDown(KeyCode.D) && !keyConfig_Instance.getCanInputConfigKey)
+        if ((Input.GetKeyDown(KeyCode.D) || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
+            && !keyConfig_Instance.getCanInputConfigKey)
         {
             tmpConfig = eachConfigsInKeyConfig[NumberOfObject - 1];
             for (int nLoop = NumberOfObject - 1; nLoop > 0; nLoop--)

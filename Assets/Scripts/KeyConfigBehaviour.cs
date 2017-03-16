@@ -188,7 +188,7 @@ public class KeyConfigBehaviour : MonoBehaviour
         }
 
         //Recovery Default Config
-        if (Input.GetKeyUp(KeyCode.R))
+        if (Input.GetKeyUp(KeyCode.R) || Input.GetButtonUp("Cancel") )
         {
             desirializationYaml.RecoveryDefaultInputManager();
 
@@ -200,7 +200,7 @@ public class KeyConfigBehaviour : MonoBehaviour
         }
 
         //SaveKeyConfig
-        if (Input.GetKeyUp(KeyCode.H))
+        if (Input.GetKeyUp(KeyCode.H) || Input.GetButtonUp("Submit"))
         {
             if (canInputConfigKey == false)
             {

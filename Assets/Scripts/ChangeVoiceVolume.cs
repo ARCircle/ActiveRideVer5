@@ -30,7 +30,7 @@ public class ChangeVoiceVolume : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        VoiceVal = 0.5f;
+        VoiceVal = 1.0f;
         gaugeCtrl = this.GetComponent<UnityEngine.UI.Image>();
         gaugeCtrl.fillAmount = VoiceVal;
 
@@ -70,14 +70,14 @@ public class ChangeVoiceVolume : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKeyUp(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0)
         {
             if (VoiceVal <= 1.0f)
             {
                 VoiceVal += 0.05f;
             }
         }
-        if (Input.GetKeyUp(KeyCode.D))
+        if (Input.GetKeyUp(KeyCode.D) || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
         {
             if (VoiceVal >= 0f)
             {

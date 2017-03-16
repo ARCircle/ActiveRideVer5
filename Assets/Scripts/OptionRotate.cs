@@ -127,7 +127,8 @@ public class OptionRotate : MonoBehaviour
 
         //キー入力を受け付け, フラグ値を指定
         //TODO: マウスホイールにも対応する?
-        if ( (Input.GetKeyUp(KeyCode.S) && !ModalOption.isModalSetActive))
+        if ( (Input.GetKeyUp(KeyCode.S) || Input.GetAxisRaw("Vertical") < 0 || Input.GetAxisRaw("Vertical2") < 0) 
+            && !ModalOption.isModalSetActive)
         {
             
             bCenterIndex--;
@@ -141,7 +142,8 @@ public class OptionRotate : MonoBehaviour
             
     	}
 
-        if ( (Input.GetKeyUp(KeyCode.W) && !ModalOption.isModalSetActive))
+        if ( (Input.GetKeyUp(KeyCode.W) || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical2") > 0)
+            && !ModalOption.isModalSetActive)
         {
             bCenterIndex++;
 			bCenterIndex = Verify_bIndex(bCenterIndex);

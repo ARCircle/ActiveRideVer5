@@ -29,7 +29,7 @@ public class ChangeBGMVal : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        BGMVal = 0.5f;
+        BGMVal = 1.0f;
         gaugeCtrl = this.GetComponent<UnityEngine.UI.Image>();
         gaugeCtrl.fillAmount = BGMVal;
 
@@ -67,14 +67,14 @@ public class ChangeBGMVal : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKeyUp(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0)
         {
             if (BGMVal <= 1.0f)
             {
                 BGMVal += 0.1f;
             }
         }
-        if (Input.GetKeyUp(KeyCode.D))
+        if (Input.GetKeyUp(KeyCode.D) || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
         {
             if (BGMVal >= 0f)
             {
