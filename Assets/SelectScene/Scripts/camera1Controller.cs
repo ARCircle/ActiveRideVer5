@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class camera1Controller : MonoBehaviour {
 
@@ -18,6 +19,7 @@ public class camera1Controller : MonoBehaviour {
 
 	int scene = 1;
 	float time;
+	int stage;
 
 	void Start () {
 
@@ -35,6 +37,7 @@ public class camera1Controller : MonoBehaviour {
 		clashcamera3.SetActive (false);
 		time = 0.0f;
 
+		stage = PlayerSelectController.Selectnumber ();
 	}
 	
 
@@ -135,9 +138,29 @@ public class camera1Controller : MonoBehaviour {
 		}
 
 		if (scene == 12 && time >= 3.0f) {
-			CameraFade.StartAlphaFade (Color.black, false, 5.0f, 0.5f, () => {
-				Application.LoadLevel ("Main");
-			});
+			/*CameraFade.StartAlphaFade (Color.black, false, 5.0f, 0.5f, () => {
+				SceneManager.LoadScene ("Main");
+			});*/
+
+			switch (stage) {
+
+			case 1:
+				CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
+					SceneManager.LoadScene ("Main");
+				});
+				break;
+			case 2:
+				CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
+					SceneManager.LoadScene ("Main");
+				});
+				break;
+			case 3:
+				CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
+					SceneManager.LoadScene ("Main");
+				});
+				break;
+
+			}
 		}
 	}
 

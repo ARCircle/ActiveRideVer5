@@ -51,14 +51,6 @@ public class StageSelectController : MonoBehaviour {
 
 	void Update () {
 
-		if (accept == 1) {
-			time += Time.deltaTime;
-
-			if (time >= 0.5f) {
-				accept = 0;
-			}
-		}
-
 		if (accept == 0) {
 
 			if (Input.GetAxis ("Horizontal") < 0.0f && line == 1) {
@@ -114,76 +106,80 @@ public class StageSelectController : MonoBehaviour {
 				time = 0;
 			}
 
-		
+		}
 
+		if (accept == 1) {
+			time += Time.deltaTime;
 
+			if (time >= 0.5f) {
+				accept = 0;
+			}
+		}
 
-			if (flag == 0 && Input.GetButtonDown ("Cancel")) {
-				audioSource4.PlayOneShot (audioSource4.clip);
+		if(flag == 0 && Input.GetButtonDown ("Cancel")) {
+			audioSource4.PlayOneShot(audioSource4.clip);
 
 				CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
 					SceneManager.LoadScene ("SelectMenu");
 				});
 
+		}
+
+		if (flag == 0 && Input.GetButtonDown ("Lock")) {
+			audioSource2.PlayOneShot(audioSource2.clip);
+			GameStart.SetActive (true);
+			flag = 1;
+		}
+
+		if (flag == 1){
+
+			//時間経過開始
+			timer += Time.deltaTime;
+
+			if(Input.GetButtonDown ("Boost")) {
+				audioSource4.PlayOneShot(audioSource4.clip);
+				GameStart.SetActive (false);
+				flag = 0;
+				timer = 0;
 			}
 
-			if (flag == 0 && Input.GetButtonDown ("Submit")) {
-				audioSource2.PlayOneShot (audioSource2.clip);
-				GameStart.SetActive (true);
-				flag = 1;
-			}
+			//時間一定経過で受付
+			if(timer > 1){
 
-			if (flag == 1) {
 
-				//時間経過開始
-				timer += Time.deltaTime;
+				if(Input.GetButtonDown ("Lock")) {
+					audioSource3.PlayOneShot(audioSource3.clip);
+					timer = 0;
+					Selectnumber ();
 
-				if (Input.GetButtonDown ("Jump")) {
-					audioSource4.PlayOneShot (audioSource4.clip);
+					switch (targetLane) {
+
+					case 1:
+						CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
+							SceneManager.LoadScene ("2PlayerModeStage1");
+						});
+						break;
+					case 2:
+						CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
+							SceneManager.LoadScene ("2PlayerModeStage2");
+						});
+						break;
+					case 3:
+						CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
+							SceneManager.LoadScene ("2PlayerModeStage3");
+						});
+						break;
+
+					}
+				}
+
+				if(Input.GetButtonDown ("Boost")) {
+					audioSource4.PlayOneShot(audioSource4.clip);
+					timer = 0;
 					GameStart.SetActive (false);
 					flag = 0;
-					timer = 0;
 				}
 
-				//時間一定経過で受付
-				if (timer > 1) {
-
-
-					if (Input.GetButtonDown ("Lock")) {
-						audioSource3.PlayOneShot (audioSource3.clip);
-						timer = 0;
-						Selectnumber ();
-
-						switch (targetLane) {
-
-						case 1:
-							CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-								SceneManager.LoadScene ("2PlayerModeStage1");
-							});
-							break;
-						case 2:
-							CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-								SceneManager.LoadScene ("2PlayerModeStage2");
-							});
-							break;
-						case 3:
-							CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-								SceneManager.LoadScene ("2PlayerModeStage3");
-							});
-							break;
-
-						}
-					}
-
-					if (Input.GetButtonDown ("Jump")) {
-						audioSource4.PlayOneShot (audioSource4.clip);
-						timer = 0;
-						GameStart.SetActive (false);
-						flag = 0;
-					}
-
-
-				}
 
 			}
 

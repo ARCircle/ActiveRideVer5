@@ -23,8 +23,10 @@ public class PlayerSelectController : MonoBehaviour {
 		
 
 		int flag = 0;
+		int accept = 0;
 
 		float timer;
+	float time;
 
 
 		void Start () {
@@ -39,27 +41,46 @@ public class PlayerSelectController : MonoBehaviour {
 
 		void Update () {
 
-		if (Input.GetAxis ("Horizontal")<0.0f) {
-			audioSource1.PlayOneShot(audioSource1.clip);
-			MoveToLeft ();
-		}
-		if (Input.GetAxis ("Horizontal")>0.0f) {
-			audioSource1.PlayOneShot(audioSource1.clip);
-			MoveToRight ();
+		if (accept == 1) {
+
+			time += Time.deltaTime;
+
+			if (time >= 0.5f) {
+				accept = 0;
+			}
 		}
 
-		if(flag == 0 && Input.GetButtonDown ("Cancel")) {
-			audioSource4.PlayOneShot(audioSource4.clip);
-			CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-				SceneManager.LoadScene ("SelectMenu");
-			});
+		if (accept == 0) {
+
+			if (Input.GetAxis ("Horizontal") < 0.0f) {
+				audioSource1.PlayOneShot (audioSource1.clip);
+				MoveToLeft ();
+				accept = 1;
+				time = 0.0f;
+			}
+			if (Input.GetAxis ("Horizontal") > 0.0f) {
+				audioSource1.PlayOneShot (audioSource1.clip);
+				MoveToRight ();
+				accept = 1;
+				time = 0.0f;
+			}
 		}
+
+
+			if (flag == 0 && Input.GetButtonDown ("Cancel")) {
+				audioSource4.PlayOneShot (audioSource4.clip);
+				CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
+					SceneManager.LoadScene ("SelectMenu");
+				});
+			}
 
 			if (flag == 0 && Input.GetButtonDown ("Lock")) {
-			audioSource2.PlayOneShot(audioSource2.clip);
-			GameStart.SetActive (true);
-			flag = 1;
-		}
+				audioSource2.PlayOneShot (audioSource2.clip);
+				GameStart.SetActive (true);
+				flag = 1;
+			}
+
+		
 
 		if (flag == 1){
 

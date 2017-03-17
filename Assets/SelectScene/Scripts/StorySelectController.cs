@@ -6,16 +6,11 @@ public class StorySelectController : MonoBehaviour {
 
 	public int MinLane;
 	public int MaxLane;
-	public int Minmusic;
-	public int Maxmusic;
 
 	static int targetLane = 1;
 	public GameObject Selecter1;
 	public GameObject Selecter2;
 	public GameObject Selecter3;
-	public GameObject stage1;
-	public GameObject stage2;
-	public GameObject stage3;
 	public GameObject GameStart;
 
 	private AudioSource audioSource1;
@@ -48,8 +43,6 @@ public class StorySelectController : MonoBehaviour {
 				//timer = Time.deltaTime;
 				audioSource1.PlayOneShot (audioSource1.clip);
 				MoveToLeft ();
-				Debug.Log ("1left");
-				Debug.Log (targetLane);
 				accept = 1;
 				time = 0;
 			}
@@ -57,8 +50,6 @@ public class StorySelectController : MonoBehaviour {
 			if (Input.GetAxis ("Horizontal") > 0.0f) {
 				audioSource1.PlayOneShot (audioSource1.clip);
 				MoveToRight ();
-				Debug.Log ("1right");
-				Debug.Log (targetLane);
 				accept = 1;
 				time = 0;
 			}
@@ -114,17 +105,17 @@ public class StorySelectController : MonoBehaviour {
 
 					case 1:
 						CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-							SceneManager.LoadScene ("2PlayerModeStage1");
+							SceneManager.LoadScene ("AnimationBan");
 						});
 						break;
 					case 2:
 						CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-							SceneManager.LoadScene ("2PlayerModeStage2");
+							SceneManager.LoadScene ("AnimationUni");
 						});
 						break;
 					case 3:
 						CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-							SceneManager.LoadScene ("2PlayerModeStage3");
+							SceneManager.LoadScene ("AnimationPhe");
 						});
 						break;
 
@@ -149,9 +140,6 @@ public class StorySelectController : MonoBehaviour {
 			Selecter2.SetActive (true);
 			Selecter1.SetActive (false);
 			Selecter3.SetActive (false);
-			stage2.SetActive (true);
-			stage1.SetActive (false);
-			stage3.SetActive (false);
 			Selectnumber ();
 		}
 
@@ -159,9 +147,6 @@ public class StorySelectController : MonoBehaviour {
 			Selecter3.SetActive (false);
 			Selecter2.SetActive (false);
 			Selecter1.SetActive (true);
-			stage2.SetActive (false);
-			stage1.SetActive (true);
-			stage3.SetActive (false);
 			Selectnumber ();
 		}
 
@@ -169,9 +154,6 @@ public class StorySelectController : MonoBehaviour {
 			Selecter1.SetActive (false);
 			Selecter2.SetActive (false);
 			Selecter3.SetActive (true);
-			stage2.SetActive (false);
-			stage1.SetActive (false);
-			stage3.SetActive (true);
 			Selectnumber ();
 		}
 
