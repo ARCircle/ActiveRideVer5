@@ -81,7 +81,7 @@ public class CanvasRotate : MonoBehaviour {
 		case 1:
 			CameraFade.StartAlphaFade(Color.black, false, 0.6f, 0.6f, () =>
 				{
-					UnityEngine.SceneManagement.SceneManager.LoadScene("selectsceneDoble");
+					UnityEngine.SceneManagement.SceneManager.LoadScene("selectsceneDouble");
 					MainSoundObject.SetActive (false);
 				});
 			break;

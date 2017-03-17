@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MainCameraController : MonoBehaviour {
 
@@ -16,6 +17,9 @@ public class MainCameraController : MonoBehaviour {
 
 
 	void Start () {
+
+		//ModalOptionの加算ロード
+		UnityEngine.SceneManagement.SceneManager.LoadScene("ModalOption", LoadSceneMode.Additive);
 
 		controller = GetComponent<CharacterController> ();
 		targetLane1 = DoublePlayerSelectController.Selectnumber1 ();

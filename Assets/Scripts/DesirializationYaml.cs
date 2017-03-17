@@ -365,9 +365,9 @@ public class DesirializationYaml
                     descriptiveName: 
                     descriptiveNegativeName: 
                     negativeButton: 
-                    positiveButton: joystick button 2
+                    positiveButton: joystick 1 button 2
                     altNegativeButton: 
-                    altPositiveButton: 
+                    altPositiveButton: c
                     gravity: 1000
                     dead: 0.001
                     sensitivity: 1000
@@ -383,7 +383,7 @@ public class DesirializationYaml
                     negativeButton: 
                     positiveButton: 
                     altNegativeButton: j
-                    altPositiveButton: i
+                    altPositiveButton: l
                     gravity: 3
                     dead: 0.1
                     sensitivity: 3
@@ -463,7 +463,7 @@ public class DesirializationYaml
                     negativeButton: 
                     positiveButton: joystick 2 button 7
                     altNegativeButton: 
-                    altPositiveButton: 
+                    altPositiveButton: n
                     gravity: 1000
                     dead: 0.001
                     sensitivity: 1000
