@@ -150,8 +150,8 @@ public class PauserScript : MonoBehaviour
                 break;
             case "Option":
 
-                BackgroundObject = GameObject.Find("BackgroundCamera");
-                GetComponentInParentAndChildren<MoveStage>(BackgroundObject).enabled = !ModalFlag;
+                //BackgroundObject = GameObject.Find("BackgroundCamera");
+                //GetComponentInParentAndChildren<MoveStage>(BackgroundObject).enabled = !ModalFlag;
 
                 RootObject = GameObject.Find("OptionCanvas");
                 //GetComponent<OptionRotate>().enabled = !ModalOption.isPause;
