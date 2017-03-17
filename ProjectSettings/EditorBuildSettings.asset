@@ -43,3 +43,5 @@ EditorBuildSettings:
     path: Assets/Scene/stageselect.unity
   - enabled: 1
     path: Assets/Scene/storyselect.unity
+  - enabled: 1
+    path: Assets/Scene/cockpit.unity
