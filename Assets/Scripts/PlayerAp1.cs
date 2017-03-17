@@ -9,6 +9,7 @@ public class PlayerAp1 : MonoBehaviour {
 
 	public static int armorPoint;
 	public static int armorPointMax = 5000;
+    public float downPointMax;
     float downPoint = 0;
     bool downFlag = false;
     float downTime = 0;
@@ -36,7 +37,7 @@ public class PlayerAp1 : MonoBehaviour {
 		//ゲーム開始時にはノイズを無効にする
 		MainCamera.GetComponent<NoiseAndScratches> ().enabled = false;
 
-        GameObject smoke_tmp = gameObject.transform.FindChild("smoke").gameObject;
+        GameObject smoke_tmp = this.gameObject.transform.FindChild("smoke1").gameObject;
         smoke = smoke_tmp.GetComponent<ParticleSystem>();
     }
 
@@ -119,7 +120,7 @@ public class PlayerAp1 : MonoBehaviour {
             }
         }
 
-        if (downPoint > 5)
+        if (downPoint > downPointMax)
         {
             
             downFlag = true;

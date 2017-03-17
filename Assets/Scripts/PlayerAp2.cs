@@ -9,10 +9,12 @@ public class PlayerAp2 : MonoBehaviour {
 
 	public static int armorPoint;
 	public static int armorPointMax = 5000;
+    public float downPointMax;
     float downPoint = 0;
     float downTime = 0;
     bool downFlag = false;
     bool DmgFlag = true;
+    ParticleSystem smoke;
 
     public Text armorText;
 
@@ -29,13 +31,15 @@ public class PlayerAp2 : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        Debug.Log("起動したよ");
 		armorPoint = armorPointMax;
 		displayArmorPoint = armorPoint;
 
 		//ゲーム開始時にはノイズを無効にする
 		MainCamera2.GetComponent<NoiseAndScratches> ().enabled = false;
-        
+
+        GameObject smoke_tmp = this.gameObject.transform.FindChild("smoke2").gameObject;
+        smoke = smoke_tmp.GetComponent<ParticleSystem>();
+
     }
 
 	// Update is called once per frame
@@ -74,7 +78,7 @@ public class PlayerAp2 : MonoBehaviour {
         {
             Debug.LogError("2Pダウン状態移動");
             DmgFlag = false;
-           // GetComponent<CharacterController>().enabled = false;
+           //GetComponent<CharacterController>().enabled = false;
             downTime += Time.deltaTime;
             if (downTime >= 3)
             {
@@ -84,6 +88,7 @@ public class PlayerAp2 : MonoBehaviour {
                 downTime = 0;
                 Debug.LogError("2Pダウン状態解除");
                 downPoint = 0;
+                smoke.Stop();
             }
         }
     }
@@ -113,7 +118,7 @@ public class PlayerAp2 : MonoBehaviour {
                 downPoint += ShotPlayer_P1.damage / 100;
             }
         }
-            if (downPoint > 5)
+            if (downPoint > downPointMax)
             {
                
                 downFlag = true;

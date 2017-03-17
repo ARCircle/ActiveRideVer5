@@ -44,12 +44,22 @@ public class LockOnChangeTest : MonoBehaviour {
 		//ここからロックオンを動かすための処理
 		posR = rectTransform.anchoredPosition;
 
-        if (rectTransform.anchoredPosition.y > -270 && rectTransform.anchoredPosition.y < 270)
+        if (rectTransform.anchoredPosition.y < 270 && Input.GetAxis("Horizontal3") < 0)
         {
             posR_tmp.y += Input.GetAxis("Horizontal3");
         }
 
-        if (rectTransform.anchoredPosition.x > -270 && rectTransform.anchoredPosition.x < 270)
+        if (rectTransform.anchoredPosition.y > -270 && Input.GetAxis("Horizontal3") > 0)
+        {
+            posR_tmp.y += Input.GetAxis("Horizontal3");
+        }
+
+        if (rectTransform.anchoredPosition.x > -840 && Input.GetAxis("Vertical3") < 0)
+        {
+            posR_tmp.x += Input.GetAxis("Vertical3");
+        }
+
+        if (rectTransform.anchoredPosition.x < -120 && Input.GetAxis("Vertical3") > 0)
         {
             posR_tmp.x += Input.GetAxis("Vertical3");
         }
