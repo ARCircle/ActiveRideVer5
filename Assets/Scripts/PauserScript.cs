@@ -231,10 +231,13 @@ public class PauserScript : MonoBehaviour
                     GetComponentInParentAndChildren<PlayerMove>(Player).enabled = !ModalFlag;
                     GetComponentInParentAndChildren<PlayerRotate>(Player).enabled = !ModalFlag;
                     GetComponentInParentAndChildren<PlayerMotion>(Player).enabled = !ModalFlag;
-                    GetComponentInParentAndChildren<PlayerShoot_U>(Player).enabled = !ModalFlag;
-					//GetComponentInParentAndChildren<PlayerShoot_P>(Player).enabled = !ModalFlag;
-					//GetComponentInParentAndChildren<PlayerShoot_B>(Player).enabled = !ModalFlag;
 
+					if (GetComponentInParentAndChildren<PlayerShoot_U>(Player) != null)					
+                   		GetComponentInParentAndChildren<PlayerShoot_U>(Player).enabled = !ModalFlag;
+					if (GetComponentInParentAndChildren<PlayerShoot_P>(Player) != null)					
+						GetComponentInParentAndChildren<PlayerShoot_P>(Player).enabled = !ModalFlag;
+					if (GetComponentInParentAndChildren<PlayerShoot_B>(Player) != null)					
+						GetComponentInParentAndChildren<PlayerShoot_B>(Player).enabled = !ModalFlag;
 
                     GetComponentInParentAndChildren<LockOn>(Player).enabled = !ModalFlag;
                     GetComponentInParentAndChildren<Compass>(Player).enabled = !ModalFlag;

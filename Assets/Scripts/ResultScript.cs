@@ -19,8 +19,10 @@ public class ResultScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		time = 0;
+		//ModalOptionの加算ロード
+		UnityEngine.SceneManagement.SceneManager.LoadScene("ModalOption", LoadSceneMode.Additive);
 
+		time = 0;
 	}
 	
 	// Update is called once per frame
