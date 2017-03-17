@@ -14,9 +14,16 @@ public class StageSelectController : MonoBehaviour {
 	public GameObject Selecter1;
 	public GameObject Selecter2;
 	public GameObject Selecter3;
+	public GameObject stage1;
+	public GameObject stage2;
+	public GameObject stage3;
 	public GameObject Music1;
 	public GameObject Music2;
 	public GameObject Music3;
+	public GameObject line1;
+	public GameObject offline1;
+	public GameObject line2;
+	public GameObject offline2;
 	public GameObject GameStart;
 
 	private AudioSource audioSource1;
@@ -25,8 +32,10 @@ public class StageSelectController : MonoBehaviour {
 	private AudioSource audioSource4;
 
 	int flag = 0;
+	int accept = 0;
 	int line = 0;
 
+	float time;
 	float timer;
 
 
@@ -42,45 +51,69 @@ public class StageSelectController : MonoBehaviour {
 
 	void Update () {
 
-		if (Input.GetAxis("Horizontal") < 0.0f && line == 1) {
-			//timer = Time.deltaTime;
-			audioSource1.PlayOneShot(audioSource1.clip);
-			MoveToLeft ();
-			Debug.Log ("1left");
-			Debug.Log (targetLane);
+		if (accept == 0) {
+
+			if (Input.GetAxis ("Horizontal") < 0.0f && line == 1) {
+				//timer = Time.deltaTime;
+				audioSource1.PlayOneShot (audioSource1.clip);
+				MoveToLeft ();
+				Debug.Log ("1left");
+				Debug.Log (targetLane);
+				accept = 1;
+				time = 0;
+			}
+
+			if (Input.GetAxis ("Horizontal") > 0.0f && line == 1) {
+				audioSource1.PlayOneShot (audioSource1.clip);
+				MoveToRight ();
+				Debug.Log ("1right");
+				Debug.Log (targetLane);
+				accept = 1;
+				time = 0;
+			}
+
+			if (Input.GetAxis ("Horizontal") < 0.0f && line == 0) {
+				audioSource1.PlayOneShot (audioSource1.clip);
+				MoveToLeft2 ();
+				Debug.Log ("2left");
+				Debug.Log (music);
+				accept = 1;
+				time = 0;
+			}
+
+			if (Input.GetAxis ("Horizontal") > 0.0f && line == 0) {
+				audioSource1.PlayOneShot (audioSource1.clip);
+				MoveToRight2 ();
+				Debug.Log ("2right");
+				Debug.Log (music);
+				accept = 1;
+				time = 0;
+			}
+
+			if (Input.GetAxis ("Vertical") < 0.0f && line != 1) {
+				audioSource1.PlayOneShot (audioSource1.clip);
+				line = 1;
+				Debug.Log ("line1");
+				accept = 1;
+				time = 0;
+			}
+
+			if (Input.GetAxis ("Vertical") > 0.0f && line != 0) {
+				audioSource1.PlayOneShot (audioSource1.clip);
+				line = 0;
+				Debug.Log ("line0");
+				accept = 1;
+				time = 0;
+			}
+
 		}
 
-		if (Input.GetAxis("Horizontal") > 0.0f && line == 1) {
-			audioSource1.PlayOneShot(audioSource1.clip);
-			MoveToRight ();
-			Debug.Log ("1right");
-			Debug.Log (targetLane);
-		}
+		if (accept == 1) {
+			time += Time.deltaTime;
 
-		if (Input.GetAxis("Horizontal") < 0.0f && line == 0) {
-			audioSource1.PlayOneShot(audioSource1.clip);
-			MoveToLeft2 ();
-			Debug.Log ("2left");
-			Debug.Log (music);
-		}
-
-		if (Input.GetAxis("Horizontal") > 0.0f && line == 0) {
-			audioSource1.PlayOneShot(audioSource1.clip);
-			MoveToRight2 ();
-			Debug.Log ("2right");
-			Debug.Log (music);
-		}
-
-		if (Input.GetAxis("Vertical") > 0.0f && line != 1) {
-			audioSource1.PlayOneShot(audioSource1.clip);
-			line = 1;
-			Debug.Log ("line1");
-		}
-
-		if (Input.GetAxis("Vertical") < 0.0f && line != 0) {
-			audioSource1.PlayOneShot(audioSource1.clip);
-			line = 0;
-			Debug.Log ("line0");
+			if (time >= 0.5f) {
+				accept = 0;
+			}
 		}
 
 		if(flag == 0 && Input.GetButtonDown ("Cancel")) {
@@ -158,6 +191,9 @@ public class StageSelectController : MonoBehaviour {
 			Selecter2.SetActive (true);
 			Selecter1.SetActive (false);
 			Selecter3.SetActive (false);
+			stage2.SetActive (true);
+			stage1.SetActive (false);
+			stage3.SetActive (false);
 			Selectnumber ();
 		}
 
@@ -165,6 +201,9 @@ public class StageSelectController : MonoBehaviour {
 			Selecter3.SetActive (false);
 			Selecter2.SetActive (false);
 			Selecter1.SetActive (true);
+			stage2.SetActive (false);
+			stage1.SetActive (true);
+			stage3.SetActive (false);
 			Selectnumber ();
 		}
 
@@ -172,6 +211,9 @@ public class StageSelectController : MonoBehaviour {
 			Selecter1.SetActive (false);
 			Selecter2.SetActive (false);
 			Selecter3.SetActive (true);
+			stage2.SetActive (false);
+			stage1.SetActive (false);
+			stage3.SetActive (true);
 			Selectnumber ();
 		}
 
@@ -197,6 +239,19 @@ public class StageSelectController : MonoBehaviour {
 			Musicnumber ();
 		}
 
+		if (line == 0) {
+			line1.SetActive (true);
+			offline1.SetActive (false);
+			line2.SetActive (false);
+			offline2.SetActive (true);
+		}
+
+		if (line == 1) {
+			line2.SetActive (true);
+			offline2.SetActive (false);
+			line1.SetActive (false);
+			offline1.SetActive (true);
+		}
 
 
 	}

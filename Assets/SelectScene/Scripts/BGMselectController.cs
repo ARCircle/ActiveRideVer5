@@ -22,29 +22,26 @@ public class BGMselectController : MonoBehaviour {
 		audioSource2 = audioSources[1];
 		audioSource3 = audioSources[2];
 
+		switch (music) {
+
+		case 1: 
+			audioSource1.PlayOneShot (audioSource1.clip);
+			flag = 1;
+			break;
+		case 2:
+			audioSource2.PlayOneShot (audioSource2.clip);
+			flag = 1;
+			break;
+		case 3:
+			audioSource3.PlayOneShot (audioSource3.clip);
+			flag = 1;
+			break;
+		}
+
 	}
 	
 
 	void Update () {
 
-		if (flag == 0) {
-
-			switch (music) {
-
-			case 1: 
-				audioSource1.PlayOneShot (audioSource1.clip);
-				flag = 1;
-				break;
-			case 2:
-				audioSource2.PlayOneShot (audioSource2.clip);
-				flag = 1;
-				break;
-			case 3:
-				audioSource3.PlayOneShot (audioSource3.clip);
-				flag = 1;
-				break;
-			}
-		
-		}
 	}
 }
