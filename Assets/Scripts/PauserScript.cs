@@ -29,6 +29,7 @@ public class PauserScript : MonoBehaviour
     private GameObject Player;
     private GameObject Enemy;
     private GameObject EventSystemObject;
+	private GameObject Script;
 
     //for 2PlayerMode
     private GameObject Player1;
@@ -194,15 +195,15 @@ public class PauserScript : MonoBehaviour
 
                 //GetComponentInParentAndChildren<LockOnChangeTest>(RootObject).enabled = !ModalFlag;
 				
-			/*
-                EventSystemObject = GameObject.Find("EventSystem");
 
-                if (GetComponentInParentAndChildren<Time_ScoreScript>(EventSystemObject) != null)
-                    GetComponentInParentAndChildren<Time_ScoreScript>(EventSystemObject).enabled = !ModalFlag;
+                Script = GameObject.Find("Scripts");
 
-                if (GetComponentInParentAndChildren<EnemyInstantiate>(EventSystemObject) != null)
-                    GetComponentInParentAndChildren<EnemyInstantiate>(EventSystemObject).enabled = !ModalFlag;
-			*/
+			if (GetComponentInParentAndChildren<Time_ScoreScript>(Script) != null)
+				GetComponentInParentAndChildren<Time_ScoreScript>(Script).enabled = !ModalFlag;
+
+			if (GetComponentInParentAndChildren<EnemyInstantiate>(Script) != null)
+				GetComponentInParentAndChildren<EnemyInstantiate>(Script).enabled = !ModalFlag;
+			
                 int SelectNumber = PlayerSelectController.Selectnumber();
 
                 switch (SelectNumber)
