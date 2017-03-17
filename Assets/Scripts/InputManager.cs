@@ -91,7 +91,7 @@ public static class InputManager {
             sensitivity = 3f,
             snap = false,
             invert = true,
-            type = AxisType.KeyOrMouseButton,
+            type = AxisType.JoystickAxis,
             axis = 1,
             joyNum = 1,
         },
