@@ -32,7 +32,6 @@ public class LockOnChangeTest : MonoBehaviour {
     {
         player = GameObject.FindGameObjectWithTag("Player");
         player = player.transform.parent.gameObject;
-        //Debug.LogError(player.name);
         cameraParent = Camera.main.transform.parent;
         GameObject plcamera_tmp = GameObject.Find("CameraForRay");
         plcamera = plcamera_tmp.GetComponent<Camera>();
@@ -85,12 +84,13 @@ public class LockOnChangeTest : MonoBehaviour {
         rectTransform.anchoredPosition = posR + posR_tmp;
 		posR_tmp.x = 0;
 		posR_tmp.y = 0;
-		
 
-		//ここまで
 
-		//ここから範囲内に敵を捕らえ続けるための処理
-		posEnem = Camera.main.WorldToScreenPoint (target.position);
+        //ここまで
+
+        //ここから範囲内に敵を捕らえ続けるための処理
+        /*
+        posEnem = Camera.main.WorldToScreenPoint (target.position);
 		posEnem = new Vector2 (posEnem.x / Camera.main.pixelWidth, posEnem.y / Camera.main.pixelHeight);
 		//Debug.Log (posEnem);
 
@@ -108,6 +108,7 @@ public class LockOnChangeTest : MonoBehaviour {
         }
 
         //ここまで
+        */
 
         //ロックオン先のオブジェクトの取得
         //posRを正規化してposR_transに代入
