@@ -384,5 +384,22 @@ public static class InputManager {
             axis = 0,
             joyNum = 2,
         },
+        new InputAxis {
+            name = "Option",
+            descriptiveName = "",
+            descriptiveNegativeName = "",
+            negativeButton = "",
+            positiveButton = "joystick button 11",
+            altNegativeButton = "",
+            altPositiveButton = "o",
+            gravity = 1000f,
+            dead = 0.001f,
+            sensitivity = 1000f,
+            snap = false,
+            invert = false,
+            type = AxisType.JoystickAxis,
+            axis = 0,
+            joyNum = 0,
+        },
     };
 }
