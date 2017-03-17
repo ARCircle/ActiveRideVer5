@@ -16,6 +16,8 @@ public class PlayerMove : MonoBehaviour {
 	int boostPointMax = 100;
 
 	public Image gaugeImage;
+	public Text boostText;
+	public Color myWhite;
 
 	Vector3 moveSpeed;
 
@@ -69,7 +71,7 @@ public class PlayerMove : MonoBehaviour {
 				moveDirection.y = 0;
 
 			//ブーストボタンが押されていればフラグを立てブーストポイントを消費
-			if (Input.GetButton ("Boost") && boostPoint > 1) {
+			if (Input.GetButton ("Boost") && boostPoint > 0) {
 
 				boostPoint -= 1;
 
@@ -172,6 +174,19 @@ public class PlayerMove : MonoBehaviour {
 			//ブーストゲージの伸縮
 			//gaugeImage.transform.localScale = new Vector3 ((float)boostPoint / boostPointMax, 1, 1);
 			gaugeImage.fillAmount = (float)boostPoint / boostPointMax;
+
+			//ブーストポイント表示
+			boostText.text = boostPoint.ToString();
+
+			//残りブーストの割合により文字・ゲージの色を変える
+			float percentageboostPoint = (float)boostPoint / boostPointMax;
+			if (percentageboostPoint >=0.4){
+				boostText.color = myWhite;
+				gaugeImage.color = myWhite;
+			} else {
+				boostText.color = Color.red;
+				gaugeImage.color = Color.red;
+			}
 
 
 			//攻撃動作の受付

@@ -389,7 +389,7 @@ public static class InputManager {
             descriptiveName = "",
             descriptiveNegativeName = "",
             negativeButton = "",
-            positiveButton = "joystick button 11",
+            positiveButton = "",
             altNegativeButton = "",
             altPositiveButton = "o",
             gravity = 1000f,
