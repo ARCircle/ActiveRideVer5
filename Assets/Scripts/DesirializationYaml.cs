@@ -16,14 +16,12 @@ using YamlDotNet.Serialization.NamingConventions;
 public class DesirializationYaml
 {
     //Destenation InputManager Path
-    private const string YamlDestinationPath = @"ProjectSettings\InputManager.asset";
+    private const string YamlDestinationPath = @"ProjectSettings\InputManager2.asset";
     private const string YamlHeader = "%YAML 1.1 \n%TAG !u! tag:unity3d.com,2011:\n--- !u!13 &1\n";
 
     public void Main()
     {
-        Debug.Log("Output Yaml");
-
-        using (var input = new StreamReader(@"ProjectSettings\InputManager2.asset", Encoding.UTF8))
+        using (var input = new StreamReader(@"ProjectSettings\InputManager.asset", Encoding.UTF8))
         {
             var yaml = new YamlStream();
             yaml.Load(input);
@@ -384,7 +382,7 @@ public class DesirializationYaml
                     descriptiveNegativeName: 
                     negativeButton: 
                     positiveButton: 
-                    altNegativeButton: k
+                    altNegativeButton: j
                     altPositiveButton: i
                     gravity: 3
                     dead: 0.1
@@ -408,7 +406,7 @@ public class DesirializationYaml
                     snap: 0
                     invert: 1
                     type: 2
-                    axis: 2
+                    axis: 4
                     joyNum: 1
                   - serializedVersion: 3
                     m_Name: Horizontal4
@@ -440,8 +438,56 @@ public class DesirializationYaml
                     snap: 0
                     invert: 1
                     type: 2
-                    axis: 3
+                    axis: 4
                     joyNum: 2
+                  - serializedVersion: 3
+                    m_Name: ShootMode1
+                    descriptiveName: 
+                    descriptiveNegativeName: 
+                    negativeButton: 
+                    positiveButton: joystick 1 button 7
+                    altNegativeButton: 
+                    altPositiveButton: space
+                    gravity: 1000
+                    dead: 0.001
+                    sensitivity: 1000
+                    snap: 0
+                    invert: 0
+                    type: 2
+                    axis: 0
+                    joyNum: 1
+                  - serializedVersion: 3
+                    m_Name: ShootMode2
+                    descriptiveName: 
+                    descriptiveNegativeName: 
+                    negativeButton: 
+                    positiveButton: joystick 2 button 7
+                    altNegativeButton: 
+                    altPositiveButton: 
+                    gravity: 1000
+                    dead: 0.001
+                    sensitivity: 1000
+                    snap: 0
+                    invert: 0
+                    type: 2
+                    axis: 0
+                    joyNum: 2
+                  - serializedVersion: 3
+                    m_Name: Option
+                    descriptiveName: 
+                    descriptiveNegativeName: 
+                    negativeButton: 
+                    positiveButton: joystick button 11
+                    altNegativeButton: 
+                    altPositiveButton: o
+                    gravity: 1000
+                    dead: 0.001
+                    sensitivity: 1000
+                    snap: 0
+                    invert: 0
+                    type: 2
+                    axis: 0
+                    joyNum: 0
 ";
 
 }

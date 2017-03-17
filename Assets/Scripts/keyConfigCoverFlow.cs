@@ -327,6 +327,18 @@ public class keyConfigCoverFlow : MonoBehaviour {
                 Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("CamReset")];
                 ValueOfConfig = Axes.PositiveButton;
                 break;
+            case "ShootMode1":
+                Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("ShootMode1")];
+                ValueOfConfig = Axes.PositiveButton;
+                break;
+            case "ShootMode2":
+                Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("ShootMode2")];
+                ValueOfConfig = Axes.PositiveButton;
+                break;
+            case "Option":
+                Axes = inputManageFile.inputManager.Axes[SearchAxesFromInputManager("Option")];
+                ValueOfConfig = Axes.PositiveButton;
+                break;
             default:
                 break;
         }
