@@ -4717,6 +4717,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 326af82004bb27c48b036c8bf3f749ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downPointMax: 5
+  Wtext: {fileID: 0}
   armorText: {fileID: 0}
   MainCamera: {fileID: 2049114}
   myWhite: {r: 0, g: 1, b: 0.5882353, a: 1}
@@ -4787,7 +4789,7 @@ GameObject:
   - component: {fileID: 199893563982784172}
   - component: {fileID: 198677303958511340}
   m_Layer: 0
-  m_Name: smoke
+  m_Name: smoke1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5113,7 +5115,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1654388133
+  randomSeed: 426119436
   InitialModule:
     serializedVersion: 3
     enabled: 1

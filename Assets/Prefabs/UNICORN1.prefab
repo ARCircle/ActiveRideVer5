@@ -3783,6 +3783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   downPointMax: 0
+  Wtext: {fileID: 0}
   armorText: {fileID: 0}
   MainCamera: {fileID: 2004772}
   myWhite: {r: 0, g: 1, b: 0.5882353, a: 1}
@@ -4333,7 +4334,7 @@ GameObject:
   - component: {fileID: 199572198218621300}
   - component: {fileID: 198375230718773176}
   m_Layer: 0
-  m_Name: smoke2
+  m_Name: smoke1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -3769,6 +3769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   downPointMax: 0
+  Wtext: {fileID: 0}
   armorText: {fileID: 0}
   MainCamera: {fileID: 2061810}
   myWhite: {r: 0, g: 1, b: 0.5882353, a: 1}

@@ -426,6 +426,7 @@ GameObject:
   - component: {fileID: 11411790}
   - component: {fileID: 11449906}
   - component: {fileID: 11411064}
+  - component: {fileID: 114680015246477834}
   m_Layer: 8
   m_Name: UNICORN2
   m_TagString: Player2
@@ -3803,6 +3804,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5370f38a412dc74418cdb223effe1f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downPointMax: 50
+  Wtext: {fileID: 0}
   armorText: {fileID: 0}
   MainCamera2: {fileID: 2019366}
   myWhite: {r: 0, g: 1, b: 0.5882353, a: 1}
@@ -4402,7 +4405,7 @@ GameObject:
   - component: {fileID: 199904916895956176}
   - component: {fileID: 198461373347053958}
   m_Layer: 0
-  m_Name: smoke
+  m_Name: smoke2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4616,6 +4619,26 @@ MonoBehaviour:
   maincamera2: {fileID: 0}
   resultCameraObject: {fileID: 0}
   resultCameraObject2: {fileID: 0}
+--- !u!114 &114680015246477834
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17eb1a7b8de5d244090b6c1200a49980, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyDestroyS: {fileID: 0}
+  ClearTimeS: {fileID: 0}
+  ClearHPS: {fileID: 0}
+  TotalS: {fileID: 0}
+  EnemyDestroyT: {fileID: 0}
+  ClearTimeT: {fileID: 0}
+  ClearHPT: {fileID: 0}
+  TotalT: {fileID: 0}
+  RankT: {fileID: 0}
 --- !u!114 &114913587824345486
 MonoBehaviour:
   m_ObjectHideFlags: 1

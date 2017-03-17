@@ -66,7 +66,7 @@ public class CutinManager_hissatu : MonoBehaviour {
 		if (PlayerShoot_U.Shoot2OK == 2) {
 			if (Input.GetButton("ShootMode1") && Input.GetButton("Fire1")) {
 				TimerWait += Time.deltaTime;
-				if (TimerWait >= 0.0001F) {
+				if (TimerWait >= 0.001f) {
 					//カットイン起こしたいトリガ処理に応じてCutInChecker(GameObject CutInTarget)に
 					//カットイン対象のGameObjectを投げる
 					//(この場合にはCutInObjects[0]に格納したものの1つ, Start関数ですべてSetActive(false)にしてる)
