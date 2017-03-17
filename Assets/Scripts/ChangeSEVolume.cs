@@ -38,7 +38,7 @@ public class ChangeSEVolume : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        SEVal = 0.5f;
+        SEVal = 1.0f;
         gaugeCtrl = this.GetComponent<UnityEngine.UI.Image>();
         gaugeCtrl.fillAmount = SEVal;
 

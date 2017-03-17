@@ -33,11 +33,19 @@ public class PlayerShoot_U : MonoBehaviour {
 	AudioSource audioSource;
 	//AudioSource audioSource2;
 
+	//GameObject CameraParent;
+	//Quaternion defaultCameraRot;
+
 	// Use this for initialization
 	void Start () {
 
 		audioSource = gameObject.GetComponent<AudioSource>();
 		Shoot2OK = 1;
+
+		//カメラ初期角度保存
+		//CameraParent = Camera.main.transform.parent.gameObject;
+		//defaultCameraRot = CameraParent.transform.localRotation;
+
 	}
 
 	// Update is called once per frame
@@ -89,6 +97,9 @@ public class PlayerShoot_U : MonoBehaviour {
 
 			//弾を発射する
 			if (Input.GetKey (KeyCode.B)) {
+
+				//CameraParent.transform.localRotation = Quaternion.Slerp (CameraParent.transform.localRotation, defaultCameraRot, Time.deltaTime * 10);
+
 				shotInterval2 = 0;
 				Instantiate (shot2, muzzle.transform.position, MainCamera1.transform.rotation);
 				Instantiate (shot2, muzzle1.transform.position, MainCamera1.transform.rotation);
