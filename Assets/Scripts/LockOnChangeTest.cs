@@ -28,6 +28,15 @@ public class LockOnChangeTest : MonoBehaviour {
 
 	}
 
+	void OnEnable() {
+		posR.x = 0;
+		posR.y = 0;
+		posR_tmp.x = 0;
+		posR_tmp.y = 0;
+	}
+		
+
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -44,24 +53,24 @@ public class LockOnChangeTest : MonoBehaviour {
 		//ここからロックオンを動かすための処理
 		posR = rectTransform.anchoredPosition;
 
-        if (rectTransform.anchoredPosition.y < 270 && Input.GetAxis("Horizontal3") < 0)
+		if (rectTransform.anchoredPosition.y < 270/2 && Input.GetAxis("Vertical3") > 0)
         {
-            posR_tmp.y += Input.GetAxis("Horizontal3");
+			posR_tmp.y += Input.GetAxis("Vertical3") * lockMoveSpeed;
         }
 
-        if (rectTransform.anchoredPosition.y > -270 && Input.GetAxis("Horizontal3") > 0)
+		if (rectTransform.anchoredPosition.y > -270/2 && Input.GetAxis("Vertical3") < 0)
         {
-            posR_tmp.y += Input.GetAxis("Horizontal3");
+			posR_tmp.y += Input.GetAxis("Vertical3") * lockMoveSpeed;
         }
 
-        if (rectTransform.anchoredPosition.x > -840 && Input.GetAxis("Vertical3") < 0)
+		if (rectTransform.anchoredPosition.x > -480/2 && Input.GetAxis("Horizontal3") < 0)
         {
-            posR_tmp.x += Input.GetAxis("Vertical3");
+			posR_tmp.x += Input.GetAxis("Horizontal3") * lockMoveSpeed;
         }
 
-        if (rectTransform.anchoredPosition.x < -120 && Input.GetAxis("Vertical3") > 0)
+		if (rectTransform.anchoredPosition.x < 480/2 && Input.GetAxis("Horizontal3") > 0)
         {
-            posR_tmp.x += Input.GetAxis("Vertical3");
+			posR_tmp.x += Input.GetAxis("Horizontal3") * lockMoveSpeed;
         }
 
 
@@ -90,6 +99,7 @@ public class LockOnChangeTest : MonoBehaviour {
 		//ここまで
 
 		//ここから範囲内に敵を捕らえ続けるための処理
+		/*
 		posEnem = Camera.main.WorldToScreenPoint (target.position);
 		posEnem = new Vector2 (posEnem.x / Camera.main.pixelWidth, posEnem.y / Camera.main.pixelHeight);
 		//Debug.Log (posEnem);
@@ -106,7 +116,7 @@ public class LockOnChangeTest : MonoBehaviour {
 		if (posEnem.y < 0.25f) {
             playerRotate(cameraParent, new Vector3(1,0, 0));
         }
-
+		*/
         //ここまで
 
         //ロックオン先のオブジェクトの取得
@@ -121,11 +131,15 @@ public class LockOnChangeTest : MonoBehaviour {
         Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
         RaycastHit hit;
         
-        if (Physics.SphereCast(ray,2, out hit))
+        if (Physics.SphereCast(ray,20, out hit))
         {
             //Rayが当たるオブジェクトがあった場合はそのオブジェクト名をログに表示
             Debug.Log(hit.collider.gameObject.name);
-            Debug.DrawRay(ray.origin, ray.direction * 1000, Color.red, 0, false);
+            //Debug.DrawRay(ray.origin, ray.direction * 1000, Color.red, 0, false);
+			if (hit.collider.gameObject.tag == "Enemy" && Input.GetButton("Fire1")) {
+				Destroy (hit.collider.gameObject);
+			}
+				
         }
         
 

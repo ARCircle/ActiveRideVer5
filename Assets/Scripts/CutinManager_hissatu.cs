@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CutinManager_hissatu : MonoBehaviour {
 
@@ -27,14 +28,15 @@ public class CutinManager_hissatu : MonoBehaviour {
 	public float TimeLeft_MAX = 0.5f;
 	private float CutInDelta;
 
-	//private PlayerShoot_U shootOK;
-
+	public Image backimg;
 
 	//Canvasとか低い階層にアタッチ
 	//canCutInをPauserScript.csに渡して止めてるので, PauserScriptもIsModalOptionがfalseになるようにアタッチ
 
 	// Use this for initialization
 	void Start () {
+
+		backimg.enabled = false;
 
 		resultCamera.enabled = false;
 		PlayerShoot_U.Shoot2OK = 1;
@@ -62,9 +64,9 @@ public class CutinManager_hissatu : MonoBehaviour {
 
 
 		if (PlayerShoot_U.Shoot2OK == 2) {
-			if (Input.GetKey (KeyCode.B)) {
+			if (Input.GetButton("ShootMode1") && Input.GetButton("Fire1")) {
 				TimerWait += Time.deltaTime;
-				if (TimerWait >= 0.02F) {
+				if (TimerWait >= 0.0001F) {
 					//カットイン起こしたいトリガ処理に応じてCutInChecker(GameObject CutInTarget)に
 					//カットイン対象のGameObjectを投げる
 					//(この場合にはCutInObjects[0]に格納したものの1つ, Start関数ですべてSetActive(false)にしてる)
@@ -132,6 +134,7 @@ public class CutinManager_hissatu : MonoBehaviour {
 			CutInTarget.transform.localPosition = CutInPos;
 			TimeLeft -= DeltaTime;
 			resultCamera.enabled = true;
+			backimg.enabled = true;
 		}
 		else
 		{
@@ -142,6 +145,7 @@ public class CutinManager_hissatu : MonoBehaviour {
 
 			canCutIn = false;
 			resultCamera.enabled = false;
+			backimg.enabled = false;
 			canStopPlayerMove = true;
 
 		}
