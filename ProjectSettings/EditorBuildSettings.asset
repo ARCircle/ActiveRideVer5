@@ -39,3 +39,7 @@ EditorBuildSettings:
     path: Assets/Scene/AnimationPhe.unity
   - enabled: 1
     path: Assets/Scene/AnimationUni.unity
+  - enabled: 1
+    path: Assets/Scene/stageselect.unity
+  - enabled: 1
+    path: Assets/Scene/storyselect.unity

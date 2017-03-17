@@ -136,7 +136,7 @@ public class StageSelectController : MonoBehaviour {
 			//時間経過開始
 			timer += Time.deltaTime;
 
-			if(Input.GetButtonDown ("Jump")) {
+			if(Input.GetButtonDown ("Boost")) {
 				audioSource4.PlayOneShot(audioSource4.clip);
 				GameStart.SetActive (false);
 				flag = 0;
@@ -173,7 +173,7 @@ public class StageSelectController : MonoBehaviour {
 					}
 				}
 
-				if(Input.GetButtonDown ("Jump")) {
+				if(Input.GetButtonDown ("Boost")) {
 					audioSource4.PlayOneShot(audioSource4.clip);
 					timer = 0;
 					GameStart.SetActive (false);
