@@ -34,6 +34,7 @@ public class PauserScript : MonoBehaviour
 
     public bool isModalOption;
     private bool isPause;
+	public bool isHissatsu;
 
     // Use this for initialization
     void Start()
@@ -44,8 +45,15 @@ public class PauserScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+		Debug.Log (CutinManager_hissatu.canCutIn);
+
         //CutInするか否かを取得
-        isPause = CutinManager.canCutIn;
+		if (isHissatsu) {
+			isPause = CutinManager_hissatu.canCutIn;
+		} else {
+			isPause = CutinManager.canCutIn;
+		}
 
         Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "is Active, " + isModalOption);
 
@@ -171,8 +179,9 @@ public class PauserScript : MonoBehaviour
 
                 RootObject = GameObject.Find("Canvas");
 
-                GetComponentInParentAndChildren<LockOnChangeTest>(RootObject).enabled = !ModalFlag;
-
+                //GetComponentInParentAndChildren<LockOnChangeTest>(RootObject).enabled = !ModalFlag;
+				
+			/*
                 EventSystemObject = GameObject.Find("EventSystem");
 
                 if (GetComponentInParentAndChildren<Time_ScoreScript>(EventSystemObject) != null)
@@ -180,7 +189,7 @@ public class PauserScript : MonoBehaviour
 
                 if (GetComponentInParentAndChildren<EnemyInstantiate>(EventSystemObject) != null)
                     GetComponentInParentAndChildren<EnemyInstantiate>(EventSystemObject).enabled = !ModalFlag;
-
+			*/
                 int SelectNumber = PlayerSelectController.Selectnumber();
 
                 switch (SelectNumber)
@@ -202,11 +211,17 @@ public class PauserScript : MonoBehaviour
 
                 if (Player != null)
                 {
+				
+					GetComponentInParentAndChildren <Animator>(Player).enabled = !ModalFlag;
+
                     GetComponentInParentAndChildren<PlayerAp>(Player).enabled = !ModalFlag;
                     GetComponentInParentAndChildren<PlayerMove>(Player).enabled = !ModalFlag;
                     GetComponentInParentAndChildren<PlayerRotate>(Player).enabled = !ModalFlag;
                     GetComponentInParentAndChildren<PlayerMotion>(Player).enabled = !ModalFlag;
-                    GetComponentInParentAndChildren<PlayerShoot>(Player).enabled = !ModalFlag;
+                    GetComponentInParentAndChildren<PlayerShoot_U>(Player).enabled = !ModalFlag;
+					//GetComponentInParentAndChildren<PlayerShoot_P>(Player).enabled = !ModalFlag;
+					//GetComponentInParentAndChildren<PlayerShoot_B>(Player).enabled = !ModalFlag;
+
 
                     GetComponentInParentAndChildren<LockOn>(Player).enabled = !ModalFlag;
                     GetComponentInParentAndChildren<Compass>(Player).enabled = !ModalFlag;
