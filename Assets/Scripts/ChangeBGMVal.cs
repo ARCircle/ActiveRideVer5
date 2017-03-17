@@ -44,7 +44,7 @@ public class ChangeBGMVal : MonoBehaviour {
     void Update () {
         mixer.SetFloat("BGMVolume", 80 * (BGMVal - 1));
 
-        if (Input.GetKeyUp(KeyCode.L))
+        if (Input.GetKeyUp(KeyCode.L) || Input.GetButtonUp("Cancel"))
         {
             if (isBGM)
             {

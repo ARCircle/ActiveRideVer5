@@ -23,7 +23,7 @@ public class DesirializationYaml
     {
         Debug.Log("Output Yaml");
 
-        using (var input = new StreamReader(@"ProjectSettings\InputManager.asset", Encoding.UTF8))
+        using (var input = new StreamReader(@"ProjectSettings\InputManager2.asset", Encoding.UTF8))
         {
             var yaml = new YamlStream();
             yaml.Load(input);

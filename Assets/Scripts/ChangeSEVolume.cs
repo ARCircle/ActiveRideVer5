@@ -55,7 +55,7 @@ public class ChangeSEVolume : MonoBehaviour {
         //Debug.Log(-40 * Mathf.Log(Mathf.Abs(100 * (SEVal - 1) + 1),10));
 		mixer.SetFloat("SEVolume", 80 * (SEVal - 1));
 
-        if (Input.GetKeyUp(KeyCode.L))
+        if (Input.GetKeyUp(KeyCode.L) || Input.GetButtonUp("Cancel"))
         {
             if (isBGM)
             {

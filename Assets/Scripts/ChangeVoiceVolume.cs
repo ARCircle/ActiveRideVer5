@@ -46,7 +46,7 @@ public class ChangeVoiceVolume : MonoBehaviour {
     {
         mixer.SetFloat("VoiceVolume", 80 * (VoiceVal - 1));
 
-        if (Input.GetKeyUp(KeyCode.L))
+        if (Input.GetKeyUp(KeyCode.L) || Input.GetButtonUp("Cancel"))
         {
             if (isBGM)
             {
