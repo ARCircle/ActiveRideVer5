@@ -25,11 +25,15 @@ public class ChangeCameraOnGallery : MonoBehaviour
     private bool DescriptionMoveFlag;
     private bool AirFrameMoveFlag;
 
+	private AudioSource audioSource1;
+
     private int CameraIndex;
 
     // Use this for initialization
     void Start()
     {
+		AudioSource[] audioSources = GetComponents<AudioSource>();
+		audioSource1 = audioSources[0];
 
         foreach(var Camera in AirFrame_Cam)
         {
@@ -77,10 +81,16 @@ public class ChangeCameraOnGallery : MonoBehaviour
             UIsActiveControl(0);
         }
        
+		if (AirFrameMoveFlag)
+		{
+			AirFrame_Cam[CameraIndex].gameObject.transform.parent.gameObject.transform.FindChild("AirFrame").transform.Rotate(new Vector3(0.1f, 0.2f, 0));
+		}
 
         if( (Input.GetKeyUp(KeyCode.S) || Input.GetAxisRaw("Vertical") < 0 || Input.GetAxisRaw("Vertical2") < 0) 
             && GalleryCanvas.OnStoryFlag)
         {
+			audioSource1.PlayOneShot(audioSource1.clip);
+
             if (AirFrameMoveFlag == false)
             {
                 AirFrameMoveFlag = true;
@@ -92,15 +102,12 @@ public class ChangeCameraOnGallery : MonoBehaviour
             }
         }
 
-        if (AirFrameMoveFlag)
-        {
-            AirFrame_Cam[CameraIndex].gameObject.transform.parent.gameObject.transform.FindChild("AirFrame").transform.Rotate(new Vector3(0.1f, 0.2f, 0));
-        }
-
         if ( (Input.GetKeyUp(KeyCode.W) || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical2") > 0)
             && GalleryCanvas.OnStoryFlag)
         {
-            CameraIndex++;
+			audioSource1.PlayOneShot(audioSource1.clip);
+
+			CameraIndex++;
 
             if (CameraIndex >= 3) { CameraIndex = 0; }
 

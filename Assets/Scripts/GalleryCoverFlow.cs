@@ -33,6 +33,8 @@ public class GalleryCoverFlow : MonoBehaviour
     public GameObject TextOfPhotos;
     public GameObject TitleOfPhotos;
 
+	private AudioSource audioSource;
+
     private string[,] CSVdata;
     private const string path = "/CSV/Picture1.csv";
 
@@ -63,6 +65,7 @@ public class GalleryCoverFlow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		audioSource  = GetComponent<AudioSource>();;
 
         if (Input.GetKeyDown(KeyCode.W) 
             || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical2") > 0)
@@ -93,6 +96,8 @@ public class GalleryCoverFlow : MonoBehaviour
 			|| Input.GetAxisRaw("Vertical") < 0 || Input.GetAxisRaw("Vertical2") < 0
 		)
 		{
+			audioSource.PlayOneShot (audioSource.clip);
+
 			intensify = 0.1f;
 
 			centerPhoto = setPhotoInActive();

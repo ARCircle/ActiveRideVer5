@@ -26,6 +26,8 @@ public class GalleryCanvas : MonoBehaviour {
 
     private Vector3 pos;
 
+	private AudioSource audioSource2;
+
     private float TimeLeft;
 
     public List<GameObject> EachUIGroup = new List<GameObject>();
@@ -58,6 +60,8 @@ public class GalleryCanvas : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+		AudioSource[] audioSources = GetComponents<AudioSource>();
+		audioSource2 = audioSources[1];
 
         //ModalOptionの加算ロード
         UnityEngine.SceneManagement.SceneManager.LoadScene("ModalOption", LoadSceneMode.Additive);
@@ -143,6 +147,8 @@ public class GalleryCanvas : MonoBehaviour {
         {
             if (!OnStoryFlag)
             {
+				audioSource2.PlayOneShot(audioSource2.clip);
+
                 OnPictureFlag = true;
                 UIGroupSetActiveOnce = true;
                 Ring_Instance = CreateInstance(EachUIGroup[0], "Arrow1");
@@ -161,6 +167,8 @@ public class GalleryCanvas : MonoBehaviour {
         {
             if (!OnPictureFlag)
             {
+				audioSource2.PlayOneShot(audioSource2.clip);
+
                 if (canStoryBegin) canStoryBegin = false;
                 OnStoryFlag = true;
                 UIGroupSetActiveOnce = true;
