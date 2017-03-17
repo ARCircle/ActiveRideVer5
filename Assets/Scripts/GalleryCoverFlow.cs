@@ -53,6 +53,7 @@ public class GalleryCoverFlow : MonoBehaviour
 
         viewConvexPhoto();
         centerPhoto = setPhotoInActive();
+		centerPhoto.transform.SetAsLastSibling();
 
         ChangeCenterPhotoSize();
         ChangeDescriptionText(centerPhoto);
@@ -62,26 +63,6 @@ public class GalleryCoverFlow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(centerPhotoFrame.gameObject.GetComponent<ViewCenterFrame>().enabled);
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S)
-            || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical2") > 0
-            || Input.GetAxisRaw("Vertical") < 0 || Input.GetAxisRaw("Vertical2") < 0
-            )
-        {
-            intensify = 0.1f;
-
-            centerPhoto = setPhotoInActive();
-            ChangeDescriptionText(centerPhoto);
-            ChangeCenterPhotoSize();
-            
-            SetTransitionToPhoto(centerPhoto);
-
-            //in ViewCenterFrame.cs
-            //中央のフレームを再表示
-            centerPhotoFrame.gameObject.GetComponent<ViewCenterFrame>().enabled = true;
-
-            viewConvexPhoto();
-        }
 
         if (Input.GetKeyDown(KeyCode.W) 
             || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical2") > 0)
@@ -106,8 +87,30 @@ public class GalleryCoverFlow : MonoBehaviour
             PhotosinGallery[0] = tmpPhoto;
 
         }
-        intensify = FlashSprite(intensify);
-    }
+
+		if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S)
+			|| Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical2") > 0
+			|| Input.GetAxisRaw("Vertical") < 0 || Input.GetAxisRaw("Vertical2") < 0
+		)
+		{
+			intensify = 0.1f;
+
+			centerPhoto = setPhotoInActive();
+
+			ChangeDescriptionText(centerPhoto);
+			ChangeCenterPhotoSize();
+
+			SetTransitionToPhoto(centerPhoto);
+			centerPhoto.transform.SetAsLastSibling();
+
+			//in ViewCenterFrame.cs
+			//中央のフレームを再表示
+			centerPhotoFrame.gameObject.GetComponent<ViewCenterFrame>().enabled = true;
+
+			viewConvexPhoto();
+		}
+		intensify = FlashSprite(intensify);
+	}
 
     static void Swap<T>(ref T lhs, ref T rhs)
     {

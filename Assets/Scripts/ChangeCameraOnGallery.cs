@@ -14,6 +14,7 @@ public class ChangeCameraOnGallery : MonoBehaviour
 
     public List<GameObject> Descriptions = new List<GameObject>();
     public List<GameObject> Characters = new List<GameObject>();
+	public List<GameObject> Operators = new List<GameObject> ();
 
     private float CameraPosFrom = -20.0f;
     private float CameraPosTo = -10.0f;
@@ -165,6 +166,12 @@ public class ChangeCameraOnGallery : MonoBehaviour
             d.gameObject.GetComponent<ShowUIText>().enabled = false;
         }
 
+		foreach (GameObject o in Operators)
+		{
+			o.SetActive(false);
+			o.gameObject.GetComponentInChildren<UIMaskTransparent>().enabled = false;
+		}
+
         foreach (GameObject c in Characters)
         {
             c.SetActive(false);
@@ -186,6 +193,9 @@ public class ChangeCameraOnGallery : MonoBehaviour
 
         Characters[index].SetActive(true);
         Characters[index].gameObject.GetComponent<UIMaskTransparent>().enabled = true;
+
+		Operators[index].SetActive(true);
+		Operators[index].gameObject.GetComponentInChildren<UIMaskTransparent>().enabled = true;
 
         AirFrame_Cam[index].SetActive(true);
         AirFrame_Cam[index].gameObject.transform.parent.gameObject.SetActive(true);

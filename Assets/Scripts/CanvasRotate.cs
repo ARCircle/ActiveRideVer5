@@ -18,7 +18,7 @@ public class CanvasRotate : MonoBehaviour {
 	GameObject MainSoundObject; 
 
 	private int Circle_val = 360;
-	public int AngleParUpdate = 6;
+	public int AngleParUpdate;
 	private static int AngleParButton;
 
 	public int dIndex;
