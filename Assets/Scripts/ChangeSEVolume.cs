@@ -55,7 +55,7 @@ public class ChangeSEVolume : MonoBehaviour {
         //Debug.Log(-40 * Mathf.Log(Mathf.Abs(100 * (SEVal - 1) + 1),10));
 		mixer.SetFloat("SEVolume", 80 * (SEVal - 1));
 
-        if (Input.GetKeyUp(KeyCode.L))
+        if (Input.GetKeyUp(KeyCode.L) || Input.GetButtonUp("Cancel"))
         {
             if (isBGM)
             {
@@ -79,14 +79,14 @@ public class ChangeSEVolume : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKeyUp(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0)
         {
             if (SEVal <= 1.0f)
             {
                 SEVal += 0.05f;
             }
         }
-        if (Input.GetKeyUp(KeyCode.D))
+        if (Input.GetKeyUp(KeyCode.D) || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
         {
             if (SEVal >= 0f)
             {

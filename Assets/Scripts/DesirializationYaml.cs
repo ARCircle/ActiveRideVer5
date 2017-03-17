@@ -15,34 +15,35 @@ using YamlDotNet.Serialization.NamingConventions;
 
 public class DesirializationYaml
 {
-    private const string YamlDestinationPath = @"ProjectSettings\InputManager2.asset";
+    //Destenation InputManager Path
+    private const string YamlDestinationPath = @"ProjectSettings\InputManager.asset";
     private const string YamlHeader = "%YAML 1.1 \n%TAG !u! tag:unity3d.com,2011:\n--- !u!13 &1\n";
 
     public void Main()
     {
         Debug.Log("Output Yaml");
 
-        var input = new StreamReader(@"ProjectSettings\InputManager.asset", Encoding.UTF8);
-        var yaml = new YamlStream();
-        yaml.Load(input);
-        var mapping = (YamlMappingNode)yaml.Documents[0].RootNode;
-        var inputManager = mapping.Children[new YamlScalarNode("InputManager")];
-        var mapping2 = (YamlMappingNode)inputManager;
-
-        var Axes = (YamlSequenceNode)mapping2.Children[new YamlScalarNode("m_Axes")];
-        foreach (YamlMappingNode item in Axes)
+        using (var input = new StreamReader(@"ProjectSettings\InputManager2.asset", Encoding.UTF8))
         {
-            foreach (var child in item)
-            {
-                Debug.Log(((YamlScalarNode)child.Key).Value);
-                Debug.Log(((YamlScalarNode)child.Value).Value);
-            }
-        }
+            var yaml = new YamlStream();
+            yaml.Load(input);
+            var mapping = (YamlMappingNode)yaml.Documents[0].RootNode;
+            var inputManager = mapping.Children[new YamlScalarNode("InputManager")];
+            var mapping2 = (YamlMappingNode)inputManager;
 
-        string txt = input.ReadToEnd();
-        //var input_d = new StringReader(input.ReadToEnd());
-        Debug.Log(txt);
-        input.Close();
+            var Axes = (YamlSequenceNode)mapping2.Children[new YamlScalarNode("m_Axes")];
+            foreach (YamlMappingNode item in Axes)
+            {
+                foreach (var child in item)
+                {
+                    Debug.Log(((YamlScalarNode)child.Key).Value);
+                    Debug.Log(((YamlScalarNode)child.Value).Value);
+                }
+            }
+
+            string txt = input.ReadToEnd();
+
+        }
         //var inputManager = (YamlSequenceNode)mapping.Children[new YamlSequenceNode("InputManager:")];
     }
 

@@ -59,9 +59,7 @@ public class CanvasRotate : MonoBehaviour {
 			pos = d.description.transform.position;
 			pos.x = 2;
 			d.description.transform.position = pos;
-
 		}
-
     }
 
     //Menuの選択されたindexに基づいてシーン遷移
@@ -145,13 +143,15 @@ public class CanvasRotate : MonoBehaviour {
 
         //キー入力を受け付け, フラグ値を指定
 		//TODO: マウスホイールにも対応する?
-		if ( Input.GetKeyUp(KeyCode.S))
+		if ( Input.GetKeyUp(KeyCode.S)
+            || Input.GetAxisRaw("Vertical") < 0 || Input.GetAxisRaw("Vertical2") < 0)
 		{
 			audioSource2.PlayOneShot(audioSource2.clip);
 			if (!RotateFlag_minus) RotateFlag_plus = true;
 		}
 
-		if ( Input.GetKeyUp(KeyCode.W))
+		if ( Input.GetKeyUp(KeyCode.W)
+            || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical2") > 0)
 		{
             audioSource2.PlayOneShot(audioSource2.clip);
 			if (!RotateFlag_plus) RotateFlag_minus = true;
@@ -219,7 +219,8 @@ public class CanvasRotate : MonoBehaviour {
         }
 
         //シーン遷移
-        if (Input.GetKeyUp(KeyCode.Q)  || Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.P) || Input.GetKeyUp(KeyCode.Return))
+        if (Input.GetKeyUp(KeyCode.Q)  || Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.P) || Input.GetKeyUp(KeyCode.Return)
+            || Input.GetButtonUp("Submit"))
 		{
             
             GameObject instance;
@@ -227,6 +228,7 @@ public class CanvasRotate : MonoBehaviour {
             instance.transform.parent = Buttons.transform;
 
             instance.transform.localPosition = BtnList[dIndex].button.transform.localPosition;
+            instance.transform.localRotation = new Quaternion(15,0,0,0);
             instance.transform.localScale = BtnList[dIndex].button.transform.localScale;
             instance.GetComponent<RingController>().TargetCircularObject = BtnList[dIndex].button;
 

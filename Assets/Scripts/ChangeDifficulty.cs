@@ -84,31 +84,32 @@ public class ChangeDifficulty : MonoBehaviour {
     void Update()
     {
 
-            if (Input.GetKeyUp(KeyCode.A))
-            {
-                bCenterIndex--;
-                bCenterIndex = Verify_bIndex(bCenterIndex);
+        if (Input.GetKeyUp(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0)
+        {
+            bCenterIndex--;
+            bCenterIndex = Verify_bIndex(bCenterIndex);
 
-                DiffiultyButtons[bCenterIndex].Select();
+            DiffiultyButtons[bCenterIndex].Select();
+
+        }
+
+        if (Input.GetKeyUp(KeyCode.D) || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
+        {
+            //ModalCanvas.SetActive(true);
+            //isModalSetActive = true;
+            bCenterIndex++;
+            bCenterIndex = Verify_bIndex(bCenterIndex);
+
+            DiffiultyButtons[bCenterIndex].Select();
                 //SetActiveDescriptions(bCenterIndex);
+        }
 
-            }
-            if (Input.GetKeyUp(KeyCode.D))
-            {
-                //ModalCanvas.SetActive(true);
-                //isModalSetActive = true;
-                bCenterIndex++;
-                bCenterIndex = Verify_bIndex(bCenterIndex);
-
-                DiffiultyButtons[bCenterIndex].Select();
-                //SetActiveDescriptions(bCenterIndex);
-            }
-            //ボタンクリック時の動作
-            if (Input.GetKeyUp(KeyCode.W))
-            {
-                DiffiultyButtons[bCenterIndex].onClick.Invoke();
+        //ボタンクリック時の動作
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetAxisRaw("Vertical3") < 0 || Input.GetAxisRaw("Vertical4") < 0)
+        {
+            DiffiultyButtons[bCenterIndex].onClick.Invoke();
                 //SceneManager(bCenterIndex);
-            }
+        }
 
         Difficulty = bCenterIndex;
     }

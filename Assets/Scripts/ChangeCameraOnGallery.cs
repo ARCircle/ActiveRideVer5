@@ -58,7 +58,9 @@ public class ChangeCameraOnGallery : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow)
+            || Input.GetAxisRaw("Horizontal") < 0 || Input.GetAxisRaw("Horizontal2") < 0
+            || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
         {
             SetCameraInActive();
             MainCam.SetActive(true);
@@ -75,7 +77,8 @@ public class ChangeCameraOnGallery : MonoBehaviour
         }
        
 
-        if(Input.GetKeyUp(KeyCode.S) && GalleryCanvas.OnStoryFlag)
+        if( (Input.GetKeyUp(KeyCode.S) || Input.GetAxisRaw("Vertical") < 0 || Input.GetAxisRaw("Vertical2") < 0) 
+            && GalleryCanvas.OnStoryFlag)
         {
             if (AirFrameMoveFlag == false)
             {
@@ -93,7 +96,8 @@ public class ChangeCameraOnGallery : MonoBehaviour
             AirFrame_Cam[CameraIndex].gameObject.transform.parent.gameObject.transform.FindChild("AirFrame").transform.Rotate(new Vector3(0.1f, 0.2f, 0));
         }
 
-        if (Input.GetKeyUp(KeyCode.W) && GalleryCanvas.OnStoryFlag)
+        if ( (Input.GetKeyUp(KeyCode.W) || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical2") > 0)
+            && GalleryCanvas.OnStoryFlag)
         {
             CameraIndex++;
 

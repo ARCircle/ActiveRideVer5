@@ -1,8 +1,8 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class GalleryCoverFlow : MonoBehaviour
@@ -62,8 +62,11 @@ public class GalleryCoverFlow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
+        Debug.Log(centerPhotoFrame.gameObject.GetComponent<ViewCenterFrame>().enabled);
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S)
+            || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical2") > 0
+            || Input.GetAxisRaw("Vertical") < 0 || Input.GetAxisRaw("Vertical2") < 0
+            )
         {
             intensify = 0.1f;
 
@@ -80,7 +83,8 @@ public class GalleryCoverFlow : MonoBehaviour
             viewConvexPhoto();
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) 
+            || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical2") > 0)
         {
             tmpPhoto = PhotosinGallery[0];
             for (int nLoop = 0; nLoop < NumberOfObject - 1; nLoop++)
@@ -91,7 +95,8 @@ public class GalleryCoverFlow : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S)
+            || Input.GetAxisRaw("Vertical") < 0 || Input.GetAxisRaw("Vertical2") < 0)
         {
             tmpPhoto = PhotosinGallery[NumberOfObject - 1];
             for (int nLoop = NumberOfObject - 1; nLoop > 0; nLoop--)
@@ -218,6 +223,7 @@ public class GalleryCoverFlow : MonoBehaviour
     {
         for (int i = 0; i < data.GetLength(0); i++)
         {
+            data[i, 2] = data[i, 2].Replace("*" , Environment.NewLine);
             MappingTitle.Add(data[i, 0], data[i, 1]);
             MappingDescription.Add(data[i, 0], data[i, 2]);
         }

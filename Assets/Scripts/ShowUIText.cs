@@ -4,6 +4,7 @@ using System.IO;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class ShowUIText : MonoBehaviour
 {

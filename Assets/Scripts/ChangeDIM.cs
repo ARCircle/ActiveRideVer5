@@ -35,19 +35,7 @@ public class ChangeDIM : MonoBehaviour {
 		AmbientLight = new UnityEngine.Color (255f, 255f, 255f, DIMVal);
 		RenderSettings.ambientLight = AmbientLight;
 
-        if (Input.GetKeyUp(KeyCode.L))
-        {
-            if (isBGM)
-            {
-                //isBGM = false;
-            }
-            else
-            {
-                //isBGM = true;
-            }
-        }
-
-        if (Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKeyUp(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0)
         {
             if (DIMVal <= 1.0f)
             {
@@ -60,7 +48,8 @@ public class ChangeDIM : MonoBehaviour {
                 new UnityEngine.Color((1 - DIMVal) * 255f, (1 - DIMVal) * 255f, (1 - DIMVal) * 255f, 1 - DIMVal);
 
         }
-        if (Input.GetKeyUp(KeyCode.D))
+
+        if (Input.GetKeyUp(KeyCode.D) || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
         {
             if (DIMVal >= 0f)
             {

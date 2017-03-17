@@ -102,7 +102,7 @@ public class ModalOption : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyUp(KeyCode.DownArrow))
+		if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetButtonUp("Option"))
 		{
             if (isModalSetActive == false) {
                 isPause = true;
@@ -121,7 +121,7 @@ public class ModalOption : MonoBehaviour {
 
 		if (isModalSetActive == true) {
 
-            if (Input.GetKeyUp(KeyCode.A))
+            if (Input.GetKeyUp(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0)
 			{
 				bCenterIndex--;
 				bCenterIndex = Verify_bIndex (bCenterIndex);
@@ -129,7 +129,7 @@ public class ModalOption : MonoBehaviour {
 				SetActiveDescriptions (bCenterIndex);
 
 			}
-			if (Input.GetKeyUp(KeyCode.D))
+			if (Input.GetKeyUp(KeyCode.D) || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
 			{
 				ModalCanvas.SetActive(true);
 				isModalSetActive = true;
@@ -141,7 +141,7 @@ public class ModalOption : MonoBehaviour {
 
 			}
 			//ボタンクリック時の動作
-			if (Input.GetKeyUp (KeyCode.W)) {
+			if (Input.GetKeyUp (KeyCode.W) || Input.GetButtonUp("Submit")) {
                 Debug.Log(bCenterIndex);
                 ModalOptionButtons[bCenterIndex].onClick.Invoke();
 				SceneManager(bCenterIndex);
