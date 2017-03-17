@@ -53,13 +53,16 @@ public class CanvasRotate : MonoBehaviour {
 		bIndex = 0;
 
         //規定位置へDescriptの各要素を移動
-		//Patch Work (need to fix)
 		foreach (var d in Descript)
 		{
 			pos = d.description.transform.position;
-			pos.x = 2;
+			//pos.x = 2;
 			d.description.transform.position = pos;
-		}
+			d.description.transform.FindChild("Image").GetComponent<UIMaskTransparent>().enabled = false;
+        }
+		Descript[dIndex].description.transform.localPosition = new Vector3(0, pos.y, pos.z);
+		Descript[dIndex].description.transform.FindChild("Image").GetComponent<UIMaskTransparent>().enabled = true;
+
     }
 
     //Menuの選択されたindexに基づいてシーン遷移
@@ -72,21 +75,21 @@ public class CanvasRotate : MonoBehaviour {
 			CameraFade.StartAlphaFade(Color.black, false, 0.6f, 0.6f, () =>
 				{
 					UnityEngine.SceneManagement.SceneManager.LoadScene("select");
-					//MainSoundObject.SetActive (false);
+					MainSoundObject.SetActive (false);
 				});
 			break;
 		case 1:
 			CameraFade.StartAlphaFade(Color.black, false, 0.6f, 0.6f, () =>
 				{
 					UnityEngine.SceneManagement.SceneManager.LoadScene("selectsceneDoble");
-					//MainSoundObject.SetActive (false);
+					MainSoundObject.SetActive (false);
 				});
 			break;
 		case 2:
 			CameraFade.StartAlphaFade(Color.black, false, 0.6f, 0.6f, () =>
 				{
 					UnityEngine.SceneManagement.SceneManager.LoadScene("Option");
-					//MainSoundObject.SetActive (false);				
+					MainSoundObject.SetActive (false);				
 				});
 			break;
 		case 3:
@@ -100,7 +103,7 @@ public class CanvasRotate : MonoBehaviour {
 			CameraFade.StartAlphaFade(Color.black, false, 0.6f, 0.6f, () =>
 				{
 					UnityEngine.SceneManagement.SceneManager.LoadScene("Gallery");
-					//MainSoundObject.SetActive (false);				
+					MainSoundObject.SetActive (false);				
 				});
 			break;
 		default: break;
@@ -147,14 +150,16 @@ public class CanvasRotate : MonoBehaviour {
             || Input.GetAxisRaw("Vertical") < 0 || Input.GetAxisRaw("Vertical2") < 0)
 		{
 			audioSource2.PlayOneShot(audioSource2.clip);
-			if (!RotateFlag_minus) RotateFlag_plus = true;
+
+            if (!RotateFlag_minus) RotateFlag_plus = true;
 		}
 
 		if ( Input.GetKeyUp(KeyCode.W)
             || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical2") > 0)
 		{
             audioSource2.PlayOneShot(audioSource2.clip);
-			if (!RotateFlag_plus) RotateFlag_minus = true;
+
+            if (!RotateFlag_plus) RotateFlag_minus = true;
 		}
 
 		angle_z = Buttons.transform.localEulerAngles.z;
@@ -208,12 +213,16 @@ public class CanvasRotate : MonoBehaviour {
 				}
                 //最前面表示
 				d.description.transform.SetAsLastSibling();
-			}
+                d.description.SetActive(true);
+                d.description.transform.FindChild("Image").GetComponent<UIMaskTransparent>().enabled = true;
+            }
             //x=11よりはスライドしない
-			else
+            else
 			{
 				pos.x = 2;
-			}
+                d.description.SetActive(false);
+                d.description.transform.FindChild("Image").GetComponent<UIMaskTransparent>().enabled = false;
+            }
 
             d.description.transform.position = pos;
         }
