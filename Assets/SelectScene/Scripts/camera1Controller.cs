@@ -37,7 +37,7 @@ public class camera1Controller : MonoBehaviour {
 		clashcamera3.SetActive (false);
 		time = 0.0f;
 
-		stage = PlayerSelectController.Selectnumber ();
+		stage = StorySelectController.Selectnumber ();
 	}
 	
 
@@ -137,30 +137,24 @@ public class camera1Controller : MonoBehaviour {
 			time = 0.0f;
 		}
 
-		if (scene == 12 && time >= 3.0f) {
-			/*CameraFade.StartAlphaFade (Color.black, false, 5.0f, 0.5f, () => {
-				SceneManager.LoadScene ("Main");
-			});*/
+		if (scene == 12 && time >= 5.0f) {
+			
+			//SceneManager.LoadScene ("cockpit");
 
 			switch (stage) {
 
 			case 1:
-				CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-					SceneManager.LoadScene ("Main");
-				});
+					SceneManager.LoadScene ("cockpit");
 				break;
 			case 2:
-				CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-					SceneManager.LoadScene ("Main");
-				});
+					SceneManager.LoadScene ("cockpit");
 				break;
 			case 3:
-				CameraFade.StartAlphaFade (Color.black, false, 0.6f, 0.6f, () => {
-					SceneManager.LoadScene ("Main");
-				});
+					SceneManager.LoadScene ("cockpit");
 				break;
 
 			}
+		
 		}
 	}
 
