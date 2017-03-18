@@ -37,7 +37,7 @@ public class AudioController : MonoBehaviour {
 		time += Time.deltaTime;
 
 		if (time >= 11.0f && flag == 0) {
-			//audioSource1.PlayOneShot (audioSource1.clip);
+			audioSource1.PlayOneShot (audioSource1.clip);
 			flag = 1;
 		}
 

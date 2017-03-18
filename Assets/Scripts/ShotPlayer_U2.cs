@@ -5,7 +5,7 @@ public class ShotPlayer_U2 : MonoBehaviour {
 
 	public GameObject explosion;
 	
-	public static int damage = 500;
+	public static int damage = 1000;
 	
 	// Use this for initialization
 	void Start () {
