@@ -30,9 +30,9 @@ public class ChangeDIM : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-		Debug.Log ("AmbientSkyColor: " + RenderSettings.ambientLight);
 		Color AmbientLight = RenderSettings.ambientLight;
 		AmbientLight = new UnityEngine.Color (255f, 255f, 255f, DIMVal);
+
 		RenderSettings.ambientLight = AmbientLight;
 
         if (Input.GetKeyUp(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0)

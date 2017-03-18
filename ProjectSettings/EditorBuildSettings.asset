@@ -5,8 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+<<<<<<< HEAD
   - enabled: 1
     path: Assets/Scene/Main1.unity
+=======
+  - enabled: 0
+    path: Assets/Scene/Main.unity
+>>>>>>> 24024c62bd35b9b0d366a5aeb7626c2c4b3bbc73
   - enabled: 1
     path: Assets/Scene/Result.unity
   - enabled: 1
@@ -42,6 +47,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/stageselect.unity
   - enabled: 1
+<<<<<<< HEAD
     path: Assets/Scene/select.unity
   - enabled: 1
     path: Assets/Scene/cockpit_m.unity
@@ -49,3 +55,10 @@ EditorBuildSettings:
     path: Assets/Scene/cockpit_s.unity
   - enabled: 1
     path: Assets/Scene/cockpit_c.unity
+=======
+    path: Assets/Scene/storyselect.unity
+  - enabled: 0
+    path: Assets/Scene/cockpit.unity
+  - enabled: 1
+    path: Assets/Scene/Option.unity
+>>>>>>> 24024c62bd35b9b0d366a5aeb7626c2c4b3bbc73
