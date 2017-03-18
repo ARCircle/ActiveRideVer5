@@ -188,6 +188,8 @@ public class PauserScript : MonoBehaviour
                     GetComponentInParentAndChildren<ChangeSEVolume>(RootObject).enabled = !ModalFlag;
                 break;
             case "Main":
+			case "Main1":
+			
                 //validate Null Exception
                 Player = GameObject.Find("UNICORN1playMode");
 
@@ -258,6 +260,7 @@ public class PauserScript : MonoBehaviour
 			case "2PlayerMode":
             case "2PlayerModeStage1":
 			case "2PlayerModeStage2":
+			case "2PlayerModeStage3":
 			
                 RootObject = GameObject.Find("Canvas");
 

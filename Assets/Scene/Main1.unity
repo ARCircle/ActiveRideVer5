@@ -808,7 +808,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 10c1cbdfd004c0c45a26122f9c06bb82, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c27086de678377445b692e45c2dc070d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.7
   m_Pitch: 1
@@ -1770,7 +1770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e350c46ea8582054b9e5399cb1daf72c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lockMoveSpeed: 5
+  lockMoveSpeed: 10
   target: {fileID: 0}
 --- !u!1001 &597323928
 Prefab:
@@ -5239,7 +5239,7 @@ Prefab:
     - target: {fileID: 114085058734769864, guid: c3f9ce1bb4e7e704c96f929c163d821a,
         type: 2}
       propertyPath: shotIntervalMax2
-      value: 4
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 408048, guid: c3f9ce1bb4e7e704c96f929c163d821a, type: 2}
       propertyPath: m_LocalPosition.x
@@ -10861,7 +10861,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2060405614}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5ea5bacb3fe7f541a29e2f1c7c2e93a, type: 3}
   m_Name: 

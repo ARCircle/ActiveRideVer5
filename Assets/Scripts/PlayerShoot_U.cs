@@ -96,7 +96,7 @@ public class PlayerShoot_U : MonoBehaviour {
 			gaugeImage2.color = myWhite;
 
 			//弾を発射する
-			if (Input.GetKey (KeyCode.B)) {
+			if (Input.GetButton("ShootMode1") && Input.GetButton("Fire1")) {
 
 				//CameraParent.transform.localRotation = Quaternion.Slerp (CameraParent.transform.localRotation, defaultCameraRot, Time.deltaTime * 10);
 
