@@ -20,7 +20,7 @@ public class idoustage2 : MonoBehaviour {
 
 		if(timer > 5){
 			if (Input.anyKeyDown) {
-				UnityEngine.SceneManagement.SceneManager.LoadScene("main2");
+				UnityEngine.SceneManagement.SceneManager.LoadScene("main1");
 			}
 
 				
