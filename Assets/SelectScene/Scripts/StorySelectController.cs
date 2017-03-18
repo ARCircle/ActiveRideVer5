@@ -60,7 +60,7 @@ public class StorySelectController : MonoBehaviour {
 		if (accept == 1) {
 			time += Time.deltaTime;
 
-			if (time >= 0.3f) {
+			if (time >= 0.5f) {
 				accept = 0;
 			}
 		}

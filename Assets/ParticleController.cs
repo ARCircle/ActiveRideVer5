@@ -27,7 +27,7 @@ public class ParticleController : MonoBehaviour {
 		time += Time.deltaTime;
 
 		if(time >= 10.0 && parflag == 0){
-			//light.Play();
+			light.Play();
 			parflag = 1;
 		}
 

@@ -108,19 +108,19 @@ public class PlayerAp1 : MonoBehaviour {
             {
                 armorPoint -= ShotPlayer_B2.damage;
                 armorPoint = Mathf.Clamp(armorPoint, 0, armorPointMax);
-				downPoint += ShotPlayer_B2.damage / 100;
+                downPoint += 3.5f;
             }
             else if (collider.gameObject.tag == "Shot_U")
             {
                 armorPoint -= ShotPlayer_U2.damage;
                 armorPoint = Mathf.Clamp(armorPoint, 0, armorPointMax);
-				downPoint += ShotPlayer_U2.damage / 100;
+                downPoint += 5;
             }
             else if (collider.gameObject.tag == "Shot_P")
             {
                 armorPoint -= ShotPlayer_P2.damage;
                 armorPoint = Mathf.Clamp(armorPoint, 0, armorPointMax);
-				downPoint += ShotPlayer_P2.damage / 100;
+                downPoint += 1;
             }
         }
 

@@ -144,13 +144,13 @@ public class camera1Controller : MonoBehaviour {
 			switch (stage) {
 
 			case 1:
-					SceneManager.LoadScene ("cockpit");
+					SceneManager.LoadScene ("cockpit_s");
 				break;
 			case 2:
-					SceneManager.LoadScene ("cockpit");
+					SceneManager.LoadScene ("cockpit_m");
 				break;
 			case 3:
-					SceneManager.LoadScene ("cockpit");
+					SceneManager.LoadScene ("cockpit_c");
 				break;
 
 			}
