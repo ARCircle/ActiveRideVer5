@@ -158,7 +158,7 @@ public class PauserScript : MonoBehaviour
 
                 break;
             case "Option":
-                BackgroundObject = GameObject.Find("BackgroundPrefab1");
+                BackgroundObject = GameObject.Find("BackgroundPrefab");
                 GetComponentInParentAndChildren<BackGroundController>(BackgroundObject).enabled = !ModalFlag;
 
                 //BackgroundObject = GameObject.Find("BackgroundCamera");
