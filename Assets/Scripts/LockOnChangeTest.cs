@@ -136,7 +136,7 @@ public class LockOnChangeTest : MonoBehaviour {
 			//Rayが当たるオブジェクトがあった場合はそのオブジェクト名をログに表示
 			Debug.Log(hit.collider.gameObject.name);
 			//Debug.DrawRay(ray.origin, ray.direction * 1000, Color.red, 0, false);
-			if (hit.collider.gameObject.tag == "Enemy" && Input.GetButton("Fire1")) {
+			if (hit.collider.gameObject.tag == "Enemy" && Input.GetButton("ShootMode1") && Input.GetButton("Fire1")) {
 				Destroy (hit.collider.gameObject);
 			}
 
