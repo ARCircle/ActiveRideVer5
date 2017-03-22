@@ -33,6 +33,8 @@ public class keyConfigCoverFlow : MonoBehaviour {
     private int Y_OFFSET = -70;
     private int CenterConfigIndex;
 
+	public Font FontForConfig;
+
     private int NumberOfActiveConfig = 3;
 
     private float X, Y, Z;
@@ -154,6 +156,11 @@ public class keyConfigCoverFlow : MonoBehaviour {
 
             eachConfigsInKeyConfig[nLoop].transform.FindChild("Conf").gameObject.GetComponent<UnityEngine.UI.Text>().fontSize = 28;
             eachConfigsInKeyConfig[nLoop].transform.FindChild("Val").gameObject.GetComponent<UnityEngine.UI.Text>().fontSize = 28;
+
+
+			eachConfigsInKeyConfig[nLoop].transform.FindChild("Conf").gameObject.GetComponent<UnityEngine.UI.Text>().font = FontForConfig;
+			eachConfigsInKeyConfig[nLoop].transform.FindChild("Val").gameObject.GetComponent<UnityEngine.UI.Text>().font = FontForConfig;
+
 
             //出現するConfigの数を制限
             if (nLoop < NumberOfActiveConfig)
