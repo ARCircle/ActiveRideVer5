@@ -46,6 +46,7 @@ public class keyConfigCoverFlow : MonoBehaviour {
 
     //TODO getisJoyStickConfigして, 代替としてのKey入力にも対応
     private bool isJoyStickConfig = true;
+	private bool isAxisInUse = false;
 
     // Use this for initialization
     void Start()
@@ -74,32 +75,44 @@ public class keyConfigCoverFlow : MonoBehaviour {
         if ((Input.GetKeyDown(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0 )
             && !keyConfig_Instance.getCanInputConfigKey)
         {
-            tmpConfig = eachConfigsInKeyConfig[0];
-            for (int nLoop = 0; nLoop < NumberOfObject - 1; nLoop++)
-            {
-                eachConfigsInKeyConfig[nLoop] = eachConfigsInKeyConfig[nLoop + 1];
-            }
-            eachConfigsInKeyConfig[NumberOfObject - 1] = tmpConfig;
-            viewConvexConfig();
-            setConfigInActive();
+
+			if (!isAxisInUse) {
+				tmpConfig = eachConfigsInKeyConfig[0];
+				for (int nLoop = 0; nLoop < NumberOfObject - 1; nLoop++)
+				{
+					eachConfigsInKeyConfig[nLoop] = eachConfigsInKeyConfig[nLoop + 1];
+				}
+				eachConfigsInKeyConfig[NumberOfObject - 1] = tmpConfig;
+				viewConvexConfig();
+				setConfigInActive();
+
+				isAxisInUse = true;
+			}
 
         }
 
         if ((Input.GetKeyDown(KeyCode.D) || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
             && !keyConfig_Instance.getCanInputConfigKey)
         {
-            tmpConfig = eachConfigsInKeyConfig[NumberOfObject - 1];
-            for (int nLoop = NumberOfObject - 1; nLoop > 0; nLoop--)
-            {
-                eachConfigsInKeyConfig[nLoop] = eachConfigsInKeyConfig[nLoop - 1];
-            }
-            eachConfigsInKeyConfig[0] = tmpConfig;
+			if (!isAxisInUse) {
+				tmpConfig = eachConfigsInKeyConfig[NumberOfObject - 1];
+				for (int nLoop = NumberOfObject - 1; nLoop > 0; nLoop--)
+				{
+					eachConfigsInKeyConfig[nLoop] = eachConfigsInKeyConfig[nLoop - 1];
+				}
+				eachConfigsInKeyConfig[0] = tmpConfig;
 
-            viewConvexConfig();
-            setConfigInActive();
+				viewConvexConfig();
+				setConfigInActive();
+
+				isAxisInUse = true;
+			}
 
         }
 
+		if (Input.GetAxisRaw ("Horizontal3") == 0 && Input.GetAxisRaw ("Horizontal4") == 0) {
+			isAxisInUse = false;
+		}
     }
 
     static void Swap<T>(ref T lhs, ref T rhs)
