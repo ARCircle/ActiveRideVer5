@@ -89,7 +89,7 @@ public class ChangeDifficulty : MonoBehaviour {
         if (Input.GetKeyUp(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0)
         {
 
-			if (isAxisInUse) {
+			if (!isAxisInUse) {
 				bCenterIndex--;
 				bCenterIndex = Verify_bIndex(bCenterIndex);
 
@@ -102,7 +102,7 @@ public class ChangeDifficulty : MonoBehaviour {
 
         if (Input.GetKeyUp(KeyCode.D) || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
         {
-			if (isAxisInUse) {
+			if (!isAxisInUse) {
 				bCenterIndex++;
 				bCenterIndex = Verify_bIndex(bCenterIndex);
 
@@ -116,7 +116,7 @@ public class ChangeDifficulty : MonoBehaviour {
         //ボタンクリック時の動作
         if (Input.GetKeyUp(KeyCode.W) || Input.GetAxisRaw("Vertical3") < 0 || Input.GetAxisRaw("Vertical4") < 0)
         {
-			if (isAxisInUse) {
+			if (!isAxisInUse) {
 				DiffiultyButtons[bCenterIndex].onClick.Invoke();
 
 				isAxisInUse = true;

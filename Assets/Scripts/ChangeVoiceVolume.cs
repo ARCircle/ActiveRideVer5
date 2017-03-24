@@ -73,7 +73,7 @@ public class ChangeVoiceVolume : MonoBehaviour {
 
         if (Input.GetKeyUp(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0)
         {
-			if (isAxisInUse) {
+			if (!isAxisInUse) {
 				if (VoiceVal <= 1.0f)
 				{
 					VoiceVal += 0.05f;
@@ -84,7 +84,7 @@ public class ChangeVoiceVolume : MonoBehaviour {
         }
         if (Input.GetKeyUp(KeyCode.D) || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
         {
-			if (isAxisInUse) {
+			if (!isAxisInUse) {
 				if (VoiceVal >= 0f)
 				{
 					VoiceVal -= 0.05f;

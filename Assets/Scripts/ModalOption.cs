@@ -125,7 +125,7 @@ public class ModalOption : MonoBehaviour {
             if (Input.GetKeyUp(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0)
 			{
 
-				if (isAxisInUse) {
+				if (!isAxisInUse) {
 					bCenterIndex--;
 					bCenterIndex = Verify_bIndex (bCenterIndex);
 					ModalOptionButtons [bCenterIndex].Select ();
@@ -137,7 +137,7 @@ public class ModalOption : MonoBehaviour {
 
 			if (Input.GetKeyUp(KeyCode.D) || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
 			{
-				if (isAxisInUse) {
+				if (!isAxisInUse) {
 
 					bCenterIndex++;
 					bCenterIndex = Verify_bIndex (bCenterIndex);

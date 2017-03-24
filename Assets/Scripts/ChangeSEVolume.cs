@@ -82,7 +82,7 @@ public class ChangeSEVolume : MonoBehaviour {
 
         if (Input.GetKeyUp(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0)
         {
-			if (isAxisInUse) {
+			if (!isAxisInUse) {
 				if (SEVal <= 1.0f)
 				{
 					SEVal += 0.05f;
@@ -93,7 +93,7 @@ public class ChangeSEVolume : MonoBehaviour {
         }
         if (Input.GetKeyUp(KeyCode.D) || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
         {
-			if (isAxisInUse) {
+			if (!isAxisInUse) {
 				if (SEVal >= 0f)
 				{
 					SEVal -= 0.05f;

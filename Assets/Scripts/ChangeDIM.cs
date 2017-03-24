@@ -39,7 +39,7 @@ public class ChangeDIM : MonoBehaviour {
         if (Input.GetKeyUp(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0)
         {
 
-			if (isAxisInUse) {
+			if (!isAxisInUse) {
 				if (DIMVal <= 1.0f)
 				{
 					DIMVal += 0.1f;
@@ -56,7 +56,7 @@ public class ChangeDIM : MonoBehaviour {
 
         if (Input.GetKeyUp(KeyCode.D) || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
         {
-			if (isAxisInUse) {
+			if (!isAxisInUse) {
 				if (DIMVal >= 0f)
 				{
 					DIMVal -= 0.1f;
