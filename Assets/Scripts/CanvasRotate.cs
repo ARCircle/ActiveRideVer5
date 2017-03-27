@@ -37,6 +37,8 @@ public class CanvasRotate : MonoBehaviour {
     private bool RotateFlag_minus;
     private int RotatedAngle_z = 0;
 
+	private bool isAxisInUse = false;
+
     // Use this for initialization
     void Start () {
 
@@ -149,17 +151,31 @@ public class CanvasRotate : MonoBehaviour {
 		if ( Input.GetKeyUp(KeyCode.S)
             || Input.GetAxisRaw("Vertical") < 0 || Input.GetAxisRaw("Vertical2") < 0)
 		{
-			audioSource2.PlayOneShot(audioSource2.clip);
+			if (!isAxisInUse) {
+				audioSource2.PlayOneShot(audioSource2.clip);
 
-            if (!RotateFlag_minus) RotateFlag_plus = true;
+				if (!RotateFlag_minus) RotateFlag_plus = true;		
+
+				isAxisInUse = true;
+			}
 		}
 
 		if ( Input.GetKeyUp(KeyCode.W)
             || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical2") > 0)
 		{
-            audioSource2.PlayOneShot(audioSource2.clip);
+			if (!isAxisInUse) {
+				audioSource2.PlayOneShot(audioSource2.clip);
 
-            if (!RotateFlag_plus) RotateFlag_minus = true;
+				if (!RotateFlag_plus) RotateFlag_minus = true;
+
+				isAxisInUse = true;
+			}
+
+		}
+
+		if (Input.GetAxisRaw ("Vertical") == 0 && Input.GetAxisRaw ("Vertical2") == 0) {
+
+			isAxisInUse = false;
 		}
 
 		angle_z = Buttons.transform.localEulerAngles.z;

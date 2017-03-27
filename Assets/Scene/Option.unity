@@ -6810,6 +6810,7 @@ MonoBehaviour:
   - {fileID: 921998822}
   - {fileID: 514595902}
   NumberOfObject: 20
+  FontForConfig: {fileID: 12800000, guid: da68c17ed4c96fe44852905f70e11d09, type: 3}
 --- !u!1 &1376171754
 GameObject:
   m_ObjectHideFlags: 0

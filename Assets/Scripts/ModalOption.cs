@@ -11,6 +11,7 @@ public class ModalOption : MonoBehaviour {
 
 	public static bool isModalSetActive;
     public static bool isPause;
+	private bool isAxisInUse = false;
 
 	private int bCenterIndex;
 	private int MaxCountOfModalOptionButtons;
@@ -123,23 +124,31 @@ public class ModalOption : MonoBehaviour {
 
             if (Input.GetKeyUp(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0)
 			{
-				bCenterIndex--;
-				bCenterIndex = Verify_bIndex (bCenterIndex);
-				ModalOptionButtons [bCenterIndex].Select ();
-				SetActiveDescriptions (bCenterIndex);
 
+				if (!isAxisInUse) {
+					bCenterIndex--;
+					bCenterIndex = Verify_bIndex (bCenterIndex);
+					ModalOptionButtons [bCenterIndex].Select ();
+					SetActiveDescriptions (bCenterIndex);
+					
+					isAxisInUse = true;
+				}
 			}
+
 			if (Input.GetKeyUp(KeyCode.D) || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
 			{
-				ModalCanvas.SetActive(true);
-				isModalSetActive = true;
-				bCenterIndex++;
-				bCenterIndex = Verify_bIndex (bCenterIndex);
-				//Debug.Log (bCenterIndex);
-				ModalOptionButtons [bCenterIndex].Select ();
-				SetActiveDescriptions (bCenterIndex);
+				if (!isAxisInUse) {
 
+					bCenterIndex++;
+					bCenterIndex = Verify_bIndex (bCenterIndex);
+					ModalOptionButtons [bCenterIndex].Select ();
+					SetActiveDescriptions (bCenterIndex);
+
+					isAxisInUse = true;
+				}
 			}
+
+
 			//ボタンクリック時の動作
 			if (Input.GetKeyUp (KeyCode.W) || Input.GetButtonUp("Submit")) {
                 Debug.Log(bCenterIndex);
@@ -148,6 +157,10 @@ public class ModalOption : MonoBehaviour {
                 ModalCanvas.SetActive(false);
                 isModalSetActive = false;
             }
+
+			if (Input.GetAxisRaw ("Horizontal3") == 0 && Input.GetAxisRaw ("Horizontal4") == 0) {
+				isAxisInUse = false;
+			}
 				
 		}
 

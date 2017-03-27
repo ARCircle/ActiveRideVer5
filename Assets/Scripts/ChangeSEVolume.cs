@@ -22,7 +22,8 @@ public class ChangeSEVolume : MonoBehaviour {
 
     private float tmpVolume;
 
-    private bool isBGM;
+    private bool isSE;
+	private bool isAxisInUse = false;
 
 	[SerializeField]
 	UnityEngine.Audio.AudioMixer mixer;
@@ -42,7 +43,7 @@ public class ChangeSEVolume : MonoBehaviour {
         gaugeCtrl = this.GetComponent<UnityEngine.UI.Image>();
         gaugeCtrl.fillAmount = SEVal;
 
-        isBGM = true;
+		isSE = true;
 
         OnColor = OnText.GetComponent<UnityEngine.UI.Text>().color;
         OffColor = OffText.GetComponent<UnityEngine.UI.Text>().color;
@@ -57,7 +58,7 @@ public class ChangeSEVolume : MonoBehaviour {
 
         if (Input.GetKeyUp(KeyCode.L) || Input.GetButtonUp("Cancel"))
         {
-            if (isBGM)
+			if (isSE)
             {
                 tmpVolume = SEVal;
 
@@ -65,7 +66,7 @@ public class ChangeSEVolume : MonoBehaviour {
                 OnText.GetComponent<UnityEngine.UI.Text>().color = OnColor;
                 OffText.GetComponent<UnityEngine.UI.Text>().color = OffColor;
 
-                isBGM = false;
+				isSE = false;
             }
             else
             {
@@ -75,26 +76,38 @@ public class ChangeSEVolume : MonoBehaviour {
                 OnText.GetComponent<UnityEngine.UI.Text>().color = OnColor;
                 OffText.GetComponent<UnityEngine.UI.Text>().color = OffColor;
 
-                isBGM = true;
+				isSE = true;
             }
         }
 
         if (Input.GetKeyUp(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0)
         {
-            if (SEVal <= 1.0f)
-            {
-                SEVal += 0.05f;
-            }
+			if (!isAxisInUse) {
+				if (SEVal <= 1.0f)
+				{
+					SEVal += 0.05f;
+				}
+
+				isAxisInUse = true;
+			}
         }
         if (Input.GetKeyUp(KeyCode.D) || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
         {
-            if (SEVal >= 0f)
-            {
-                SEVal -= 0.05f;
-            }
+			if (!isAxisInUse) {
+				if (SEVal >= 0f)
+				{
+					SEVal -= 0.05f;
+				}
+
+				isAxisInUse = true;
+			}
         }
 
-        if (!isBGM)
+		if (Input.GetAxisRaw ("Horizontal3") == 0 && Input.GetAxisRaw ("Horizontal4") == 0) {
+			isAxisInUse = false;
+		}
+
+		if (!isSE)
         {
             gaugeCtrl.GetComponent<UnityEngine.UI.Image>().color = new Color(0.7f, 0.7f, 0.7f);
             SEVal = 0f;

@@ -47,8 +47,6 @@ public class DesirializationYaml
 
     public void RecoveryDefaultInputManager()
     {
-        //TODO: 一旦InputManagerStringをDeserializeしてからSerialize => 出力したほうが綺麗?
-        //　　 ->検討したうえで修正
 
         //var serializer = new SerializerBuilder().Build();
         //var reSerializedYaml = serializer.Serialize(iM);
@@ -131,6 +129,7 @@ public class DesirializationYaml
         public int joyNum { get; set; }
     }
 
+	//デフォルトのYamlファイル InputManager.assets
     private const string InputManagerString = @"---
             InputManager:
                 m_ObjectHideFlags: 0

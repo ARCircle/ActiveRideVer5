@@ -21,6 +21,8 @@ public class ChangeDifficulty : MonoBehaviour {
     private int bCenterIndex;
     private int MaxCountOfModalOptionButtons;
 
+	private bool isAxisInUse = false;
+
     private int Verify_bIndex(int bCenterIndex)
     {
         if (bCenterIndex >= MaxCountOfModalOptionButtons)
@@ -86,30 +88,46 @@ public class ChangeDifficulty : MonoBehaviour {
 
         if (Input.GetKeyUp(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0)
         {
-            bCenterIndex--;
-            bCenterIndex = Verify_bIndex(bCenterIndex);
 
-            DiffiultyButtons[bCenterIndex].Select();
+			if (!isAxisInUse) {
+				bCenterIndex--;
+				bCenterIndex = Verify_bIndex(bCenterIndex);
+
+				DiffiultyButtons[bCenterIndex].Select();
+
+				isAxisInUse = true;
+			}
 
         }
 
         if (Input.GetKeyUp(KeyCode.D) || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
         {
-            //ModalCanvas.SetActive(true);
-            //isModalSetActive = true;
-            bCenterIndex++;
-            bCenterIndex = Verify_bIndex(bCenterIndex);
+			if (!isAxisInUse) {
+				bCenterIndex++;
+				bCenterIndex = Verify_bIndex(bCenterIndex);
 
-            DiffiultyButtons[bCenterIndex].Select();
-                //SetActiveDescriptions(bCenterIndex);
+				DiffiultyButtons[bCenterIndex].Select();
+
+				isAxisInUse = true;
+			}
+				
         }
 
         //ボタンクリック時の動作
         if (Input.GetKeyUp(KeyCode.W) || Input.GetAxisRaw("Vertical3") < 0 || Input.GetAxisRaw("Vertical4") < 0)
         {
+			if (!isAxisInUse) {
+				DiffiultyButtons[bCenterIndex].onClick.Invoke();
+
+				isAxisInUse = true;
+			}
             DiffiultyButtons[bCenterIndex].onClick.Invoke();
-                //SceneManager(bCenterIndex);
         }
+
+		if (Input.GetAxisRaw ("Horizontal3") == 0 && Input.GetAxisRaw ("Horizontal4") == 0
+			&& Input.GetAxisRaw("Vertical3") == 0 && Input.GetAxisRaw("Vertical4") == 0 ) {
+			isAxisInUse = false;
+		}
 
         Difficulty = bCenterIndex;
     }

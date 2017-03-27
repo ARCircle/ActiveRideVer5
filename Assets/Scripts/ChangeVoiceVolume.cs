@@ -23,6 +23,7 @@ public class ChangeVoiceVolume : MonoBehaviour {
     private float tmpVolume;
 
     private bool isBGM;
+	private bool isAxisInUse = false;
 
     [SerializeField]
     UnityEngine.Audio.AudioMixer mixer;
@@ -72,17 +73,26 @@ public class ChangeVoiceVolume : MonoBehaviour {
 
         if (Input.GetKeyUp(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0)
         {
-            if (VoiceVal <= 1.0f)
-            {
-                VoiceVal += 0.05f;
-            }
+			if (!isAxisInUse) {
+				if (VoiceVal <= 1.0f)
+				{
+					VoiceVal += 0.05f;
+				}
+				isAxisInUse = true;
+			}
+
         }
         if (Input.GetKeyUp(KeyCode.D) || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
         {
-            if (VoiceVal >= 0f)
-            {
-                VoiceVal -= 0.05f;
-            }
+			if (!isAxisInUse) {
+				if (VoiceVal >= 0f)
+				{
+					VoiceVal -= 0.05f;
+				}
+
+				isAxisInUse = true;
+			}
+
         }
 
         if (!isBGM)
@@ -95,6 +105,10 @@ public class ChangeVoiceVolume : MonoBehaviour {
             gaugeCtrl.GetComponent<UnityEngine.UI.Image>().color = new Color(1f, 1f, 1f);
             gaugeCtrl.fillAmount = VoiceVal;
         }
+
+		if (Input.GetAxisRaw ("Horizontal3") == 0 && Input.GetAxisRaw ("Horizontal4") == 0) {
+			isAxisInUse = false;
+		}
     }
 
     static void Swap<T>(ref T lhs, ref T rhs)

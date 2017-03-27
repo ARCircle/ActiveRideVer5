@@ -23,6 +23,7 @@ public class ChangeBGMVal : MonoBehaviour {
     private float tmpVolume;
 
     private bool isBGM;
+	private bool isAxisInUse = false;
 
     [SerializeField]
     UnityEngine.Audio.AudioMixer mixer;
@@ -69,24 +70,38 @@ public class ChangeBGMVal : MonoBehaviour {
 
         if (Input.GetKeyUp(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0)
         {
-            if (BGMVal <= 1.0f)
-            {
-                BGMVal += 0.1f;
-            }
+			if (isAxisInUse) {
+				if (BGMVal <= 1.0f)
+				{
+					BGMVal += 0.1f;
+				}
+
+				isAxisInUse = true;
+			}
         }
+
         if (Input.GetKeyUp(KeyCode.D) || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
         {
-            if (BGMVal >= 0f)
-            {
-                BGMVal -= 0.1f;
-            }
+			if (isAxisInUse) {
+				if (BGMVal >= 0f)
+				{
+					BGMVal -= 0.1f;
+				}
+
+				isAxisInUse = true;
+			}
         }
+
+		if (Input.GetAxisRaw ("Horizontal3") == 0 && Input.GetAxisRaw ("Horizontal4") == 0) {
+			isAxisInUse = false;
+		}
 
         if (!isBGM)
         {
             gaugeCtrl.color = new Color(0.7f,0.7f,0.7f);
             BGMVal = 0f;
-        }else
+        }
+		else
         {
             gaugeCtrl.color = new Color(1f, 1f, 1f);
             gaugeCtrl.fillAmount = BGMVal;
