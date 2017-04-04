@@ -18,7 +18,6 @@ public class ModalWindowController : MonoBehaviour {
 
     public void OnClick(){
         //1Pモード開始
-        Application.LoadLevel("Main");
 
     }
 

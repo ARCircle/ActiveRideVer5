@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class ModalOption : MonoBehaviour {
     public GameObject ModalCanvas;
+
 	public List<Button> ModalOptionButtons = new List<Button>();
 	public List<GameObject> ModalOptionDescriptions = new List<GameObject>();
 

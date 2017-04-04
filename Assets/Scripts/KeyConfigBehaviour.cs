@@ -132,8 +132,8 @@ public class KeyConfigBehaviour : MonoBehaviour
 
     private string configFilePath;
 
-    private bool canInputConfigKey;
-    public bool getCanInputConfigKey
+    private static bool canInputConfigKey;
+    public static bool getCanInputConfigKey
     {
         private set { canInputConfigKey = value; }
         get { return canInputConfigKey; }

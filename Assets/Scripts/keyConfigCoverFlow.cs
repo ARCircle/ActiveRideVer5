@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class keyConfigCoverFlow : MonoBehaviour {
 
-    private static KeyConfigBehaviour keyConfig_Instance = new KeyConfigBehaviour();
-
     public List<GameObject> eachConfigsInKeyConfig_JoyStick = new List<GameObject>();
     public List<GameObject> eachConfigsInKeyConfig_Key = new List<GameObject>();
     private List<GameObject> eachConfigsInKeyConfig = new List<GameObject>();
@@ -41,8 +39,9 @@ public class keyConfigCoverFlow : MonoBehaviour {
     private float Rotate_X, Rotate_Y, Rotate_Z;
 
     //Yamlファイルのインスタンス作成, inputManagerFileを作成
-    private DesirializationYaml desirializationYaml = new DesirializationYaml();
-    DesirializationYaml.InputManagerFile inputManageFile;
+	private DesirializationYaml desirializationYaml = new DesirializationYaml();
+
+    private DesirializationYaml.InputManagerFile inputManageFile;
 
     //TODO getisJoyStickConfigして, 代替としてのKey入力にも対応
     private bool isJoyStickConfig = true;
@@ -73,7 +72,8 @@ public class keyConfigCoverFlow : MonoBehaviour {
     {
 
         if ((Input.GetKeyDown(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0 )
-            && !keyConfig_Instance.getCanInputConfigKey)
+			&& !KeyConfigBehaviour.getCanInputConfigKey
+		)
         {
 
 			if (!isAxisInUse) {
@@ -92,7 +92,8 @@ public class keyConfigCoverFlow : MonoBehaviour {
         }
 
         if ((Input.GetKeyDown(KeyCode.D) || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
-            && !keyConfig_Instance.getCanInputConfigKey)
+			&& !KeyConfigBehaviour.getCanInputConfigKey
+		)
         {
 			if (!isAxisInUse) {
 				tmpConfig = eachConfigsInKeyConfig[NumberOfObject - 1];

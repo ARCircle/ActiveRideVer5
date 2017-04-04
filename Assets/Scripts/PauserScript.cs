@@ -58,7 +58,7 @@ public class PauserScript : MonoBehaviour
     void Update()
     {
 
-		Debug.Log (CutinManager_hissatu.canCutIn);
+		//Debug.Log (CutinManager_hissatu.canCutIn);
 
         //CutInするか否かを取得
 		if (isHissatsu) {
