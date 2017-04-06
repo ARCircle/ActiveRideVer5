@@ -33,10 +33,14 @@ public class GalleryCoverFlow : MonoBehaviour
     public GameObject TextOfPhotos;
     public GameObject TitleOfPhotos;
 
+	private AudioSource audioSource;
+
+	private bool isAxisInUse = false;
+
     private string[,] CSVdata;
     private const string path = "/CSV/Picture1.csv";
 
-    private string[] DescriptionText = { "あああ", "いいい", "ううう", "えええ", "おおお", "がはは" };
+    private string[] DescriptionText;
 
     public Dictionary<string, string> MappingDescription = new Dictionary<string, string>();
     public Dictionary<string, string> MappingTitle = new Dictionary<string, string>();
@@ -53,6 +57,7 @@ public class GalleryCoverFlow : MonoBehaviour
 
         viewConvexPhoto();
         centerPhoto = setPhotoInActive();
+		centerPhoto.transform.SetAsLastSibling();
 
         ChangeCenterPhotoSize();
         ChangeDescriptionText(centerPhoto);
@@ -62,52 +67,79 @@ public class GalleryCoverFlow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(centerPhotoFrame.gameObject.GetComponent<ViewCenterFrame>().enabled);
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S)
-            || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical2") > 0
-            || Input.GetAxisRaw("Vertical") < 0 || Input.GetAxisRaw("Vertical2") < 0
-            )
-        {
-            intensify = 0.1f;
-
-            centerPhoto = setPhotoInActive();
-            ChangeDescriptionText(centerPhoto);
-            ChangeCenterPhotoSize();
-            
-            SetTransitionToPhoto(centerPhoto);
-
-            //in ViewCenterFrame.cs
-            //中央のフレームを再表示
-            centerPhotoFrame.gameObject.GetComponent<ViewCenterFrame>().enabled = true;
-
-            viewConvexPhoto();
-        }
+		audioSource  = GetComponent<AudioSource>();;
 
         if (Input.GetKeyDown(KeyCode.W) 
             || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical2") > 0)
         {
-            tmpPhoto = PhotosinGallery[0];
-            for (int nLoop = 0; nLoop < NumberOfObject - 1; nLoop++)
-            {
-                PhotosinGallery[nLoop] = PhotosinGallery[nLoop + 1];
-            }
-            PhotosinGallery[NumberOfObject - 1] = tmpPhoto;
+
+			if (!isAxisInUse) {
+			
+				tmpPhoto = PhotosinGallery[0];
+				for (int nLoop = 0; nLoop < NumberOfObject - 1; nLoop++)
+				{
+					PhotosinGallery[nLoop] = PhotosinGallery[nLoop + 1];
+				}
+				PhotosinGallery[NumberOfObject - 1] = tmpPhoto;
+
+				isAxisInUse = true;
+			}
 
         }
 
         if (Input.GetKeyDown(KeyCode.S)
             || Input.GetAxisRaw("Vertical") < 0 || Input.GetAxisRaw("Vertical2") < 0)
         {
-            tmpPhoto = PhotosinGallery[NumberOfObject - 1];
-            for (int nLoop = NumberOfObject - 1; nLoop > 0; nLoop--)
-            {
-                PhotosinGallery[nLoop] = PhotosinGallery[nLoop - 1];
-            }
-            PhotosinGallery[0] = tmpPhoto;
+			if (!isAxisInUse) {
+				
+				tmpPhoto = PhotosinGallery[NumberOfObject - 1];
+				for (int nLoop = NumberOfObject - 1; nLoop > 0; nLoop--)
+				{
+					PhotosinGallery[nLoop] = PhotosinGallery[nLoop - 1];
+				}
+				PhotosinGallery[0] = tmpPhoto;
+
+				isAxisInUse = true;
+			}
 
         }
-        intensify = FlashSprite(intensify);
-    }
+
+		if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S)
+			|| Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical2") > 0
+			|| Input.GetAxisRaw("Vertical") < 0 || Input.GetAxisRaw("Vertical2") < 0
+		)
+		{
+			if (!isAxisInUse) {
+
+				audioSource.PlayOneShot (audioSource.clip);
+
+				intensify = 0.1f;
+
+				centerPhoto = setPhotoInActive();
+
+				ChangeDescriptionText(centerPhoto);
+				ChangeCenterPhotoSize();
+
+				SetTransitionToPhoto(centerPhoto);
+				centerPhoto.transform.SetAsLastSibling();
+
+				//in ViewCenterFrame.cs
+				//中央のフレームを再表示
+				centerPhotoFrame.gameObject.GetComponent<ViewCenterFrame>().enabled = true;
+
+				viewConvexPhoto();
+
+				isAxisInUse = true;
+			}
+		}
+
+		if (Input.GetAxisRaw ("Vertical") == 0 && Input.GetAxisRaw ("Vertical2") == 0) {
+
+			isAxisInUse = false;
+		}
+
+		intensify = FlashSprite(intensify);
+	}
 
     static void Swap<T>(ref T lhs, ref T rhs)
     {

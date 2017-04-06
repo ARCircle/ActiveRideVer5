@@ -47,8 +47,6 @@ public class DesirializationYaml
 
     public void RecoveryDefaultInputManager()
     {
-        //TODO: 一旦InputManagerStringをDeserializeしてからSerialize => 出力したほうが綺麗?
-        //　　 ->検討したうえで修正
 
         //var serializer = new SerializerBuilder().Build();
         //var reSerializedYaml = serializer.Serialize(iM);
@@ -131,6 +129,7 @@ public class DesirializationYaml
         public int joyNum { get; set; }
     }
 
+	//デフォルトのYamlファイル InputManager.assets
     private const string InputManagerString = @"---
             InputManager:
                 m_ObjectHideFlags: 0
@@ -365,9 +364,9 @@ public class DesirializationYaml
                     descriptiveName: 
                     descriptiveNegativeName: 
                     negativeButton: 
-                    positiveButton: joystick button 2
+                    positiveButton: joystick 1 button 2
                     altNegativeButton: 
-                    altPositiveButton: 
+                    altPositiveButton: c
                     gravity: 1000
                     dead: 0.001
                     sensitivity: 1000
@@ -383,7 +382,7 @@ public class DesirializationYaml
                     negativeButton: 
                     positiveButton: 
                     altNegativeButton: j
-                    altPositiveButton: i
+                    altPositiveButton: l
                     gravity: 3
                     dead: 0.1
                     sensitivity: 3
@@ -463,7 +462,7 @@ public class DesirializationYaml
                     negativeButton: 
                     positiveButton: joystick 2 button 7
                     altNegativeButton: 
-                    altPositiveButton: 
+                    altPositiveButton: n
                     gravity: 1000
                     dead: 0.001
                     sensitivity: 1000

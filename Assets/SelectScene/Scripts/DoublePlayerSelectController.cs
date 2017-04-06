@@ -27,11 +27,13 @@ public class DoublePlayerSelectController : MonoBehaviour {
 
 	int flag1 = 0;
 	int flag2 = 0;
+	int accept = 0;
 
 	float x;
 	float y;
 
 	float timer;
+	float time;
 
 	private AudioSource audioSource1;
 	private AudioSource audioSource2;
@@ -41,6 +43,7 @@ public class DoublePlayerSelectController : MonoBehaviour {
 	void Start () {
 		GameStart1.SetActive (false);
 		GameStart2.SetActive (false);
+		Ready.SetActive (false);
 
 		AudioSource[] audioSources = GetComponents<AudioSource>();
 		audioSource1 = audioSources[0];
@@ -52,24 +55,44 @@ public class DoublePlayerSelectController : MonoBehaviour {
 
 	void Update () {
 
-		if (Input.GetAxis ("Horizontal")<0.0f) {
-			audioSource1.PlayOneShot (audioSource1.clip);
-			MoveToLeft1 ();
+		if (accept == 1) {
+			time += Time.deltaTime;
+
+			if (time >= 0.5f) {
+				accept = 0;
+			}
 		}
 
-		if (Input.GetAxis ("Horizontal")>0.0f) {
-			audioSource1.PlayOneShot (audioSource1.clip);
-			MoveToRight1 ();
-		}
+		if (accept == 0) {
 
-		if (Input.GetAxis ("Horizontal2")<0.0f) {
-			audioSource1.PlayOneShot (audioSource1.clip);
-			MoveToLeft2 ();
-		}
+			if (Input.GetAxis ("Horizontal") < 0.0f) {
+				audioSource1.PlayOneShot (audioSource1.clip);
+				MoveToLeft1 ();
+				accept = 1;
+				time = 0.0f;
+			}
 
-		if (Input.GetAxis ("Horizontal2")>0.0f) {
-			audioSource1.PlayOneShot (audioSource1.clip);
-			MoveToRight2 ();
+			if (Input.GetAxis ("Horizontal") > 0.0f) {
+				audioSource1.PlayOneShot (audioSource1.clip);
+				MoveToRight1 ();
+				accept = 1;
+				time = 0.0f;
+			}
+
+			if (Input.GetAxis ("Horizontal2") < 0.0f) {
+				audioSource1.PlayOneShot (audioSource1.clip);
+				MoveToLeft2 ();
+				accept = 1;
+				time = 0.0f;
+			}
+
+			if (Input.GetAxis ("Horizontal2") > 0.0f) {
+				audioSource1.PlayOneShot (audioSource1.clip);
+				MoveToRight2 ();
+				accept = 1;
+				time = 0.0f;
+			}
+
 		}
 
 
@@ -113,7 +136,7 @@ public class DoublePlayerSelectController : MonoBehaviour {
 			Ready.SetActive (true);
 
 
-			if(timer > 1){
+			if(timer > 1.0f){
 				
 				if (Input.GetButtonDown ("Lock")) {
 					audioSource3.PlayOneShot (audioSource3.clip);
@@ -128,7 +151,7 @@ public class DoublePlayerSelectController : MonoBehaviour {
 			}
 		} else {
 			Ready.SetActive (false);
-				timer = 0;
+				timer = 0.0f;
 		}
 
 

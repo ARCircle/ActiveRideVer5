@@ -15,6 +15,7 @@ public class ChangeDIM : MonoBehaviour {
     private UnityEngine.UI.Image gaugeCtrl;
 
     private bool isBGM;
+	private bool isAxisInUse = false;
 
     // Use this for initialization
     void Start()
@@ -30,39 +31,50 @@ public class ChangeDIM : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-		Debug.Log ("AmbientSkyColor: " + RenderSettings.ambientLight);
 		Color AmbientLight = RenderSettings.ambientLight;
 		AmbientLight = new UnityEngine.Color (255f, 255f, 255f, DIMVal);
+
 		RenderSettings.ambientLight = AmbientLight;
 
         if (Input.GetKeyUp(KeyCode.A) || Input.GetAxisRaw("Horizontal3") > 0 || Input.GetAxisRaw("Horizontal4") > 0)
         {
-            if (DIMVal <= 1.0f)
-            {
-                DIMVal += 0.1f;
-            }
 
-            RenderSettings.ambientSkyColor =
-                new UnityEngine.Color((1 - DIMVal) * 255f, (1 - DIMVal) * 255f, (1 - DIMVal) * 255f, 1 - DIMVal);
-            RenderSettings.ambientGroundColor =
-                new UnityEngine.Color((1 - DIMVal) * 255f, (1 - DIMVal) * 255f, (1 - DIMVal) * 255f, 1 - DIMVal);
+			if (!isAxisInUse) {
+				if (DIMVal <= 1.0f)
+				{
+					DIMVal += 0.1f;
+				}
 
+				RenderSettings.ambientSkyColor =
+					new UnityEngine.Color((1 - DIMVal) * 255f, (1 - DIMVal) * 255f, (1 - DIMVal) * 255f, 1 - DIMVal);
+				RenderSettings.ambientGroundColor =
+					new UnityEngine.Color((1 - DIMVal) * 255f, (1 - DIMVal) * 255f, (1 - DIMVal) * 255f, 1 - DIMVal);
+
+				isAxisInUse = true;
+			}
         }
 
         if (Input.GetKeyUp(KeyCode.D) || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
         {
-            if (DIMVal >= 0f)
-            {
-                DIMVal -= 0.1f;
-            }
-			RenderSettings.ambientSkyColor = 
-                new UnityEngine.Color((1 - DIMVal) * 255f, (1 - DIMVal) * 255f, (1 - DIMVal) *255f, 1 - DIMVal);
-            RenderSettings.ambientGroundColor = 
-                new UnityEngine.Color((1 - DIMVal) * 255f, (1 - DIMVal) * 255f, (1 - DIMVal) * 255f, 1 - DIMVal);
+			if (!isAxisInUse) {
+				if (DIMVal >= 0f)
+				{
+					DIMVal -= 0.1f;
+				}
+				RenderSettings.ambientSkyColor = 
+					new UnityEngine.Color((1 - DIMVal) * 255f, (1 - DIMVal) * 255f, (1 - DIMVal) *255f, 1 - DIMVal);
+				RenderSettings.ambientGroundColor = 
+					new UnityEngine.Color((1 - DIMVal) * 255f, (1 - DIMVal) * 255f, (1 - DIMVal) * 255f, 1 - DIMVal);
 
+				isAxisInUse = true;
+			}
         }
 
-        RenderSettings.ambientIntensity = DIMVal;
+		if (Input.GetAxisRaw ("Horizontal3") == 0 && Input.GetAxisRaw ("Horizontal4") == 0) {
+			isAxisInUse = false;
+		}
+        
+		RenderSettings.ambientIntensity = DIMVal;
 
         if (!isBGM)
         {

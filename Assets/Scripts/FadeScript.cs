@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FadeScript : MonoBehaviour {
 
@@ -27,6 +28,10 @@ public class FadeScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
+		//ModalOptionの加算ロード
+		UnityEngine.SceneManagement.SceneManager.LoadScene("ModalOption", LoadSceneMode.Additive);
+
         isFadein = true;
         isFadeout = false;
 

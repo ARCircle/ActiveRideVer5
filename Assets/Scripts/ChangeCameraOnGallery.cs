@@ -14,6 +14,7 @@ public class ChangeCameraOnGallery : MonoBehaviour
 
     public List<GameObject> Descriptions = new List<GameObject>();
     public List<GameObject> Characters = new List<GameObject>();
+	public List<GameObject> Operators = new List<GameObject> ();
 
     private float CameraPosFrom = -20.0f;
     private float CameraPosTo = -10.0f;
@@ -23,12 +24,17 @@ public class ChangeCameraOnGallery : MonoBehaviour
 
     private bool DescriptionMoveFlag;
     private bool AirFrameMoveFlag;
+	private bool isAxisInUse = false;
+
+	private AudioSource audioSource1;
 
     private int CameraIndex;
 
     // Use this for initialization
     void Start()
     {
+		AudioSource[] audioSources = GetComponents<AudioSource>();
+		audioSource1 = audioSources[0];
 
         foreach(var Camera in AirFrame_Cam)
         {
@@ -62,13 +68,16 @@ public class ChangeCameraOnGallery : MonoBehaviour
             || Input.GetAxisRaw("Horizontal") < 0 || Input.GetAxisRaw("Horizontal2") < 0
             || Input.GetAxisRaw("Horizontal3") < 0 || Input.GetAxisRaw("Horizontal4") < 0)
         {
-            SetCameraInActive();
-            MainCam.SetActive(true);
+			if (!isAxisInUse) {
+				SetCameraInActive();
+				MainCam.SetActive(true);
+			
+				isAxisInUse = true;
+			}
         }
 
         if (GalleryCanvas.canStoryBegin)
         {
-            Debug.Log("do here");
             //AirFrame_Pos[CameraIndex].z = CameraPosFrom;
             //AirFrame_Cam[CameraIndex].transform.localPosition = AirFrame_Pos[CameraIndex];
 
@@ -76,39 +85,60 @@ public class ChangeCameraOnGallery : MonoBehaviour
             UIsActiveControl(0);
         }
        
+		if (AirFrameMoveFlag)
+		{
+			AirFrame_Cam[CameraIndex].gameObject.transform.parent.gameObject.transform.FindChild("AirFrame").transform.Rotate(new Vector3(0.1f, 0.2f, 0));
+		}
 
         if( (Input.GetKeyUp(KeyCode.S) || Input.GetAxisRaw("Vertical") < 0 || Input.GetAxisRaw("Vertical2") < 0) 
             && GalleryCanvas.OnStoryFlag)
         {
-            if (AirFrameMoveFlag == false)
-            {
-                AirFrameMoveFlag = true;
-            }
-            else
-            {
-                AirFrame_Cam[CameraIndex].gameObject.transform.parent.gameObject.transform.FindChild("AirFrame").transform.localRotation = new Quaternion(0, 0, 0, 0);
-                AirFrameMoveFlag = false;
-            }
-        }
 
-        if (AirFrameMoveFlag)
-        {
-            AirFrame_Cam[CameraIndex].gameObject.transform.parent.gameObject.transform.FindChild("AirFrame").transform.Rotate(new Vector3(0.1f, 0.2f, 0));
+			if (!isAxisInUse) {
+				audioSource1.PlayOneShot(audioSource1.clip);
+
+				if (AirFrameMoveFlag == false)
+				{
+					AirFrameMoveFlag = true;
+				}
+				else
+				{
+					AirFrame_Cam[CameraIndex].gameObject.transform.parent.gameObject.transform.FindChild("AirFrame").transform.localRotation = new Quaternion(0, 0, 0, 0);
+					AirFrameMoveFlag = false;
+				}
+
+				isAxisInUse = true;
+			}
+
         }
 
         if ( (Input.GetKeyUp(KeyCode.W) || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical2") > 0)
             && GalleryCanvas.OnStoryFlag)
         {
-            CameraIndex++;
+			if (!isAxisInUse) {
+				audioSource1.PlayOneShot(audioSource1.clip);
 
-            if (CameraIndex >= 3) { CameraIndex = 0; }
+				CameraIndex++;
 
-            AirFrame_Pos[CameraIndex].z = CameraPosFrom;
-            AirFrame_Cam[CameraIndex].transform.localPosition = AirFrame_Pos[CameraIndex];
+				if (CameraIndex >= 3) { CameraIndex = 0; }
 
-            SetCameraInActive();
-            UIsActiveControl(CameraIndex);
+				AirFrame_Pos[CameraIndex].z = CameraPosFrom;
+				AirFrame_Cam[CameraIndex].transform.localPosition = AirFrame_Pos[CameraIndex];
+
+				SetCameraInActive();
+				UIsActiveControl(CameraIndex);
+
+				isAxisInUse = true;
+			}
+
         }
+
+		if (Input.GetAxisRaw ("Horizontal2") == 0 && Input.GetAxisRaw ("Horizontal") == 0
+			&& Input.GetAxisRaw ("Horizontal3") == 0 && Input.GetAxisRaw ("Horizontal4") == 0
+			&& Input.GetAxisRaw ("Vertical") == 0 && Input.GetAxisRaw ("Vertical2") == 0) {
+
+			isAxisInUse = false;
+		}
 
         AirFrame_Pos[CameraIndex] = AirFrame_Cam[CameraIndex].transform.localPosition;
         AirFrame_Pos[CameraIndex] = MoveCamera(AirFrame_Cam[CameraIndex], AirFrame_Pos[CameraIndex]);
@@ -165,6 +195,12 @@ public class ChangeCameraOnGallery : MonoBehaviour
             d.gameObject.GetComponent<ShowUIText>().enabled = false;
         }
 
+		foreach (GameObject o in Operators)
+		{
+			o.SetActive(false);
+			o.gameObject.GetComponentInChildren<UIMaskTransparent>().enabled = false;
+		}
+
         foreach (GameObject c in Characters)
         {
             c.SetActive(false);
@@ -186,6 +222,9 @@ public class ChangeCameraOnGallery : MonoBehaviour
 
         Characters[index].SetActive(true);
         Characters[index].gameObject.GetComponent<UIMaskTransparent>().enabled = true;
+
+		Operators[index].SetActive(true);
+		Operators[index].gameObject.GetComponentInChildren<UIMaskTransparent>().enabled = true;
 
         AirFrame_Cam[index].SetActive(true);
         AirFrame_Cam[index].gameObject.transform.parent.gameObject.SetActive(true);

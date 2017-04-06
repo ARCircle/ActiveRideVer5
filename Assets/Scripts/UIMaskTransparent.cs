@@ -8,6 +8,7 @@ public class UIMaskTransparent : MonoBehaviour {
 
     //[Range(0, 1)]
     private float mask_range;
+	private float mask_rangeMAX = 0.5f;
     private float maskRangeDelta = 0.02f;
 
     private bool canUpdateMaskRange;
@@ -16,7 +17,7 @@ public class UIMaskTransparent : MonoBehaviour {
     void Start () {
         //Debug.Log("UI_Mask" + UI_mask_mat);
 
-        mask_range = 1.0f;
+		mask_range = mask_rangeMAX;
         this.UI_mask_mat.SetFloat("_Range", 1.0f);
 
         canUpdateMaskRange = true;
@@ -28,7 +29,7 @@ public class UIMaskTransparent : MonoBehaviour {
         if (!Input.GetKeyUp(KeyCode.DownArrow))
         {
             canUpdateMaskRange = true;
-            mask_range = 1.0f;
+			mask_range = mask_rangeMAX;
         }
 
     }

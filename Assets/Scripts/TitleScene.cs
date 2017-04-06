@@ -17,7 +17,7 @@ public class TitleScene : MonoBehaviour {
 	void Start () {
 
         //ModalOptionの加算ロード
-        UnityEngine.SceneManagement.SceneManager.LoadScene("ModalOption", LoadSceneMode.Additive);
+        //UnityEngine.SceneManagement.SceneManager.LoadScene("ModalOption", LoadSceneMode.Additive);
 
         MainSoundObject = GameObject.Find ("MainSoundObject");
 

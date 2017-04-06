@@ -9,12 +9,13 @@ public class PlayerAp2 : MonoBehaviour {
 
 	public static int armorPoint;
 	public static int armorPointMax = 5000;
-    public float downPointMax;
+    public float downPointMax = 50;
     float downPoint = 0;
     float downTime = 0;
     bool downFlag = false;
     bool DmgFlag = true;
     ParticleSystem smoke;
+    public Text Wtext;
 
     public Text armorText;
 
@@ -30,7 +31,7 @@ public class PlayerAp2 : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+        Wtext.enabled = false;
 		armorPoint = armorPointMax;
 		displayArmorPoint = armorPoint;
 
@@ -44,7 +45,7 @@ public class PlayerAp2 : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
+        Debug.LogError(downPoint);
 
 
 		//現在の体力と表示用体力が異なっていれば、現在の体力になるまで加減算する
@@ -74,9 +75,10 @@ public class PlayerAp2 : MonoBehaviour {
 		//ゲージの長さを体力の割合に合わせて伸縮させる
 		gaugeImage.transform.localScale = new Vector3(percentageArmorpoint, 1, 1);
 
+        
+
         if (downFlag)
         {
-            Debug.LogError("2Pダウン状態移動");
             DmgFlag = false;
            //GetComponent<CharacterController>().enabled = false;
             downTime += Time.deltaTime;
@@ -86,10 +88,15 @@ public class PlayerAp2 : MonoBehaviour {
                 DmgFlag = true;
                 //   GetComponent<CharacterController>().enabled = true;
                 downTime = 0;
-                Debug.LogError("2Pダウン状態解除");
                 downPoint = 0;
                 smoke.Stop();
+                Wtext.enabled = false;
             }
+        }
+
+        if(downPoint > 0)
+        {
+            downPoint -= Time.deltaTime * 0.5f;
         }
     }
 
@@ -103,26 +110,28 @@ public class PlayerAp2 : MonoBehaviour {
             {
                 armorPoint -= ShotPlayer_B1.damage;
                 armorPoint = Mathf.Clamp(armorPoint, 0, armorPointMax);
-                downPoint += ShotPlayer_B1.damage / 100;
+                downPoint += 3.5f;
             }
             else if (collider.gameObject.tag == "Shot_U")
             {
                 armorPoint -= ShotPlayer_U1.damage;
                 armorPoint = Mathf.Clamp(armorPoint, 0, armorPointMax);
-                downPoint += ShotPlayer_U1.damage / 100;
+                downPoint += 5;
             }
             else if (collider.gameObject.tag == "Shot_P")
             {
                 armorPoint -= ShotPlayer_P1.damage;
                 armorPoint = Mathf.Clamp(armorPoint, 0, armorPointMax);
-                downPoint += ShotPlayer_P1.damage / 100;
+                downPoint += 1;
             }
         }
-            if (downPoint > downPointMax)
+            if (downPoint > 5)
             {
                
                 downFlag = true;
-            }
+                smoke.Play();
+                Wtext.enabled = true;
+        }
         
 	}
 

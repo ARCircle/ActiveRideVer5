@@ -19,12 +19,16 @@ public class GalleryCanvas : MonoBehaviour {
     public static bool OnStoryFlag;
 
     private bool UIGroupSetActiveOnce;
+	private bool isAxisInUse = false;
+
     public static bool canStoryBegin;
 
     public GameObject Ring_Prefab;
     private GameObject Ring_Instance;
 
     private Vector3 pos;
+
+	private AudioSource audioSource2;
 
     private float TimeLeft;
 
@@ -58,6 +62,8 @@ public class GalleryCanvas : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+		AudioSource[] audioSources = GetComponents<AudioSource>();
+		audioSource2 = audioSources[1];
 
         //ModalOptionの加算ロード
         UnityEngine.SceneManagement.SceneManager.LoadScene("ModalOption", LoadSceneMode.Additive);
@@ -141,38 +147,55 @@ public class GalleryCanvas : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.RightArrow) 
             || Input.GetAxisRaw("Horizontal") < 0 || Input.GetAxisRaw("Horizontal2") < 0)
         {
-            if (!OnStoryFlag)
-            {
-                OnPictureFlag = true;
-                UIGroupSetActiveOnce = true;
-                Ring_Instance = CreateInstance(EachUIGroup[0], "Arrow1");
-                //EachUIGroupSetActive(0);
-            }
-            else
-            {
-                OnPictureFlag = false;
-                InitializePos(pos);
-                EachUIGroupSetActive(0);
-            }
+
+			if (!isAxisInUse) {
+				
+				if (!OnStoryFlag)
+				{
+					audioSource2.PlayOneShot(audioSource2.clip);
+
+					OnPictureFlag = true;
+					UIGroupSetActiveOnce = true;
+					Ring_Instance = CreateInstance(EachUIGroup[0], "Arrow1");
+					//EachUIGroupSetActive(0);
+				}
+				else
+				{
+					OnPictureFlag = false;
+					InitializePos(pos);
+					EachUIGroupSetActive(0);
+				}
+
+				isAxisInUse = true;
+			}
         }
 
         if (Input.GetKeyDown(KeyCode.LeftArrow)
             || Input.GetAxisRaw("Horizontal") > 0 || Input.GetAxisRaw("Horizontal2") > 0)
         {
-            if (!OnPictureFlag)
-            {
-                if (canStoryBegin) canStoryBegin = false;
-                OnStoryFlag = true;
-                UIGroupSetActiveOnce = true;
-                Ring_Instance = CreateInstance(EachUIGroup[0], "Arrow2");
-                GetComponent<ChangeCameraOnGallery>().enabled = false;
-            }
-            else
-            {
-                OnStoryFlag = false;
-                InitializePos(pos);
-                EachUIGroupSetActive(0);
-            }
+
+			if (!isAxisInUse) {
+
+				if (!OnPictureFlag)
+				{
+					audioSource2.PlayOneShot(audioSource2.clip);
+
+					if (canStoryBegin) canStoryBegin = false;
+					OnStoryFlag = true;
+					UIGroupSetActiveOnce = true;
+					Ring_Instance = CreateInstance(EachUIGroup[0], "Arrow2");
+					GetComponent<ChangeCameraOnGallery>().enabled = false;
+				}
+				else
+				{
+					OnStoryFlag = false;
+					InitializePos(pos);
+					EachUIGroupSetActive(0);
+				}
+
+				isAxisInUse = true;
+			}
+
         }
 
         if (OnPictureFlag && !OnStoryFlag)
@@ -194,6 +217,10 @@ public class GalleryCanvas : MonoBehaviour {
                 //wait();
             }
         }
+
+		if (Input.GetAxisRaw ("Horizontal2") == 0 && Input.GetAxisRaw ("Horizontal") == 0) {
+			isAxisInUse = false;
+		}
 
 		if ( (OnPictureFlag && (Input.GetKeyDown(KeyCode.LeftArrow)
             || Input.GetAxisRaw("Horizontal") > 0 || Input.GetAxisRaw("Horizontal2") > 0)) 

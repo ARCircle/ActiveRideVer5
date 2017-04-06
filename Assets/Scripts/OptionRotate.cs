@@ -37,6 +37,8 @@ public class OptionRotate : MonoBehaviour
 
 	private static float angle_z = 0;
 
+	private bool isAxisInUse = false;
+
     // Use this for initialization
     void Start()
     {
@@ -130,34 +132,42 @@ public class OptionRotate : MonoBehaviour
         if ( (Input.GetKeyUp(KeyCode.S) || Input.GetAxisRaw("Vertical") < 0 || Input.GetAxisRaw("Vertical2") < 0) 
             && !ModalOption.isModalSetActive)
         {
-            
-            bCenterIndex--;
-            bCenterIndex = Verify_bIndex(bCenterIndex);
+			if (!isAxisInUse) {
+				bCenterIndex--;
+				bCenterIndex = Verify_bIndex(bCenterIndex);
 
-            audioSource2.PlayOneShot(audioSource2.clip);
+				audioSource2.PlayOneShot(audioSource2.clip);
 
-			SetActiveSettings (bCenterIndex);
+				SetActiveSettings (bCenterIndex);
 
-        	if (!RotateFlag_minus) RotateFlag_plus = true;
-            
+				if (!RotateFlag_minus) RotateFlag_plus = true;
+
+				isAxisInUse = true;
+			}          
     	}
 
         if ( (Input.GetKeyUp(KeyCode.W) || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical2") > 0)
             && !ModalOption.isModalSetActive)
         {
-            bCenterIndex++;
-			bCenterIndex = Verify_bIndex(bCenterIndex);
 
-			audioSource2.PlayOneShot(audioSource2.clip);
+			if (!isAxisInUse) {
 
-			SetActiveSettings (bCenterIndex);
+				bCenterIndex++;
+				bCenterIndex = Verify_bIndex(bCenterIndex);
 
-            if (!RotateFlag_plus) RotateFlag_minus = true;
+				audioSource2.PlayOneShot(audioSource2.clip);
+
+				SetActiveSettings (bCenterIndex);
+
+				if (!RotateFlag_plus) RotateFlag_minus = true;
+
+				isAxisInUse = true;
+			}
 
         }
 
-		if (Input.GetKeyUp (KeyCode.Q)) {
-		
+		if (Input.GetKeyUp (KeyCode.Q) || Input.GetButtonUp("Cancel")) {
+
 			CameraFade.StartAlphaFade(Color.black, false, 0.6f, 0.6f, () =>
 				{
 					UnityEngine.SceneManagement.SceneManager.LoadScene("SelectMenu");
@@ -201,6 +211,9 @@ public class OptionRotate : MonoBehaviour
             RotateFlag_plus = false;
         }
         
+		if (Input.GetAxisRaw ("Vertical") == 0 && Input.GetAxisRaw ("Vertical2") == 0) {
+			isAxisInUse = false;
+		}
        
         //シーン遷移
         if (Input.GetKeyUp(KeyCode.Q) || Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.P) || Input.GetKeyUp(KeyCode.Return))

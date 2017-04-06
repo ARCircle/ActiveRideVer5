@@ -29,6 +29,7 @@ public class PauserScript : MonoBehaviour
     private GameObject Player;
     private GameObject Enemy;
     private GameObject EventSystemObject;
+	private GameObject Script;
 
     //for 2PlayerMode
     private GameObject Player1;
@@ -157,7 +158,7 @@ public class PauserScript : MonoBehaviour
 
                 break;
             case "Option":
-                BackgroundObject = GameObject.Find("BackgroundPrefab1");
+                BackgroundObject = GameObject.Find("BackgroundPrefab");
                 GetComponentInParentAndChildren<BackGroundController>(BackgroundObject).enabled = !ModalFlag;
 
                 //BackgroundObject = GameObject.Find("BackgroundCamera");
@@ -187,6 +188,8 @@ public class PauserScript : MonoBehaviour
                     GetComponentInParentAndChildren<ChangeSEVolume>(RootObject).enabled = !ModalFlag;
                 break;
             case "Main":
+			case "Main1":
+			
                 //validate Null Exception
                 Player = GameObject.Find("UNICORN1playMode");
 
@@ -194,15 +197,15 @@ public class PauserScript : MonoBehaviour
 
                 //GetComponentInParentAndChildren<LockOnChangeTest>(RootObject).enabled = !ModalFlag;
 				
-			/*
-                EventSystemObject = GameObject.Find("EventSystem");
 
-                if (GetComponentInParentAndChildren<Time_ScoreScript>(EventSystemObject) != null)
-                    GetComponentInParentAndChildren<Time_ScoreScript>(EventSystemObject).enabled = !ModalFlag;
+                Script = GameObject.Find("Scripts");
 
-                if (GetComponentInParentAndChildren<EnemyInstantiate>(EventSystemObject) != null)
-                    GetComponentInParentAndChildren<EnemyInstantiate>(EventSystemObject).enabled = !ModalFlag;
-			*/
+			if (GetComponentInParentAndChildren<Time_ScoreScript>(Script) != null)
+				GetComponentInParentAndChildren<Time_ScoreScript>(Script).enabled = !ModalFlag;
+
+			if (GetComponentInParentAndChildren<EnemyInstantiate>(Script) != null)
+				GetComponentInParentAndChildren<EnemyInstantiate>(Script).enabled = !ModalFlag;
+			
                 int SelectNumber = PlayerSelectController.Selectnumber();
 
                 switch (SelectNumber)
@@ -231,10 +234,13 @@ public class PauserScript : MonoBehaviour
                     GetComponentInParentAndChildren<PlayerMove>(Player).enabled = !ModalFlag;
                     GetComponentInParentAndChildren<PlayerRotate>(Player).enabled = !ModalFlag;
                     GetComponentInParentAndChildren<PlayerMotion>(Player).enabled = !ModalFlag;
-                    GetComponentInParentAndChildren<PlayerShoot_U>(Player).enabled = !ModalFlag;
-					//GetComponentInParentAndChildren<PlayerShoot_P>(Player).enabled = !ModalFlag;
-					//GetComponentInParentAndChildren<PlayerShoot_B>(Player).enabled = !ModalFlag;
 
+					if (GetComponentInParentAndChildren<PlayerShoot_U>(Player) != null)					
+                   		GetComponentInParentAndChildren<PlayerShoot_U>(Player).enabled = !ModalFlag;
+					if (GetComponentInParentAndChildren<PlayerShoot_P>(Player) != null)					
+						GetComponentInParentAndChildren<PlayerShoot_P>(Player).enabled = !ModalFlag;
+					if (GetComponentInParentAndChildren<PlayerShoot_B>(Player) != null)					
+						GetComponentInParentAndChildren<PlayerShoot_B>(Player).enabled = !ModalFlag;
 
                     GetComponentInParentAndChildren<LockOn>(Player).enabled = !ModalFlag;
                     GetComponentInParentAndChildren<Compass>(Player).enabled = !ModalFlag;
@@ -251,9 +257,14 @@ public class PauserScript : MonoBehaviour
                 GetComponentInParentAndChildren<Marker>(Enemy).enabled = !ModalFlag;
 
                 break;
-            case "2PlayerMode":
+			case "2PlayerMode":
+            case "2PlayerModeStage1":
+			case "2PlayerModeStage2":
+			case "2PlayerModeStage3":
+			
                 RootObject = GameObject.Find("Canvas");
-                if (GetComponentInParentAndChildren<Time2PMode>(RootObject) != null)
+
+				if (GetComponentInParentAndChildren<LockOnChangeTest>(RootObject) != null)
                     GetComponentInParentAndChildren<LockOnChangeTest>(RootObject).enabled = !ModalFlag;
 
                 EventSystemObject = GameObject.Find("EventSystem");
@@ -369,12 +380,14 @@ public class PauserScript : MonoBehaviour
                 GetComponentInParentAndChildren<PlayerSelectController>(PlayerSelectControllerObject).enabled = !ModalFlag;
 
                 break;
-            case "selectsceneDouble":
+			case "selectsceneDouble":
                 CameraObject = GameObject.Find("Camera");
-                GetComponentInParentAndChildren<MainCameraController>(CameraObject).enabled = !ModalFlag;
+				if (GetComponentInParentAndChildren<MainCameraController>(CameraObject) != null)					
+                	GetComponentInParentAndChildren<MainCameraController>(CameraObject).enabled = !ModalFlag;
 
                 CameraObject2 = GameObject.Find("Camera2");
-                GetComponentInParentAndChildren<MainCameraController2>(CameraObject).enabled = !ModalFlag;
+				if (GetComponentInParentAndChildren<MainCameraController2>(CameraObject2) != null)									
+                	GetComponentInParentAndChildren<MainCameraController2>(CameraObject2).enabled = !ModalFlag;
 
                 PlayerSelectControllerObject = GameObject.Find("PlayerSelectController");
                 GetComponentInParentAndChildren<DoublePlayerSelectController>(PlayerSelectControllerObject).enabled = !ModalFlag;
